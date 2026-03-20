@@ -1,0 +1,17 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.4.8/schema.json",
+	"extends": ["@snowdrive/biome-config/biome.json"],
+	"overrides": [
+		{
+			"includes": ["./**/tsup.config.ts"],
+			"linter": {
+				"rules": {
+					"style": {
+						"noProcessEnv": "off",
+						"noDefaultExport": "off"
+					}
+				}
+			}
+		}
+	]
+}

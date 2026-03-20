@@ -1,0 +1,19 @@
+{
+	"name": "@snowdrive/princesitas",
+	"scripts": {
+		"lint": "biome check . --write",
+		"format": "biome format --write .",
+		"lint:check": "biome check .",
+		"format:check": "biome format ."
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.4.8",
+		"@snowdrive/biome-config": "1.0.0",
+		"@snowdrive/logger": "1.1.0",
+		"@types/node": "25.5.0",
+		"tsup": "8.5.1",
+		"tsx": "4.21.0",
+		"typescript": "5.9.3",
+		"winston": "3.19.0"
+	}
+}
