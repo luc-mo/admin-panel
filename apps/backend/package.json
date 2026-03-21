@@ -1,0 +1,30 @@
+{
+	"name": "@princesitas/backend",
+	"version": "1.0.0",
+	"main": "dist/index.js",
+	"type": "module",
+	"scripts": {
+		"dev": "tsx watch --env-file=.env ./src/index.dev.ts",
+		"emulator": "tsup && firebase emulators:start --only functions",
+		"build": "tsup",
+		"lint": "biome check . --write",
+		"format": "biome format --write .",
+		"lint:check": "biome check .",
+		"format:check": "biome format ."
+	},
+	"dependencies": {
+		"@princesitas/core": "workspace:*",
+		"awilix": "13.0.0",
+		"cors": "2.8.6",
+		"cross-env": "10.1.0",
+		"dotenv": "17.3.1",
+		"express": "5.2.1",
+		"firebase-admin": "13.7.0",
+		"firebase-functions": "7.0.5"
+	},
+	"devDependencies": {
+		"@types/cors": "2.8.19",
+		"@types/express": "5.0.6",
+		"@types/node": "25.3.0"
+	}
+}
