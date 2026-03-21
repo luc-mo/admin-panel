@@ -6,6 +6,8 @@ import cors from 'cors'
 import { config } from '@/infrastructure/config'
 import { ControllerFactory } from '@/infrastructure/http/controller-factory'
 
+import { IdGenerator } from './domain/services/id-generator'
+
 import { HealthCheck } from '@/application/health-check'
 import type { IContainer } from '@/types/container'
 
@@ -20,6 +22,8 @@ container.register({
 
 	config: asValue(config),
 	controllerFactory: asClass(ControllerFactory).singleton(),
+
+	idGenerator: asClass(IdGenerator).singleton(),
 
 	healthCheck: asClass(HealthCheck).singleton(),
 })
