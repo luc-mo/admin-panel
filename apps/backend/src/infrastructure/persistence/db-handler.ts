@@ -1,0 +1,36 @@
+import type admin from 'firebase-admin'
+import { Logger } from '@snowdrive/logger'
+import { InjectableDependency } from '@/shared/injectable-dependency'
+
+@Logger({ severity: 'DEBUG' })
+export class FirebaseDbHandler extends InjectableDependency('admin', 'config', 'cloudSdkService') {
+	private _db: admin.firestore.Firestore | null = null
+
+	public getDatabase() {
+		if (!this._db) {
+			this._db = this._createDatabase()
+		}
+		return this._db
+	}
+
+	public getCollection<T>(path: string) {
+		const instance = this.getDatabase()
+		return instance.collection(path) as admin.firestore.CollectionReference<T>
+	}
+
+	private _createDatabase() {
+		try {
+			Logger.info('Initializing Firestore instance')
+			const app = this._cloudSdkService.getApp()
+			const db = this._admin.firestore(app)
+			db.settings({
+				databaseId: this._config.firebase.databaseId,
+				ignoreUndefinedProperties: true,
+			})
+			return db
+		} catch (error) {
+			Logger.error(`Error initializing Firestore instance: ${error}`)
+			throw new Error(`Error initializing Firestore instance: ${error}`)
+		}
+	}
+}
