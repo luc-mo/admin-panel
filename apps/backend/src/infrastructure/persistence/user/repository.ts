@@ -1,3 +1,4 @@
+import { Filter } from 'firebase-admin/firestore'
 import { Logger } from '@snowdrive/logger'
 import { InjectableDependency } from '@/shared/injectable-dependency'
 import type { User } from '@princesitas/core'
@@ -9,6 +10,13 @@ export class UserRepository extends InjectableDependency('dbHandler', 'userDocum
 		const collection = this._getCollection()
 		const document = await collection.doc(id).get()
 		return document.exists ? this._userDocumentParser.toDomain(document.data()!) : null
+	}
+
+	public async findByIdOrEmail(id: string, email: string) {
+		const collection = this._getCollection()
+		const query = Filter.or(Filter.where('id', '==', id), Filter.where('email', '==', email))
+		const document = await collection.where(query).get()
+		return document.docs[0] ? this._userDocumentParser.toDomain(document.docs[0].data()) : null
 	}
 
 	public async save(user: User) {

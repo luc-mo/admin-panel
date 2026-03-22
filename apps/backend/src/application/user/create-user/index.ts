@@ -7,6 +7,8 @@ import type { CreateUserCommand } from './command'
 @Logger({ severity: 'INFO' })
 export class CreateUser extends InjectableDependency('authService', 'userRepository') {
 	public async execute(command: CreateUserCommand) {
+		await this._assertUserDoesNotExist(command.id, command.email)
+
 		const date = new Date()
 		const user = new User({
 			id: command.id,
@@ -37,5 +39,12 @@ export class CreateUser extends InjectableDependency('authService', 'userReposit
 			},
 			message: 'Usuario creado exitosamente',
 		})
+	}
+
+	private async _assertUserDoesNotExist(id: string, email: string) {
+		const exists = await this._userRepository.findByIdOrEmail(id, email)
+		if (exists) {
+			throw new Error('El usuario ya existe')
+		}
 	}
 }
