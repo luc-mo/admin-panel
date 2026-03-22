@@ -22,4 +22,5 @@ export interface IContainer {
 	idGenerator: import('@/domain/services/id-generator').IdGenerator
 
 	healthCheck: import('@/application/health-check').HealthCheck
+	createUser: import('@/application/user/create-user').CreateUser
 }
