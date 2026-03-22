@@ -9,6 +9,11 @@ export interface IContainer {
 	controllerFactory: import('@/infrastructure/http/controller-factory').ControllerFactory
 
 	dbHandler: import('@/infrastructure/persistence/db-handler').FirebaseDbHandler
+	userRepository: import('@/infrastructure/persistence/user/repository').UserRepository
+	roleRepository: import('@/infrastructure/persistence/role/repository').RoleRepository
+	permissionRepository: import('@/infrastructure/persistence/permission/repository').PermissionRepository
+	endpointRepository: import('@/infrastructure/persistence/endpoint/repository').EndpointRepository
+
 	userDocumentParser: import('@/infrastructure/persistence/user/document-parser').UserDocumentParser
 	roleDocumentParser: import('@/infrastructure/persistence/role/document-parser').RoleDocumentParser
 	permissionDocumentParser: import('@/infrastructure/persistence/permission/document-parser').PermissionDocumentParser

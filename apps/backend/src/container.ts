@@ -9,6 +9,11 @@ import { FirebaseAuthService } from '@/infrastructure/services/auth-service'
 import { ControllerFactory } from '@/infrastructure/http/controller-factory'
 
 import { FirebaseDbHandler } from '@/infrastructure/persistence/db-handler'
+import { UserRepository } from '@/infrastructure/persistence/user/repository'
+import { RoleRepository } from '@/infrastructure/persistence/role/repository'
+import { PermissionRepository } from '@/infrastructure/persistence/permission/repository'
+import { EndpointRepository } from '@/infrastructure/persistence/endpoint/repository'
+
 import { UserDocumentParser } from '@/infrastructure/persistence/user/document-parser'
 import { RoleDocumentParser } from '@/infrastructure/persistence/role/document-parser'
 import { PermissionDocumentParser } from '@/infrastructure/persistence/permission/document-parser'
@@ -34,6 +39,11 @@ container.register({
 	controllerFactory: asClass(ControllerFactory).singleton(),
 
 	dbHandler: asClass(FirebaseDbHandler).singleton(),
+	userRepository: asClass(UserRepository),
+	roleRepository: asClass(RoleRepository),
+	permissionRepository: asClass(PermissionRepository),
+	endpointRepository: asClass(EndpointRepository),
+
 	userDocumentParser: asClass(UserDocumentParser),
 	roleDocumentParser: asClass(RoleDocumentParser),
 	permissionDocumentParser: asClass(PermissionDocumentParser),
