@@ -13,6 +13,11 @@ export class FirebaseAuthService extends InjectableDependency('admin', 'cloudSdk
 		return this._auth
 	}
 
+	public async createUser({ email, password, displayName }: ICreateUserParams) {
+		const auth = this.getAuth()
+		return auth.createUser({ email, password, displayName })
+	}
+
 	private _createAuth() {
 		try {
 			Logger.info('Initializing Firebase Auth instance')
@@ -23,4 +28,10 @@ export class FirebaseAuthService extends InjectableDependency('admin', 'cloudSdk
 			throw new Error(`Error initializing Firebase Auth instance: ${error}`)
 		}
 	}
+}
+
+interface ICreateUserParams {
+	email: string
+	password: string
+	displayName: string
 }
