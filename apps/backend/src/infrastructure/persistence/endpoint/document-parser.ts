@@ -1,12 +1,17 @@
+import { Timestamp } from 'firebase-admin/firestore'
+import { Logger } from '@snowdrive/logger'
 import { Endpoint } from '@princesitas/core'
 import type { IEndpointDocument } from './types'
 
+@Logger({ severity: 'TRACE' })
 export class EndpointDocumentParser {
 	public toDomain(document: IEndpointDocument): Endpoint {
 		return new Endpoint({
 			id: document.id,
 			path: document.path,
 			permissions: document.permissions,
+			createdAt: document.createdAt.toDate(),
+			updatedAt: document.updatedAt.toDate(),
 		})
 	}
 
@@ -15,6 +20,8 @@ export class EndpointDocumentParser {
 			id: endpoint.id,
 			path: endpoint.path,
 			permissions: endpoint.permissions,
+			createdAt: Timestamp.fromDate(endpoint.createdAt),
+			updatedAt: Timestamp.fromDate(endpoint.updatedAt),
 		}
 	}
 }

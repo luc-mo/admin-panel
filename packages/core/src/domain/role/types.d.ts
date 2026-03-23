@@ -6,3 +6,12 @@ export interface IRole {
 	createdAt: Date
 	updatedAt: Date
 }
+
+export interface IJsonRole {
+	id: string
+	name: string
+	description: string
+	permissions: string[]
+	createdAt: string
+	updatedAt: string
+}
