@@ -35,8 +35,8 @@ export class CreateUser extends InjectableDependency('authService', 'userReposit
 				username: user.username,
 				displayName: user.displayName,
 				roles: user.roles,
-				createdAt: user.createdAt,
-				updatedAt: user.updatedAt,
+				createdAt: user.createdAt.toISOString(),
+				updatedAt: user.updatedAt.toISOString(),
 			},
 			message: 'Usuario creado exitosamente',
 		})

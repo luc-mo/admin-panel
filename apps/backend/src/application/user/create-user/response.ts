@@ -1,6 +1,8 @@
+import type { IJsonUser } from '@princesitas/core'
+
 export class CreateUserResponse {
-	public readonly data: IConstructor['data']
-	public readonly message: IConstructor['message']
+	public readonly data: IJsonUser
+	public readonly message: string
 
 	constructor(params: IConstructor) {
 		this.data = params.data
@@ -9,14 +11,6 @@ export class CreateUserResponse {
 }
 
 interface IConstructor {
-	data: {
-		id: string
-		email: string
-		username: string
-		displayName: string
-		roles: string[]
-		createdAt: Date
-		updatedAt: Date
-	}
+	data: IJsonUser
 	message: string
 }
