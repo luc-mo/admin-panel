@@ -21,6 +21,7 @@ export class CreateUser extends InjectableDependency('authService', 'userReposit
 		})
 
 		await this._authService.createUser({
+			id: user.id,
 			email: user.email,
 			password: command.password,
 			displayName: user.displayName,

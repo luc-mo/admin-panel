@@ -13,9 +13,9 @@ export class FirebaseAuthService extends InjectableDependency('admin', 'cloudSdk
 		return this._auth
 	}
 
-	public async createUser({ email, password, displayName }: ICreateUserParams) {
+	public async createUser({ id, email, password, displayName }: ICreateUserParams) {
 		const auth = this.getAuth()
-		return auth.createUser({ email, password, displayName })
+		return auth.createUser({ uid: id, email, password, displayName })
 	}
 
 	private _createAuth() {
@@ -31,6 +31,7 @@ export class FirebaseAuthService extends InjectableDependency('admin', 'cloudSdk
 }
 
 interface ICreateUserParams {
+	id: string
 	email: string
 	password: string
 	displayName: string
