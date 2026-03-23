@@ -22,6 +22,7 @@ import { EndpointDocumentParser } from '@/infrastructure/persistence/endpoint/do
 import { IdGenerator } from './domain/services/id-generator'
 
 import { HealthCheck } from '@/application/health-check'
+import { FindUsers } from '@/application/user/find-users'
 import { CreateUser } from '@/application/user/create-user'
 import type { IContainer } from '@/types/container'
 
@@ -53,6 +54,7 @@ container.register({
 	idGenerator: asClass(IdGenerator),
 
 	healthCheck: asClass(HealthCheck),
+	findUsers: asClass(FindUsers),
 	createUser: asClass(CreateUser),
 } as Record<keyof IContainer, any>)
 
