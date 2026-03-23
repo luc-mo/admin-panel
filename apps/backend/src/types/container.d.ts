@@ -23,5 +23,6 @@ export interface IContainer {
 
 	healthCheck: import('@/application/health-check').HealthCheck
 	findUsers: import('@/application/user/find-users').FindUsers
+	findUserById: import('@/application/user/find-user-by-id').FindUserById
 	createUser: import('@/application/user/create-user').CreateUser
 }

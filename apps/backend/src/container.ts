@@ -23,6 +23,7 @@ import { IdGenerator } from './domain/services/id-generator'
 
 import { HealthCheck } from '@/application/health-check'
 import { FindUsers } from '@/application/user/find-users'
+import { FindUserById } from '@/application/user/find-user-by-id'
 import { CreateUser } from '@/application/user/create-user'
 import type { IContainer } from '@/types/container'
 
@@ -55,6 +56,7 @@ container.register({
 
 	healthCheck: asClass(HealthCheck),
 	findUsers: asClass(FindUsers),
+	findUserById: asClass(FindUserById),
 	createUser: asClass(CreateUser),
 } as Record<keyof IContainer, any>)
 

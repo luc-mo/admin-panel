@@ -1,6 +1,7 @@
 import { container } from '@/container'
 import { loggerMiddleware } from './middlewares/logger-middleware'
 import { FindUsersCommand } from '@/application/user/find-users/command'
+import { FindUserByIdCommand } from '@/application/user/find-user-by-id/command'
 import { CreateUserCommand } from '@/application/user/create-user/command'
 
 export const usersController = container.resolve('controllerFactory').createController({
@@ -18,6 +19,18 @@ export const usersController = container.resolve('controllerFactory').createCont
 				})
 				const findUsers = container.resolve('findUsers')
 				const response = await findUsers.execute(command)
+				res.status(200).send(response)
+			},
+		},
+		{
+			method: 'get',
+			path: '/:id',
+			middlewares: [],
+			handler: async (req, res) => {
+				const id = req.params.id as string
+				const command = new FindUserByIdCommand({ id })
+				const findUserById = container.resolve('findUserById')
+				const response = await findUserById.execute(command)
 				res.status(200).send(response)
 			},
 		},
