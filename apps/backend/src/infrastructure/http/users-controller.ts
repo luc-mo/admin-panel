@@ -3,6 +3,7 @@ import { loggerMiddleware } from './middlewares/logger-middleware'
 import { FindUsersCommand } from '@/application/user/find-users/command'
 import { FindUserByIdCommand } from '@/application/user/find-user-by-id/command'
 import { CreateUserCommand } from '@/application/user/create-user/command'
+import { UpdateUserCommand } from '@/application/user/update-user/command'
 import { RemoveUserCommand } from '@/application/user/remove-user/command'
 
 export const usersController = container.resolve('controllerFactory').createController({
@@ -36,12 +37,11 @@ export const usersController = container.resolve('controllerFactory').createCont
 			},
 		},
 		{
-			method: 'put',
+			method: 'post',
 			path: '/:id',
 			middlewares: [],
 			handler: async (req, res) => {
 				const command = new CreateUserCommand({
-					id: req.params.id as string,
 					email: req.body.email,
 					username: req.body.username,
 					password: req.body.password,
@@ -49,6 +49,21 @@ export const usersController = container.resolve('controllerFactory').createCont
 				})
 				const createUser = container.resolve('createUser')
 				const response = await createUser.execute(command)
+				res.status(201).send(response)
+			},
+		},
+		{
+			method: 'patch',
+			path: '/:id',
+			middlewares: [],
+			handler: async (req, res) => {
+				const command = new UpdateUserCommand({
+					id: req.params.id as string,
+					displayName: req.body.displayName,
+					roles: req.body.roles,
+				})
+				const updateUser = container.resolve('updateUser')
+				const response = await updateUser.execute(command)
 				res.status(200).send(response)
 			},
 		},

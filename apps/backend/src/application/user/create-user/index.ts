@@ -5,13 +5,18 @@ import { CreateUserResponse } from './response'
 import type { CreateUserCommand } from './command'
 
 @Logger({ severity: 'INFO' })
-export class CreateUser extends InjectableDependency('authService', 'userRepository') {
+export class CreateUser extends InjectableDependency(
+	'idGenerator',
+	'authService',
+	'userRepository'
+) {
 	public async execute(command: CreateUserCommand) {
-		await this._assertUserDoesNotExist(command.id, command.email)
+		const userId = this._idGenerator.generate()
+		await this._assertUserDoesNotExist(userId, command.email)
 
 		const date = new Date()
 		const user = new User({
-			id: command.id,
+			id: userId,
 			email: command.email,
 			username: command.username,
 			displayName: command.displayName,
@@ -20,13 +25,15 @@ export class CreateUser extends InjectableDependency('authService', 'userReposit
 			updatedAt: date,
 		})
 
-		await this._authService.createUser({
-			id: user.id,
-			email: user.email,
-			password: command.password,
-			displayName: user.displayName,
-		})
-		await this._userRepository.save(user)
+		await Promise.all([
+			this._authService.createUser({
+				id: user.id,
+				email: user.email,
+				password: command.password,
+				displayName: user.displayName,
+			}),
+			this._userRepository.save(user),
+		])
 
 		return new CreateUserResponse({
 			data: {
