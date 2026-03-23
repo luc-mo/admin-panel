@@ -18,6 +18,11 @@ export class FirebaseAuthService extends InjectableDependency('admin', 'cloudSdk
 		return auth.createUser({ uid: id, email, password, displayName })
 	}
 
+	public async removeUser(id: string) {
+		const auth = this.getAuth()
+		return auth.deleteUser(id)
+	}
+
 	private _createAuth() {
 		try {
 			Logger.info('Initializing Firebase Auth instance')

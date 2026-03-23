@@ -37,6 +37,11 @@ export class UserRepository extends InjectableDependency('dbHandler', 'userDocum
 		await collection.doc(user.id).set(document)
 	}
 
+	public async remove(id: string) {
+		const collection = this._getCollection()
+		await collection.doc(id).delete()
+	}
+
 	private _getCollection() {
 		const COLLECTION_NAME = 'users'
 		return this._dbHandler.getCollection<IUserDocument>(COLLECTION_NAME)
