@@ -6,6 +6,18 @@ import type { IUserDocument } from './types'
 
 @Logger({ severity: 'DEBUG' })
 export class UserRepository extends InjectableDependency('dbHandler', 'userDocumentParser') {
+	public async count() {
+		const collection = this._getCollection()
+		const snapshot = await collection.count().get()
+		return snapshot.data().count
+	}
+
+	public async find(limit: number, offset: number) {
+		const collection = this._getCollection()
+		const documents = await collection.limit(limit).offset(offset).get()
+		return documents.docs.map((document) => this._userDocumentParser.toDomain(document.data()))
+	}
+
 	public async findById(id: string) {
 		const collection = this._getCollection()
 		const document = await collection.doc(id).get()
