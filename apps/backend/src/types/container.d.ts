@@ -25,4 +25,5 @@ export interface IContainer {
 	findUsers: import('@/application/user/find-users').FindUsers
 	findUserById: import('@/application/user/find-user-by-id').FindUserById
 	createUser: import('@/application/user/create-user').CreateUser
+	removeUser: import('@/application/user/remove-user').RemoveUser
 }

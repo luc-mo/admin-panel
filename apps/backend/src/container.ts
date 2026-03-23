@@ -25,6 +25,7 @@ import { HealthCheck } from '@/application/health-check'
 import { FindUsers } from '@/application/user/find-users'
 import { FindUserById } from '@/application/user/find-user-by-id'
 import { CreateUser } from '@/application/user/create-user'
+import { RemoveUser } from '@/application/user/remove-user'
 import type { IContainer } from '@/types/container'
 
 const container = createContainer<IContainer>({
@@ -58,6 +59,7 @@ container.register({
 	findUsers: asClass(FindUsers),
 	findUserById: asClass(FindUserById),
 	createUser: asClass(CreateUser),
+	removeUser: asClass(RemoveUser),
 } as Record<keyof IContainer, any>)
 
 export { container }

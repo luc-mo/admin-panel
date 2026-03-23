@@ -3,6 +3,7 @@ import { loggerMiddleware } from './middlewares/logger-middleware'
 import { FindUsersCommand } from '@/application/user/find-users/command'
 import { FindUserByIdCommand } from '@/application/user/find-user-by-id/command'
 import { CreateUserCommand } from '@/application/user/create-user/command'
+import { RemoveUserCommand } from '@/application/user/remove-user/command'
 
 export const usersController = container.resolve('controllerFactory').createController({
 	path: '/api/users',
@@ -48,6 +49,18 @@ export const usersController = container.resolve('controllerFactory').createCont
 				})
 				const createUser = container.resolve('createUser')
 				const response = await createUser.execute(command)
+				res.status(200).send(response)
+			},
+		},
+		{
+			method: 'delete',
+			path: '/:id',
+			middlewares: [],
+			handler: async (req, res) => {
+				const id = req.params.id as string
+				const command = new RemoveUserCommand({ id })
+				const removeUser = container.resolve('removeUser')
+				const response = await removeUser.execute(command)
 				res.status(200).send(response)
 			},
 		},
