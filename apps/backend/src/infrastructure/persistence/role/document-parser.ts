@@ -1,7 +1,9 @@
 import { Timestamp } from 'firebase-admin/firestore'
+import { Logger } from '@snowdrive/logger'
 import { Role } from '@princesitas/core'
 import type { IRoleDocument } from './types'
 
+@Logger({ severity: 'TRACE' })
 export class RoleDocumentParser {
 	public toDomain(document: IRoleDocument): Role {
 		return new Role({

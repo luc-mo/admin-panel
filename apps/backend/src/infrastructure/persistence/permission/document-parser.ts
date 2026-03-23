@@ -1,7 +1,9 @@
 import { Timestamp } from 'firebase-admin/firestore'
+import { Logger } from '@snowdrive/logger'
 import { Permission } from '@princesitas/core'
 import type { IPermissionDocument } from './types'
 
+@Logger({ severity: 'TRACE' })
 export class PermissionDocumentParser {
 	public toDomain(document: IPermissionDocument): Permission {
 		return new Permission({
