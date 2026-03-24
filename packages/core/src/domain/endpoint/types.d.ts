@@ -1,7 +1,7 @@
 export interface IEndpoint {
 	id: string
 	path: string
-	permissions: string[][]
+	roles: string[]
 	createdAt: Date
 	updatedAt: Date
 }
@@ -9,7 +9,7 @@ export interface IEndpoint {
 export interface IJsonEndpoint {
 	id: string
 	path: string
-	permissions: string[][]
+	roles: string[]
 	createdAt: string
 	updatedAt: string
 }

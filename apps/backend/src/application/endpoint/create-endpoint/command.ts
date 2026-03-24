@@ -1,14 +1,14 @@
 export class CreateEndpointCommand {
 	public readonly path: string
-	public readonly permissions: string[][]
+	public readonly roles: string[]
 
 	constructor(params: IConstructor) {
 		this.path = params.path
-		this.permissions = params.permissions
+		this.roles = params.roles
 	}
 }
 
 interface IConstructor {
 	path: string
-	permissions: string[][]
+	roles: string[]
 }

@@ -9,7 +9,7 @@ export class EndpointDocumentParser {
 		return new Endpoint({
 			id: document.id,
 			path: document.path,
-			permissions: document.permissions,
+			roles: document.roles,
 			createdAt: document.createdAt.toDate(),
 			updatedAt: document.updatedAt.toDate(),
 		})
@@ -19,7 +19,7 @@ export class EndpointDocumentParser {
 		return {
 			id: endpoint.id,
 			path: endpoint.path,
-			permissions: endpoint.permissions,
+			roles: endpoint.roles,
 			createdAt: Timestamp.fromDate(endpoint.createdAt),
 			updatedAt: Timestamp.fromDate(endpoint.updatedAt),
 		}

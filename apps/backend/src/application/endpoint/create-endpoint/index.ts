@@ -14,7 +14,7 @@ export class CreateEndpoint extends InjectableDependency('idGenerator', 'endpoin
 		const endpoint = new Endpoint({
 			id: endpointId,
 			path: command.path,
-			permissions: command.permissions,
+			roles: command.roles,
 			createdAt: date,
 			updatedAt: date,
 		})
@@ -25,7 +25,7 @@ export class CreateEndpoint extends InjectableDependency('idGenerator', 'endpoin
 			data: {
 				id: endpoint.id,
 				path: endpoint.path,
-				permissions: endpoint.permissions,
+				roles: endpoint.roles,
 				createdAt: endpoint.createdAt.toISOString(),
 				updatedAt: endpoint.updatedAt.toISOString(),
 			},

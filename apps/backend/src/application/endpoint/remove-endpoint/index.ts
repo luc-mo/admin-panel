@@ -16,7 +16,7 @@ export class RemoveEndpoint extends InjectableDependency('endpointRepository') {
 			data: {
 				id: endpoint.id,
 				path: endpoint.path,
-				permissions: endpoint.permissions,
+				roles: endpoint.roles,
 				createdAt: endpoint.createdAt.toISOString(),
 				updatedAt: endpoint.updatedAt.toISOString(),
 			},

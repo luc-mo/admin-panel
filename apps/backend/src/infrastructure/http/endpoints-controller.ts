@@ -43,7 +43,7 @@ export const endpointsController = container.resolve('controllerFactory').create
 			handler: async (req, res) => {
 				const command = new CreateEndpointCommand({
 					path: req.body.path,
-					permissions: req.body.permissions,
+					roles: req.body.roles,
 				})
 				const createEndpoint = container.resolve('createEndpoint')
 				const response = await createEndpoint.execute(command)
@@ -58,7 +58,7 @@ export const endpointsController = container.resolve('controllerFactory').create
 				const command = new UpdateEndpointCommand({
 					id: req.params.id as string,
 					path: req.body.path,
-					permissions: req.body.permissions,
+					roles: req.body.roles,
 				})
 				const updateEndpoint = container.resolve('updateEndpoint')
 				const response = await updateEndpoint.execute(command)

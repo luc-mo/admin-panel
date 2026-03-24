@@ -3,14 +3,14 @@ import type { IEndpoint } from './types'
 export class Endpoint {
 	private readonly _id: string
 	private readonly _path: string
-	private readonly _permissions: string[][]
+	private readonly _roles: string[]
 	private readonly _createdAt: Date
 	private readonly _updatedAt: Date
 
 	constructor(data: IEndpoint) {
 		this._id = data.id
 		this._path = data.path
-		this._permissions = data.permissions
+		this._roles = data.roles
 		this._createdAt = data.createdAt
 		this._updatedAt = data.updatedAt
 	}
@@ -23,8 +23,8 @@ export class Endpoint {
 		return this._path
 	}
 
-	public get permissions() {
-		return this._permissions
+	public get roles() {
+		return this._roles
 	}
 
 	public get createdAt() {
