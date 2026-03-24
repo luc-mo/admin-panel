@@ -13,6 +13,11 @@ export class FirebaseAuthService extends InjectableDependency('admin', 'cloudSdk
 		return this._auth
 	}
 
+	public async validateToken(token: string) {
+		const auth = this.getAuth()
+		return auth.verifyIdToken(token)
+	}
+
 	public async createUser(params: ICreateUserParams) {
 		const auth = this.getAuth()
 		return auth.createUser({
