@@ -45,7 +45,6 @@ export const usersController = container.resolve('controllerFactory').createCont
 					email: req.body.email,
 					username: req.body.username,
 					password: req.body.password,
-					displayName: req.body.displayName,
 				})
 				const createUser = container.resolve('createUser')
 				const response = await createUser.execute(command)
@@ -59,7 +58,7 @@ export const usersController = container.resolve('controllerFactory').createCont
 			handler: async (req, res) => {
 				const command = new UpdateUserCommand({
 					id: req.params.id as string,
-					displayName: req.body.displayName,
+					username: req.body.username,
 					roles: req.body.roles,
 				})
 				const updateUser = container.resolve('updateUser')

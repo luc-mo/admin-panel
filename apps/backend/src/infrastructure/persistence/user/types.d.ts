@@ -4,7 +4,6 @@ export interface IUserDocument {
 	id: string
 	email: string
 	username: string
-	displayName: string
 	roles: string[]
 	createdAt: Timestamp
 	updatedAt: Timestamp

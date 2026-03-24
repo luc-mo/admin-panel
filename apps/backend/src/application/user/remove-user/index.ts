@@ -20,7 +20,6 @@ export class RemoveUser extends InjectableDependency('userRepository', 'authServ
 				id: user.id,
 				email: user.email,
 				username: user.username,
-				displayName: user.displayName,
 				roles: user.roles,
 				createdAt: user.createdAt.toISOString(),
 				updatedAt: user.updatedAt.toISOString(),

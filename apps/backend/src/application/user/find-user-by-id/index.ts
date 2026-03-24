@@ -15,7 +15,6 @@ export class FindUserById extends InjectableDependency('userRepository') {
 				id: user.id,
 				email: user.email,
 				username: user.username,
-				displayName: user.displayName,
 				roles: user.roles,
 				createdAt: user.createdAt.toISOString(),
 				updatedAt: user.updatedAt.toISOString(),

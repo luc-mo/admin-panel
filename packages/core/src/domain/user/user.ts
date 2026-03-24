@@ -4,7 +4,6 @@ export class User {
 	private readonly _id: string
 	private readonly _email: string
 	private readonly _username: string
-	private readonly _displayName: string
 	private readonly _roles: string[]
 	private readonly _createdAt: Date
 	private readonly _updatedAt: Date
@@ -13,7 +12,6 @@ export class User {
 		this._id = data.id
 		this._email = data.email
 		this._username = data.username
-		this._displayName = data.displayName
 		this._roles = data.roles
 		this._createdAt = data.createdAt
 		this._updatedAt = data.updatedAt
@@ -29,10 +27,6 @@ export class User {
 
 	public get username() {
 		return this._username
-	}
-
-	public get displayName() {
-		return this._displayName
 	}
 
 	public get roles() {

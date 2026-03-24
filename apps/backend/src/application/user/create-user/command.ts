@@ -2,13 +2,11 @@ export class CreateUserCommand {
 	public readonly email: string
 	public readonly username: string
 	public readonly password: string
-	public readonly displayName: string
 
 	constructor(params: IConstructor) {
 		this.email = params.email
 		this.username = params.username
 		this.password = params.password
-		this.displayName = params.displayName
 	}
 }
 
@@ -16,5 +14,4 @@ interface IConstructor {
 	email: string
 	username: string
 	password: string
-	displayName: string
 }
