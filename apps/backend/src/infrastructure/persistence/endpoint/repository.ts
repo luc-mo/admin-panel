@@ -27,6 +27,12 @@ export class EndpointRepository extends InjectableDependency(
 		return document.exists ? this._endpointDocumentParser.toDomain(document.data()!) : null
 	}
 
+	public async findByPath(path: string) {
+		const collection = this._getCollection()
+		const document = await collection.where('path', '==', path).get()
+		return document.docs[0] ? this._endpointDocumentParser.toDomain(document.docs[0].data()) : null
+	}
+
 	public async findByIdOrPath(id: string, path: string) {
 		const collection = this._getCollection()
 		const query = Filter.or(Filter.where('id', '==', id), Filter.where('path', '==', path))
