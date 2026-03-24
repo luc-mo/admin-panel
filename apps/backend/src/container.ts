@@ -37,6 +37,11 @@ import { FindPermissionById } from '@/application/permission/find-permission-by-
 import { CreatePermission } from '@/application/permission/create-permission'
 import { UpdatePermission } from '@/application/permission/update-permission'
 import { RemovePermission } from '@/application/permission/remove-permission'
+import { FindEndpoints } from '@/application/endpoint/find-endpoints'
+import { FindEndpointById } from '@/application/endpoint/find-endpoint-by-id'
+import { CreateEndpoint } from '@/application/endpoint/create-endpoint'
+import { UpdateEndpoint } from '@/application/endpoint/update-endpoint'
+import { RemoveEndpoint } from '@/application/endpoint/remove-endpoint'
 import type { IContainer } from '@/types/container'
 
 const container = createContainer<IContainer>({
@@ -82,6 +87,11 @@ container.register({
 	createPermission: asClass(CreatePermission),
 	updatePermission: asClass(UpdatePermission),
 	removePermission: asClass(RemovePermission),
+	findEndpoints: asClass(FindEndpoints),
+	findEndpointById: asClass(FindEndpointById),
+	createEndpoint: asClass(CreateEndpoint),
+	updateEndpoint: asClass(UpdateEndpoint),
+	removeEndpoint: asClass(RemoveEndpoint),
 } as Record<keyof IContainer, any>)
 
 export { container }

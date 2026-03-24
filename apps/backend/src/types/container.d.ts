@@ -44,4 +44,11 @@ export interface IContainer {
 	createPermission: import('@/application/permission/create-permission').CreatePermission
 	updatePermission: import('@/application/permission/update-permission').UpdatePermission
 	removePermission: import('@/application/permission/remove-permission').RemovePermission
+
+	// Endpoint
+	findEndpoints: import('@/application/endpoint/find-endpoints').FindEndpoints
+	findEndpointById: import('@/application/endpoint/find-endpoint-by-id').FindEndpointById
+	createEndpoint: import('@/application/endpoint/create-endpoint').CreateEndpoint
+	updateEndpoint: import('@/application/endpoint/update-endpoint').UpdateEndpoint
+	removeEndpoint: import('@/application/endpoint/remove-endpoint').RemoveEndpoint
 }
