@@ -14,7 +14,7 @@
 	},
 	"dependencies": {
 		"@princesitas/core": "workspace:*",
-		"@snowdrive/logger": "1.1.0",
+		"@snowdrive/logger": "1.2.0",
 		"awilix": "13.0.0",
 		"cors": "2.8.6",
 		"cross-env": "10.1.0",
