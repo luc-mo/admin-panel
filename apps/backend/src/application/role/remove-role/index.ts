@@ -1,0 +1,33 @@
+import { Logger } from '@snowdrive/logger'
+import { InjectableDependency } from '@/shared/injectable-dependency'
+import { RemoveRoleResponse } from './response'
+import type { RemoveRoleCommand } from './command'
+import type { Role } from '@princesitas/core'
+
+@Logger({ severity: 'INFO' })
+export class RemoveRole extends InjectableDependency('roleRepository') {
+	public async execute(command: RemoveRoleCommand) {
+		const role = await this._roleRepository.findById(command.id)
+		this._assertRoleExists(role)
+
+		await this._roleRepository.remove(command.id)
+
+		return new RemoveRoleResponse({
+			data: {
+				id: role.id,
+				name: role.name,
+				description: role.description,
+				permissions: role.permissions,
+				createdAt: role.createdAt.toISOString(),
+				updatedAt: role.updatedAt.toISOString(),
+			},
+			message: 'Rol eliminado exitosamente',
+		})
+	}
+
+	private _assertRoleExists(role: Role | null): asserts role is Role {
+		if (!role) {
+			throw new Error('Rol no encontrado')
+		}
+	}
+}
