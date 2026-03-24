@@ -1,5 +1,6 @@
 import { Filter } from 'firebase-admin/firestore'
 import { Logger } from '@snowdrive/logger'
+import { ArrayUtils } from '@/shared/array-utils'
 import { InjectableDependency } from '@/shared/injectable-dependency'
 import type { Role } from '@princesitas/core'
 import type { IRoleDocument } from './types'
@@ -22,6 +23,17 @@ export class RoleRepository extends InjectableDependency('dbHandler', 'roleDocum
 		const collection = this._getCollection()
 		const document = await collection.doc(id).get()
 		return document.exists ? this._roleDocumentParser.toDomain(document.data()!) : null
+	}
+
+	public async findByIds(ids: string[]) {
+		if (!ids.length) return []
+		const uniqueIds = ArrayUtils.unique(ids)
+		const chunkedIds = ArrayUtils.chunk(uniqueIds, 30)
+		const collection = this._getCollection()
+		return ArrayUtils.asyncFlatMap(chunkedIds, async (chunk) => {
+			const documents = await collection.where('id', 'in', chunk).get()
+			return documents.docs.map((document) => this._roleDocumentParser.toDomain(document.data()))
+		})
 	}
 
 	public async findByIdOrName(id: string, name: string) {
