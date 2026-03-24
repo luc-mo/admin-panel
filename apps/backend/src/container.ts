@@ -27,6 +27,16 @@ import { FindUserById } from '@/application/user/find-user-by-id'
 import { CreateUser } from '@/application/user/create-user'
 import { UpdateUser } from '@/application/user/update-user'
 import { RemoveUser } from '@/application/user/remove-user'
+import { FindRoles } from '@/application/role/find-roles'
+import { FindRoleById } from '@/application/role/find-role-by-id'
+import { CreateRole } from '@/application/role/create-role'
+import { UpdateRole } from '@/application/role/update-role'
+import { RemoveRole } from '@/application/role/remove-role'
+import { FindPermissions } from '@/application/permission/find-permissions'
+import { FindPermissionById } from '@/application/permission/find-permission-by-id'
+import { CreatePermission } from '@/application/permission/create-permission'
+import { UpdatePermission } from '@/application/permission/update-permission'
+import { RemovePermission } from '@/application/permission/remove-permission'
 import type { IContainer } from '@/types/container'
 
 const container = createContainer<IContainer>({
@@ -62,6 +72,16 @@ container.register({
 	createUser: asClass(CreateUser),
 	updateUser: asClass(UpdateUser),
 	removeUser: asClass(RemoveUser),
+	findRoles: asClass(FindRoles),
+	findRoleById: asClass(FindRoleById),
+	createRole: asClass(CreateRole),
+	updateRole: asClass(UpdateRole),
+	removeRole: asClass(RemoveRole),
+	findPermissions: asClass(FindPermissions),
+	findPermissionById: asClass(FindPermissionById),
+	createPermission: asClass(CreatePermission),
+	updatePermission: asClass(UpdatePermission),
+	removePermission: asClass(RemovePermission),
 } as Record<keyof IContainer, any>)
 
 export { container }

@@ -21,10 +21,27 @@ export interface IContainer {
 
 	idGenerator: import('@/domain/services/id-generator').IdGenerator
 
+	// Health
 	healthCheck: import('@/application/health-check').HealthCheck
+
+	// User
 	findUsers: import('@/application/user/find-users').FindUsers
 	findUserById: import('@/application/user/find-user-by-id').FindUserById
 	createUser: import('@/application/user/create-user').CreateUser
 	updateUser: import('@/application/user/update-user').UpdateUser
 	removeUser: import('@/application/user/remove-user').RemoveUser
+
+	// Role
+	findRoles: import('@/application/role/find-roles').FindRoles
+	findRoleById: import('@/application/role/find-role-by-id').FindRoleById
+	createRole: import('@/application/role/create-role').CreateRole
+	updateRole: import('@/application/role/update-role').UpdateRole
+	removeRole: import('@/application/role/remove-role').RemoveRole
+
+	// Permission
+	findPermissions: import('@/application/permission/find-permissions').FindPermissions
+	findPermissionById: import('@/application/permission/find-permission-by-id').FindPermissionById
+	createPermission: import('@/application/permission/create-permission').CreatePermission
+	updatePermission: import('@/application/permission/update-permission').UpdatePermission
+	removePermission: import('@/application/permission/remove-permission').RemovePermission
 }
