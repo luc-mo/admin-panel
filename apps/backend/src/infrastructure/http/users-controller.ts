@@ -45,6 +45,7 @@ export const usersController = container.resolve('controllerFactory').createCont
 					email: req.body.email,
 					username: req.body.username,
 					password: req.body.password,
+					roles: req.body.roles,
 				})
 				const createUser = container.resolve('createUser')
 				const response = await createUser.execute(command)

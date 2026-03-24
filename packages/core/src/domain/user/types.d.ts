@@ -3,6 +3,7 @@ export interface IUser {
 	email: string
 	username: string
 	roles: string[]
+	isSuperAdmin?: boolean
 	createdAt: Date
 	updatedAt: Date
 }
@@ -12,6 +13,7 @@ export interface IJsonUser {
 	email: string
 	username: string
 	roles: string[]
+	isSuperAdmin?: boolean
 	createdAt: string
 	updatedAt: string
 }

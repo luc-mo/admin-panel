@@ -19,7 +19,7 @@ export class CreateUser extends InjectableDependency(
 			id: userId,
 			email: command.email,
 			username: command.username,
-			roles: [],
+			roles: command.roles,
 			createdAt: date,
 			updatedAt: date,
 		})
@@ -28,8 +28,8 @@ export class CreateUser extends InjectableDependency(
 			this._authService.createUser({
 				id: user.id,
 				email: user.email,
-				password: command.password,
 				username: user.username,
+				password: command.password,
 			}),
 			this._userRepository.save(user),
 		])

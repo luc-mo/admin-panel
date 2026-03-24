@@ -5,6 +5,7 @@ export class User {
 	private readonly _email: string
 	private readonly _username: string
 	private readonly _roles: string[]
+	private readonly _isSuperAdmin?: boolean
 	private readonly _createdAt: Date
 	private readonly _updatedAt: Date
 
@@ -13,6 +14,7 @@ export class User {
 		this._email = data.email
 		this._username = data.username
 		this._roles = data.roles
+		this._isSuperAdmin = data.isSuperAdmin
 		this._createdAt = data.createdAt
 		this._updatedAt = data.updatedAt
 	}
@@ -31,6 +33,10 @@ export class User {
 
 	public get roles() {
 		return this._roles
+	}
+
+	public get isSuperAdmin() {
+		return this._isSuperAdmin
 	}
 
 	public get createdAt() {
