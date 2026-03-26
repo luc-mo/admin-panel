@@ -1,4 +1,4 @@
-export class CheckUserPermissionsCommand {
+export class CheckUserRolesCommand {
 	public readonly userId: string
 	public readonly path: string
 

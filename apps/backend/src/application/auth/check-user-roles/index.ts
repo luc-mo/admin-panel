@@ -1,17 +1,17 @@
 import { Logger } from '@snowdrive/logger'
 import { InjectableDependency } from '@/shared/injectable-dependency'
-import { CheckUserPermissionsResponse } from './response'
+import { CheckUserRolesResponse } from './response'
 import type { User } from '@princesitas/core'
-import type { CheckUserPermissionsCommand } from './command'
+import type { CheckUserRolesCommand } from './command'
 
 @Logger({ severity: 'INFO' })
-export class CheckUserPermissions extends InjectableDependency(
+export class CheckUserRoles extends InjectableDependency(
 	'userRepository',
 	'roleRepository',
 	'permissionRepository',
 	'endpointRepository'
 ) {
-	public async execute(command: CheckUserPermissionsCommand) {
+	public async execute(command: CheckUserRolesCommand) {
 		const [user, endpoint] = await Promise.all([
 			this._userRepository.findById(command.userId),
 			this._endpointRepository.findByPath(command.path),
@@ -19,12 +19,12 @@ export class CheckUserPermissions extends InjectableDependency(
 		this._assertUserExists(user)
 
 		if (user.isSuperAdmin || !endpoint || !endpoint.roles.length) {
-			return new CheckUserPermissionsResponse({ hasPermission: true })
+			return new CheckUserRolesResponse({ isAuthorized: true })
 		}
 
 		const userRoles = new Set(user.roles)
-		const hasPermission = endpoint.roles.some((roleId) => userRoles.has(roleId))
-		return new CheckUserPermissionsResponse({ hasPermission })
+		const isAuthorized = endpoint.roles.some((roleId) => userRoles.has(roleId))
+		return new CheckUserRolesResponse({ isAuthorized })
 	}
 
 	private _assertUserExists(user: User | null): asserts user is User {

@@ -22,7 +22,7 @@ import { EndpointDocumentParser } from '@/infrastructure/persistence/endpoint/do
 import { IdGenerator } from './domain/services/id-generator'
 
 import { HealthCheck } from '@/application/health-check'
-import { CheckUserPermissions } from '@/application/auth/check-user-permissions'
+import { CheckUserRoles } from '@/application/auth/check-user-roles'
 import { FindUsers } from '@/application/user/find-users'
 import { FindUserById } from '@/application/user/find-user-by-id'
 import { CreateUser } from '@/application/user/create-user'
@@ -73,7 +73,7 @@ container.register({
 	idGenerator: asClass(IdGenerator),
 
 	healthCheck: asClass(HealthCheck),
-	checkUserPermissions: asClass(CheckUserPermissions),
+	checkUserRoles: asClass(CheckUserRoles),
 	findUsers: asClass(FindUsers),
 	findUserById: asClass(FindUserById),
 	createUser: asClass(CreateUser),

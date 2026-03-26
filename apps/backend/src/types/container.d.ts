@@ -23,7 +23,7 @@ export interface IContainer {
 
 	// Miscellaneous
 	healthCheck: import('@/application/health-check').HealthCheck
-	checkUserPermissions: import('@/application/auth/check-user-permissions').CheckUserPermissions
+	checkUserRoles: import('@/application/auth/check-user-roles').CheckUserRoles
 
 	// User
 	findUsers: import('@/application/user/find-users').FindUsers

@@ -1,7 +1,7 @@
 import { container } from '@/container'
 import { loggerMiddleware } from './middlewares/logger-middleware'
 import { accessTokenMiddleware } from './middlewares/access-token-middleware'
-import { userPermissionsMiddleware } from './middlewares/user-permissions-middleware'
+import { userRolesMiddleware } from './middlewares/user-roles-middleware'
 
 import { FindRolesCommand } from '@/application/role/find-roles/command'
 import { FindRoleByIdCommand } from '@/application/role/find-role-by-id/command'
@@ -11,7 +11,7 @@ import { RemoveRoleCommand } from '@/application/role/remove-role/command'
 
 export const rolesController = container.resolve('controllerFactory').createController({
 	path: '/api/roles',
-	middlewares: [loggerMiddleware, accessTokenMiddleware, userPermissionsMiddleware],
+	middlewares: [loggerMiddleware, accessTokenMiddleware, userRolesMiddleware],
 	endpoints: [
 		{
 			method: 'get',

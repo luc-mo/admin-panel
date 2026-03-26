@@ -1,7 +1,7 @@
 import { container } from '@/container'
 import { loggerMiddleware } from './middlewares/logger-middleware'
 import { accessTokenMiddleware } from './middlewares/access-token-middleware'
-import { userPermissionsMiddleware } from './middlewares/user-permissions-middleware'
+import { userRolesMiddleware } from './middlewares/user-roles-middleware'
 
 import { FindUsersCommand } from '@/application/user/find-users/command'
 import { FindUserByIdCommand } from '@/application/user/find-user-by-id/command'
@@ -11,12 +11,11 @@ import { RemoveUserCommand } from '@/application/user/remove-user/command'
 
 export const usersController = container.resolve('controllerFactory').createController({
 	path: '/api/users',
-	middlewares: [loggerMiddleware, accessTokenMiddleware, userPermissionsMiddleware],
+	middlewares: [loggerMiddleware, accessTokenMiddleware, userRolesMiddleware],
 	endpoints: [
 		{
 			method: 'get',
 			path: '/',
-			middlewares: [],
 			handler: async (req, res) => {
 				const command = new FindUsersCommand({
 					limit: Number.parseInt(req.query.limit as string, 10) || 10,
@@ -29,8 +28,19 @@ export const usersController = container.resolve('controllerFactory').createCont
 		},
 		{
 			method: 'get',
+			path: '/me',
+			overrides: [userRolesMiddleware.bypass],
+			handler: async (req, res) => {
+				const id = req.authUser.uid
+				const command = new FindUserByIdCommand({ id })
+				const findUserById = container.resolve('findUserById')
+				const response = await findUserById.execute(command)
+				res.status(200).send(response)
+			},
+		},
+		{
+			method: 'get',
 			path: '/:id',
-			middlewares: [],
 			handler: async (req, res) => {
 				const id = req.params.id as string
 				const command = new FindUserByIdCommand({ id })
@@ -42,7 +52,6 @@ export const usersController = container.resolve('controllerFactory').createCont
 		{
 			method: 'post',
 			path: '/:id',
-			middlewares: [],
 			handler: async (req, res) => {
 				const command = new CreateUserCommand({
 					email: req.body.email,
@@ -58,7 +67,6 @@ export const usersController = container.resolve('controllerFactory').createCont
 		{
 			method: 'patch',
 			path: '/:id',
-			middlewares: [],
 			handler: async (req, res) => {
 				const command = new UpdateUserCommand({
 					id: req.params.id as string,
@@ -73,7 +81,6 @@ export const usersController = container.resolve('controllerFactory').createCont
 		{
 			method: 'delete',
 			path: '/:id',
-			middlewares: [],
 			handler: async (req, res) => {
 				const id = req.params.id as string
 				const command = new RemoveUserCommand({ id })
