@@ -25,19 +25,28 @@ export class ControllerFactory extends InjectableDependency('express', 'cors') {
 
 	public createController({ path, middlewares, endpoints }: IControllerConfig): IController {
 		const router = this._express()
-		router.use(this._cors())
 		router.use(
+			this._cors(),
 			this._express.json({
 				verify: (req: Request, _, buf) => {
 					req.rawBody = buf
 				},
-			})
+			}),
+			(req, _, next) => {
+				req.context = {}
+				next()
+			}
 		)
+
+		endpoints.forEach((endpoint) => {
+			if (!endpoint.overrides) return
+			router[endpoint.method](endpoint.path, ...endpoint.overrides)
+		})
 		middlewares.forEach((middleware) => {
 			router.use(middleware)
 		})
 		endpoints.forEach((endpoint) => {
-			router[endpoint.method](endpoint.path, ...endpoint.middlewares, endpoint.handler)
+			router[endpoint.method](endpoint.path, ...(endpoint.middlewares ?? []), endpoint.handler)
 		})
 		return { path, router }
 	}
@@ -71,6 +80,7 @@ interface IControllerConfig {
 interface IEndpointConfig {
 	method: 'get' | 'post' | 'put' | 'patch' | 'delete'
 	path: string
-	middlewares: RequestHandler[]
+	overrides?: RequestHandler[]
+	middlewares?: RequestHandler[]
 	handler: RequestHandler
 }

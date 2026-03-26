@@ -6,6 +6,7 @@ declare global {
 		interface Request {
 			rawBody: Buffer
 			authUser: DecodedIdToken
+			context: Record<string, any>
 		}
 	}
 }
