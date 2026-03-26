@@ -18,7 +18,7 @@ export class CheckUserPermissions extends InjectableDependency(
 		])
 		this._assertUserExists(user)
 
-		if (!endpoint || !endpoint.roles.length) {
+		if (user.isSuperAdmin || !endpoint || !endpoint.roles.length) {
 			return new CheckUserPermissionsResponse({ hasPermission: true })
 		}
 
