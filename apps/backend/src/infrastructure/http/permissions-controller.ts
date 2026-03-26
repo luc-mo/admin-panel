@@ -1,5 +1,8 @@
 import { container } from '@/container'
 import { loggerMiddleware } from './middlewares/logger-middleware'
+import { accessTokenMiddleware } from './middlewares/access-token-middleware'
+import { userPermissionsMiddleware } from './middlewares/user-permissions-middleware'
+
 import { FindPermissionsCommand } from '@/application/permission/find-permissions/command'
 import { FindPermissionByIdCommand } from '@/application/permission/find-permission-by-id/command'
 import { CreatePermissionCommand } from '@/application/permission/create-permission/command'
@@ -8,7 +11,7 @@ import { RemovePermissionCommand } from '@/application/permission/remove-permiss
 
 export const permissionsController = container.resolve('controllerFactory').createController({
 	path: '/api/permissions',
-	middlewares: [loggerMiddleware],
+	middlewares: [loggerMiddleware, accessTokenMiddleware, userPermissionsMiddleware],
 	endpoints: [
 		{
 			method: 'get',

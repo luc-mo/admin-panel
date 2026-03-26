@@ -1,5 +1,8 @@
 import { container } from '@/container'
 import { loggerMiddleware } from './middlewares/logger-middleware'
+import { accessTokenMiddleware } from './middlewares/access-token-middleware'
+import { userPermissionsMiddleware } from './middlewares/user-permissions-middleware'
+
 import { FindEndpointsCommand } from '@/application/endpoint/find-endpoints/command'
 import { FindEndpointByIdCommand } from '@/application/endpoint/find-endpoint-by-id/command'
 import { CreateEndpointCommand } from '@/application/endpoint/create-endpoint/command'
@@ -8,7 +11,7 @@ import { RemoveEndpointCommand } from '@/application/endpoint/remove-endpoint/co
 
 export const endpointsController = container.resolve('controllerFactory').createController({
 	path: '/api/endpoints',
-	middlewares: [loggerMiddleware],
+	middlewares: [loggerMiddleware, accessTokenMiddleware, userPermissionsMiddleware],
 	endpoints: [
 		{
 			method: 'get',
