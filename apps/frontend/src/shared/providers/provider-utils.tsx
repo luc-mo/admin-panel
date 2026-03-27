@@ -4,7 +4,7 @@ export interface IProvider<S> {
 	name: string
 	Context: React.Context<S | null>
 	Provider: React.FC<React.PropsWithChildren>
-	useProvider: () => S
+	use: () => S
 }
 
 export function createProvider<S extends object>(name: string, useValue: () => S): IProvider<S> {
@@ -27,7 +27,7 @@ export function createProvider<S extends object>(name: string, useValue: () => S
 		name,
 		Context,
 		Provider,
-		useProvider,
+		use: useProvider,
 	}
 }
 
