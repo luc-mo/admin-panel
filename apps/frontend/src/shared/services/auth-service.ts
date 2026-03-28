@@ -1,6 +1,11 @@
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { cloudSdkService } from './cloud-sdk-service'
 
+interface ILoginParams {
+	email: string
+	password: string
+}
+
 interface ILoginResult {
 	accessToken: string
 	refreshToken: string
@@ -14,7 +19,7 @@ const isAuthenticated = async (): Promise<boolean> => {
 	return user !== null
 }
 
-const logIn = async (email: string, password: string): Promise<ILoginResult> => {
+const logIn = async ({ email, password }: ILoginParams): Promise<ILoginResult> => {
 	const credentials = await signInWithEmailAndPassword(_auth, email, password)
 	return {
 		accessToken: await credentials.user.getIdToken(),

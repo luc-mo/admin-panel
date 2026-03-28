@@ -32,8 +32,8 @@ export function createProvider<S extends object>(name: string, useValue: () => S
 }
 
 export function withProviders<C extends React.ComponentType<any>, P extends IProvider<any>>(
-	Component: C,
-	providers: P[]
+	providers: P[],
+	Component: C
 ): React.FC<React.ComponentProps<C>> {
 	return (props: React.ComponentProps<C>) => {
 		return providers.reduceRight(
