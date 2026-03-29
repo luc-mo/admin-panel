@@ -9,6 +9,15 @@ export const router = createBrowserRouter([
 			return { Component: module.App }
 		},
 		hydrateFallbackElement: <></>,
-		children: [...authRouter],
+		children: [
+			...authRouter,
+			{
+				path: '/dashboard',
+				lazy: async () => {
+					const module = await import('@/shared/pages/dashboard')
+					return { Component: module.Dashboard }
+				},
+			},
+		],
 	},
 ])
