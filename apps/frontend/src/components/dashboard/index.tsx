@@ -1,30 +1,47 @@
-import { useState } from 'react'
-import { Layout, Menu } from 'antd'
+import { Outlet } from 'react-router-dom'
+import { Layout, Menu, Avatar } from 'antd'
 import { HomeOutlined, LogoutOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons'
+
 import { withProviders } from '@/providers/utils/with-providers'
 import { routerProvider } from '@/providers/router-provider'
+import { useDashboardMenu } from '@/hooks/use-dashboard-menu'
+
+import { cn } from '@/utils/cn'
 import styles from './styles.module.css'
 
 export const Dashboard: React.FC = withProviders([routerProvider], ({ router }) => {
-	const [collapsed, _setCollapsed] = useState(false)
-
-	// const toggleCollapsed = () => setCollapsed((prev) => !prev)
-
-	const handleMenuClick = (info: IMenuInfo) => {
-		console.log('Menu item clicked:', info)
-	}
+	const { onMenuClick } = useDashboardMenu()
 
 	return (
 		<Layout className={styles.layout}>
-			<Layout.Sider collapsed={collapsed} theme="dark">
+			<Layout.Sider width={300} theme="dark">
+				<div className={cn(styles.avatar_container)}>
+					<Avatar
+						className={styles.avatar}
+						size={48}
+						alt="Avatar del usuario"
+						src="https://cataas.com/cat/0BTTVEVWXNyOgXYd?width=150"
+					/>
+					<section>
+						<div className={styles.user_name}>Administrador</div>
+						<div className={styles.user_email}>admin@sistema.com</div>
+					</section>
+				</div>
+
 				<Menu
 					theme="dark"
 					selectedKeys={[router.location.pathname]}
 					mode="inline"
 					items={menuItems}
-					onClick={handleMenuClick}
+					onClick={onMenuClick}
 				/>
 			</Layout.Sider>
+
+			<Layout>
+				<Layout.Content>
+					<Outlet />
+				</Layout.Content>
+			</Layout>
 		</Layout>
 	)
 })
@@ -52,9 +69,3 @@ const menuItems = [
 		danger: true,
 	},
 ]
-
-interface IMenuInfo {
-	key: string
-	keyPath: string[]
-	domEvent: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>
-}

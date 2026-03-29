@@ -19,9 +19,23 @@ export const router = createBrowserRouter([
 			{
 				path: '/dashboard',
 				lazy: async () => {
-					const module = await import('@/pages/dashboard')
+					const module = await import('@/components/dashboard')
 					return { Component: module.Dashboard }
 				},
+				children: [
+					{
+						index: true,
+						element: <div>Dashboard Home</div>,
+					},
+					{
+						path: 'users',
+						element: <div>Users</div>,
+					},
+					{
+						path: 'roles',
+						element: <div>Roles</div>,
+					},
+				],
 			},
 		],
 	},
