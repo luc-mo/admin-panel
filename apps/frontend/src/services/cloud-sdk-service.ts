@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { config } from '@/shared/config'
+import { config } from '@/config'
 
 export const cloudSdkService = initializeApp({
 	projectId: config.firebase.projectId,

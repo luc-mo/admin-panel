@@ -1,10 +1,10 @@
 import { ConfigProvider, Form, Input, Button, Card, Typography } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
-import { withProviders } from '@/shared/providers/utils/with-providers'
-import { routerProvider } from '@/shared/providers/router-provider'
+import { withProviders } from '@/providers/utils/with-providers'
+import { routerProvider } from '@/providers/router-provider'
 
-import { useAuth } from '@/auth/hooks/use-auth'
+import { useAuth } from '@/hooks/use-auth'
 import styles from './styles.module.css'
 
 export const Login: React.FC = withProviders([routerProvider], () => {

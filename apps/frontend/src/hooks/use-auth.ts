@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { message } from 'antd'
-import { useProviders } from '@/shared/providers/utils/use-providers'
-import { routerProvider } from '@/shared/providers/router-provider'
-import { servicesProvider } from '@/shared/providers/services-provider'
+import { useProviders } from '@/providers/utils/use-providers'
+import { routerProvider } from '@/providers/router-provider'
+import { servicesProvider } from '@/providers/services-provider'
 
 export const useAuth = () => {
 	const { router, services } = useProviders([routerProvider, servicesProvider])

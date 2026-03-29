@@ -1,5 +1,5 @@
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-import { cloudSdkService } from './cloud-sdk-service'
+import { cloudSdkService } from '@/services/cloud-sdk-service'
 
 interface ILoginParams {
 	email: string

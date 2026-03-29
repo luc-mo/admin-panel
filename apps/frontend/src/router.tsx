@@ -1,5 +1,4 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { authRouter } from '@/auth/router'
 
 export const router = createBrowserRouter([
 	{
@@ -10,11 +9,17 @@ export const router = createBrowserRouter([
 		},
 		hydrateFallbackElement: <></>,
 		children: [
-			...authRouter,
+			{
+				path: '/auth/login',
+				lazy: async () => {
+					const module = await import('@/pages/login')
+					return { Component: module.Login }
+				},
+			},
 			{
 				path: '/dashboard',
 				lazy: async () => {
-					const module = await import('@/shared/pages/dashboard')
+					const module = await import('@/pages/dashboard')
 					return { Component: module.Dashboard }
 				},
 			},

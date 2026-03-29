@@ -1,5 +1,5 @@
-import { createProvider } from '@/shared/providers/utils/create-provider'
-import { config } from '@/shared/config'
+import { createProvider } from './utils/create-provider'
+import { config } from '@/config'
 
 export const configProvider = createProvider({
 	providerName: 'ConfigProvider',

@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Layout, Menu } from 'antd'
 import { HomeOutlined, LogoutOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons'
-import { withProviders } from '@/shared/providers/utils/with-providers'
-import { routerProvider } from '@/shared/providers/router-provider'
+import { withProviders } from '@/providers/utils/with-providers'
+import { routerProvider } from '@/providers/router-provider'
 import styles from './styles.module.css'
 
 export const Dashboard: React.FC = withProviders([routerProvider], ({ router }) => {
