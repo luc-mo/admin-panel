@@ -3,13 +3,10 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
 import { withProviders } from '@/providers/utils/with-providers'
 import { routerProvider } from '@/providers/router-provider'
-
-import { useAuth } from '@/hooks/use-auth'
+import { authProvider } from '@/providers/auth-provider'
 import styles from './styles.module.css'
 
-export const Login: React.FC = withProviders([routerProvider], () => {
-	const { loadings, logIn } = useAuth()
-
+export const Login: React.FC = withProviders([routerProvider, authProvider], ({ auth }) => {
 	return (
 		<ConfigProvider theme={themeConfig}>
 			<main className={styles.layout}>
@@ -23,7 +20,7 @@ export const Login: React.FC = withProviders([routerProvider], () => {
 						</Typography.Text>
 					</header>
 
-					<Form onFinish={logIn} layout="vertical" requiredMark={false}>
+					<Form onFinish={auth.logIn} layout="vertical" requiredMark={false}>
 						<Form.Item
 							name="email"
 							rules={[{ required: true, message: 'Por favor ingresa tu correo electrónico' }]}
@@ -39,7 +36,13 @@ export const Login: React.FC = withProviders([routerProvider], () => {
 						</Form.Item>
 
 						<Form.Item className={styles.submit_item}>
-							<Button type="primary" htmlType="submit" loading={loadings.logIn} block size="large">
+							<Button
+								type="primary"
+								htmlType="submit"
+								loading={auth.logInLoading}
+								block
+								size="large"
+							>
 								Iniciar sesión
 							</Button>
 						</Form.Item>
