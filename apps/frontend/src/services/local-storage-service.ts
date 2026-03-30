@@ -1,5 +1,5 @@
+function getItem(key: string): string | null
 function getItem<T>(key: string, deserializer: (value: string) => T): T | null
-function getItem<T>(key: string): T | null
 function getItem<T>(key: string, deserializer?: (value: string) => T): T | string | null {
 	const item = localStorage.getItem(key)
 	if (item === null) return null
@@ -7,7 +7,7 @@ function getItem<T>(key: string, deserializer?: (value: string) => T): T | strin
 	return item
 }
 
-function setItem<T>(key: string, value: T): void
+function setItem(key: string, value: string): void
 function setItem<T>(key: string, value: T, serializer: (value: T) => string): void
 function setItem<T>(key: string, value: T, serializer?: (value: T) => string) {
 	if (serializer) localStorage.setItem(key, serializer(value))
