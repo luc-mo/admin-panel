@@ -1,15 +1,19 @@
 import { useState, useEffect } from 'react'
-import { message } from 'antd'
 import { createProvider } from './utils/create-provider'
 import { useProviders } from './utils/use-providers'
 import { servicesProvider } from './services-provider'
 import { routerProvider } from './router-provider'
+import { toastProvider } from './toast-provider'
 
 export const authProvider = createProvider({
 	providerName: 'AuthProvider',
 	contextName: 'auth',
 	useValue: () => {
-		const { services, router } = useProviders([servicesProvider, routerProvider])
+		const { services, router, toast } = useProviders([
+			servicesProvider,
+			routerProvider,
+			toastProvider,
+		])
 		const [session, setSession] = useState<ISession>({
 			accessToken: null,
 			refreshToken: null,
@@ -25,14 +29,14 @@ export const authProvider = createProvider({
 			try {
 				setLoadings((prev) => ({ ...prev, logIn: true }))
 				const result = await services.auth.logIn(credentials)
-
 				services.localStorage.setItem('auth.access_token', result.accessToken)
 				services.localStorage.setItem('auth.refresh_token', result.refreshToken)
 				services.localStorage.setItem('auth.expires_in', result.expiresIn, String)
 				setSession(result)
+				toast.show('success', 'Sesión iniciada exitosamente')
 				router.navigate('/dashboard')
 			} catch {
-				message.error('Ocurrió un error al iniciar sesión. Por favor, intenta nuevamente.')
+				toast.show('error', 'Ocurrió un error al iniciar sesión. Por favor, intenta nuevamente')
 			}
 			setLoadings((prev) => ({ ...prev, logIn: false }))
 		}
@@ -41,7 +45,6 @@ export const authProvider = createProvider({
 			try {
 				setLoadings((prev) => ({ ...prev, logOut: true }))
 				await services.auth.logOut()
-
 				services.localStorage.removeItem('auth.access_token')
 				services.localStorage.removeItem('auth.refresh_token')
 				services.localStorage.removeItem('auth.expires_in')
@@ -50,9 +53,10 @@ export const authProvider = createProvider({
 					refreshToken: null,
 					expiresIn: null,
 				})
+				toast.show('success', 'Sesión cerrada exitosamente')
 				router.navigate('/auth/login')
 			} catch {
-				message.error('Ocurrió un error al cerrar sesión. Por favor, intenta nuevamente.')
+				toast.show('error', 'Ocurrió un error al cerrar sesión. Por favor, intenta nuevamente.')
 			}
 			setLoadings((prev) => ({ ...prev, logOut: false }))
 		}
@@ -68,6 +72,7 @@ export const authProvider = createProvider({
 					services.localStorage.setItem('auth.refresh_token', refreshToken)
 					services.localStorage.setItem('auth.expires_in', expiresIn, String)
 					setSession({ accessToken, refreshToken, expiresIn })
+					toast.show('success', 'Sesión reanudada exitosamente')
 				} else {
 					services.localStorage.removeItem('auth.access_token')
 					services.localStorage.removeItem('auth.refresh_token')
@@ -77,8 +82,8 @@ export const authProvider = createProvider({
 						refreshToken: null,
 						expiresIn: null,
 					})
+					toast.show('info', 'La sesión ha expirado, por favor inicia sesión nuevamente')
 				}
-
 				setLoadings((prev) => ({ ...prev, session: false }))
 			})
 			return unsubscribe
