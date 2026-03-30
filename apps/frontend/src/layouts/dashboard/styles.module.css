@@ -31,4 +31,12 @@
 		font-size: 12px;
 		white-space: nowrap;
 	}
+
+	.content {
+		height: 100%;
+		padding: 24px;
+		margin: 16px;
+		background-color: #ffffff;
+		border-radius: 8px;
+	}
 }

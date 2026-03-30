@@ -19,13 +19,16 @@ export const router = createBrowserRouter([
 			{
 				path: '/dashboard',
 				lazy: async () => {
-					const module = await import('@/components/dashboard')
+					const module = await import('@/layouts/dashboard')
 					return { Component: module.Dashboard }
 				},
 				children: [
 					{
 						index: true,
-						element: <div>Dashboard Home</div>,
+						lazy: async () => {
+							const module = await import('@/pages/home')
+							return { Component: module.Home }
+						},
 					},
 					{
 						path: 'users',

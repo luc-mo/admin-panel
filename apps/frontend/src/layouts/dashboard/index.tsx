@@ -38,7 +38,7 @@ export const Dashboard: React.FC = withProviders([routerProvider], ({ router }) 
 			</Layout.Sider>
 
 			<Layout>
-				<Layout.Content>
+				<Layout.Content className={styles.content}>
 					<Outlet />
 				</Layout.Content>
 			</Layout>
