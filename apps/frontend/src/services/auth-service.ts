@@ -29,7 +29,8 @@ const logIn = async ({ email, password }: ILoginParams): Promise<ILoginResult> =
 }
 
 const logOut = async (): Promise<void> => {
-	if (await isAuthenticated()) return
+	const shouldLogOut = await isAuthenticated()
+	if (!shouldLogOut) return
 	await _auth.signOut()
 }
 
