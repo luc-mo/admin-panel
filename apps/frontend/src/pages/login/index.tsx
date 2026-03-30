@@ -1,12 +1,12 @@
 import { ConfigProvider, Form, Input, Button, Card, Typography } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
-import { withProviders } from '@/providers/utils/with-providers'
-import { routerProvider } from '@/providers/router-provider'
+import { useProviders } from '@/providers/utils/use-providers'
 import { authProvider } from '@/providers/auth-provider'
 import styles from './styles.module.css'
 
-export const Login: React.FC = withProviders([routerProvider, authProvider], ({ auth }) => {
+export const Login: React.FC = () => {
+	const { auth } = useProviders([authProvider])
 	return (
 		<ConfigProvider theme={themeConfig}>
 			<main className={styles.layout}>
@@ -39,7 +39,7 @@ export const Login: React.FC = withProviders([routerProvider, authProvider], ({ 
 							<Button
 								type="primary"
 								htmlType="submit"
-								loading={auth.logInLoading}
+								loading={auth.loadings.logIn}
 								block
 								size="large"
 							>
@@ -51,7 +51,7 @@ export const Login: React.FC = withProviders([routerProvider, authProvider], ({ 
 			</main>
 		</ConfigProvider>
 	)
-})
+}
 
 const themeConfig = {
 	components: {

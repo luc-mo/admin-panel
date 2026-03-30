@@ -1,4 +1,4 @@
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, type User } from 'firebase/auth'
 import { cloudSdkService } from '@/services/cloud-sdk-service'
 
 interface ILoginParams {
@@ -34,4 +34,8 @@ const logOut = async (): Promise<void> => {
 	await _auth.signOut()
 }
 
-export const authService = { isAuthenticated, logIn, logOut }
+const onSessionChange = (callback: (user: User | null) => void) => {
+	return onAuthStateChanged(_auth, callback)
+}
+
+export const authService = { isAuthenticated, logIn, logOut, onSessionChange }

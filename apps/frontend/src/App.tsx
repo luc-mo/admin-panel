@@ -2,12 +2,10 @@ import { Outlet } from 'react-router-dom'
 import { withProviders } from '@/providers/utils/with-providers'
 import { configProvider } from '@/providers/config-provider'
 import { servicesProvider } from '@/providers/services-provider'
-import { authProvider } from './providers/auth-provider'
 import { routerProvider } from './providers/router-provider'
+import { authProvider } from './providers/auth-provider'
 
-export const App: React.FC = withProviders(
-	[configProvider, servicesProvider, routerProvider, authProvider],
-	() => {
-		return <Outlet />
-	}
-)
+const providers = [configProvider, servicesProvider, routerProvider, authProvider]
+export const App: React.FC = withProviders(providers, () => {
+	return <Outlet />
+})

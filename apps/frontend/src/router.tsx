@@ -1,4 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom'
+import { AuthGuard } from '@/layouts/auth-guard'
 
 export const router = createBrowserRouter([
 	{
@@ -10,33 +11,44 @@ export const router = createBrowserRouter([
 		hydrateFallbackElement: <></>,
 		children: [
 			{
-				path: '/auth/login',
-				lazy: async () => {
-					const module = await import('@/pages/login')
-					return { Component: module.Login }
-				},
-			},
-			{
-				path: '/dashboard',
-				lazy: async () => {
-					const module = await import('@/layouts/dashboard')
-					return { Component: module.Dashboard }
-				},
+				path: '/auth/*',
+				element: <AuthGuard visibility="public" />,
 				children: [
 					{
-						index: true,
+						path: 'login',
 						lazy: async () => {
-							const module = await import('@/pages/home')
-							return { Component: module.Home }
+							const module = await import('@/pages/login')
+							return { Component: module.Login }
 						},
 					},
+				],
+			},
+			{
+				element: <AuthGuard visibility="private" />,
+				children: [
 					{
-						path: 'users',
-						element: <div>Users</div>,
-					},
-					{
-						path: 'roles',
-						element: <div>Roles</div>,
+						path: '/dashboard',
+						lazy: async () => {
+							const module = await import('@/layouts/dashboard')
+							return { Component: module.Dashboard }
+						},
+						children: [
+							{
+								index: true,
+								lazy: async () => {
+									const module = await import('@/pages/home')
+									return { Component: module.Home }
+								},
+							},
+							{
+								path: 'users',
+								element: <div>Users</div>,
+							},
+							{
+								path: 'roles',
+								element: <div>Roles</div>,
+							},
+						],
 					},
 				],
 			},
