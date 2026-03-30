@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { createProvider } from './utils/create-provider'
 import { useProviders } from './utils/use-providers'
 import { servicesProvider } from './services-provider'
@@ -24,14 +24,12 @@ export const authProvider = createProvider({
 			logIn: false,
 			logOut: false,
 		})
+		const isFirstSessionLoad = useRef(true)
 
 		const logIn = async (credentials: ICredentials) => {
 			try {
 				setLoadings((prev) => ({ ...prev, logIn: true }))
 				const result = await services.auth.logIn(credentials)
-				services.localStorage.setItem('auth.access_token', result.accessToken)
-				services.localStorage.setItem('auth.refresh_token', result.refreshToken)
-				services.localStorage.setItem('auth.expires_in', result.expiresIn, String)
 				setSession(result)
 				toast.show('success', 'Sesión iniciada exitosamente')
 				router.navigate('/dashboard')
@@ -45,9 +43,6 @@ export const authProvider = createProvider({
 			try {
 				setLoadings((prev) => ({ ...prev, logOut: true }))
 				await services.auth.logOut()
-				services.localStorage.removeItem('auth.access_token')
-				services.localStorage.removeItem('auth.refresh_token')
-				services.localStorage.removeItem('auth.expires_in')
 				setSession({
 					accessToken: null,
 					refreshToken: null,
@@ -61,28 +56,27 @@ export const authProvider = createProvider({
 			setLoadings((prev) => ({ ...prev, logOut: false }))
 		}
 
-		// biome-ignore lint/correctness/useExhaustiveDependencies: Just run one time
 		useEffect(() => {
 			const unsubscribe = services.auth.onSessionChange(async (user) => {
 				if (user) {
 					const accessToken = await user.getIdToken()
 					const refreshToken = user.refreshToken
 					const expiresIn = 3600
-					services.localStorage.setItem('auth.access_token', accessToken)
-					services.localStorage.setItem('auth.refresh_token', refreshToken)
-					services.localStorage.setItem('auth.expires_in', expiresIn, String)
 					setSession({ accessToken, refreshToken, expiresIn })
-					toast.show('success', 'Sesión reanudada exitosamente')
+					if (isFirstSessionLoad.current) {
+						isFirstSessionLoad.current = false
+						toast.show('success', 'Sesión reanudada exitosamente')
+					}
 				} else {
-					services.localStorage.removeItem('auth.access_token')
-					services.localStorage.removeItem('auth.refresh_token')
-					services.localStorage.removeItem('auth.expires_in')
 					setSession({
 						accessToken: null,
 						refreshToken: null,
 						expiresIn: null,
 					})
-					toast.show('info', 'La sesión ha expirado, por favor inicia sesión nuevamente')
+					if (isFirstSessionLoad.current) {
+						isFirstSessionLoad.current = false
+						toast.show('info', 'La sesión ha expirado, por favor inicia sesión nuevamente')
+					}
 				}
 				setLoadings((prev) => ({ ...prev, session: false }))
 			})

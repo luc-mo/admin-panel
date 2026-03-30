@@ -7,7 +7,7 @@ const _toastConfig: ArgsProps = {
 	showProgress: true,
 	styles: {
 		title: { display: 'none' },
-		description: { marginTop: 0 },
+		description: { marginTop: 0, marginRight: 22 },
 	},
 }
 
