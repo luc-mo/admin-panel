@@ -8,8 +8,8 @@ import { toastProvider } from '@/providers/toast-provider'
 export const useUsers = () => {
 	const http = useHttpClient()
 	const { toast } = useProviders([toastProvider])
-	const [usersData, setUsersData] = useState({
-		users: [] as IJsonUser[],
+	const [users, setUsersData] = useState({
+		data: [] as IJsonUser[],
 		limit: 0,
 		offset: 0,
 		total: 0,
@@ -21,7 +21,7 @@ export const useUsers = () => {
 			setUsersData((prev) => ({ ...prev, loading: true }))
 			const { data } = await http.get<IGetUsersResponse>('/users')
 			setUsersData({
-				users: data.data,
+				data: data.data,
 				limit: data.limit,
 				offset: data.offset,
 				total: data.total,
@@ -38,7 +38,7 @@ export const useUsers = () => {
 	}, [])
 
 	return {
-		usersData,
+		users,
 		getUsers,
 	}
 }

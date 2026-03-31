@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { AuthGuard } from '@/layouts/auth-guard'
 
 export const router = createBrowserRouter([
@@ -10,6 +10,10 @@ export const router = createBrowserRouter([
 		},
 		hydrateFallbackElement: <></>,
 		children: [
+			{
+				index: true,
+				element: <Navigate to="/dashboard" replace />,
+			},
 			{
 				path: '/auth/*',
 				element: <AuthGuard visibility="public" />,
@@ -42,7 +46,10 @@ export const router = createBrowserRouter([
 							},
 							{
 								path: 'users',
-								element: <div>Users</div>,
+								lazy: async () => {
+									const module = await import('@/pages/users')
+									return { Component: module.Users }
+								},
 							},
 							{
 								path: 'roles',
