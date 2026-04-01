@@ -11,6 +11,7 @@ export class UserDocumentParser {
 			email: document.email,
 			username: document.username,
 			roles: document.roles,
+			isSuperAdmin: document.isSuperAdmin,
 			createdAt: document.createdAt.toDate(),
 			updatedAt: document.updatedAt.toDate(),
 		})
@@ -22,6 +23,7 @@ export class UserDocumentParser {
 			email: user.email,
 			username: user.username,
 			roles: user.roles,
+			isSuperAdmin: user.isSuperAdmin,
 			createdAt: Timestamp.fromDate(user.createdAt),
 			updatedAt: Timestamp.fromDate(user.updatedAt),
 		}

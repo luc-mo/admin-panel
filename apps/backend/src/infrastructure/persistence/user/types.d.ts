@@ -5,6 +5,7 @@ export interface IUserDocument {
 	email: string
 	username: string
 	roles: string[]
+	isSuperAdmin?: boolean
 	createdAt: Timestamp
 	updatedAt: Timestamp
 }

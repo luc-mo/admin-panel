@@ -51,7 +51,7 @@ export const usersController = container.resolve('controllerFactory').createCont
 		},
 		{
 			method: 'post',
-			path: '/:id',
+			path: '/',
 			handler: async (req, res) => {
 				const command = new CreateUserCommand({
 					email: req.body.email,

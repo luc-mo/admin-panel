@@ -15,6 +15,7 @@ export class UpdateUser extends InjectableDependency('userRepository') {
 			email: exists.email,
 			username: exists.username ?? command.username,
 			roles: command.roles ?? exists.roles,
+			isSuperAdmin: exists.isSuperAdmin,
 			createdAt: exists.createdAt,
 			updatedAt: new Date(),
 		})
@@ -27,6 +28,7 @@ export class UpdateUser extends InjectableDependency('userRepository') {
 				email: updatedUser.email,
 				username: updatedUser.username,
 				roles: updatedUser.roles,
+				isSuperAdmin: updatedUser.isSuperAdmin,
 				createdAt: updatedUser.createdAt.toISOString(),
 				updatedAt: updatedUser.updatedAt.toISOString(),
 			},
