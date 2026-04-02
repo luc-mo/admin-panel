@@ -1,9 +1,11 @@
-import { Table, Typography, Button, Space, Popconfirm } from 'antd'
-import { DeleteOutlined, EditOutlined, EyeOutlined, PlusOutlined } from '@ant-design/icons'
+import { Table, Button, Space, Popconfirm } from 'antd'
+import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons'
 import type { ColumnsType } from 'antd/es/table'
 
 import { useRoles } from './use-roles'
 import type { IRole } from '@princesitas/core'
+
+import { PageHeader } from '@/ui/components/page-header'
 import styles from './styles.module.css'
 
 export const Roles: React.FC = () => {
@@ -49,22 +51,12 @@ export const Roles: React.FC = () => {
 	}
 
 	return (
-		<div>
-			<div
-				style={{
-					display: 'flex',
-					justifyContent: 'space-between',
-					alignItems: 'center',
-					marginBottom: 16,
-				}}
-			>
-				<Typography.Title level={3} style={{ margin: 0 }}>
-					Administración de Roles
-				</Typography.Title>
-				<Button type="primary" icon={<PlusOutlined />}>
-					Nuevo Rol
-				</Button>
-			</div>
+		<>
+			<PageHeader
+				title="Administración de Roles"
+				newItemText="Nuevo Rol"
+				onNewItemClick={() => console.log('Crear nuevo rol')}
+			/>
 
 			<Table
 				className={styles.table}
@@ -81,7 +73,7 @@ export const Roles: React.FC = () => {
 				}}
 				onChange={(args) => onPaginationChange(args)}
 			/>
-		</div>
+		</>
 	)
 }
 

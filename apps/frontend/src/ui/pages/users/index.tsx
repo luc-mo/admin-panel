@@ -1,9 +1,11 @@
-import { Table, Typography, Button, Space, Popconfirm } from 'antd'
-import { DeleteOutlined, EditOutlined, EyeOutlined, PlusOutlined } from '@ant-design/icons'
+import { Table, Button, Space, Popconfirm } from 'antd'
+import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons'
 import type { ColumnsType } from 'antd/es/table'
 
 import { useUsers } from './use-users'
 import type { IUser } from '@princesitas/core'
+
+import { PageHeader } from '@/ui/components/page-header'
 import styles from './styles.module.css'
 
 export const Users: React.FC = () => {
@@ -49,22 +51,12 @@ export const Users: React.FC = () => {
 	}
 
 	return (
-		<div>
-			<div
-				style={{
-					display: 'flex',
-					justifyContent: 'space-between',
-					alignItems: 'center',
-					marginBottom: 16,
-				}}
-			>
-				<Typography.Title level={3} style={{ margin: 0 }}>
-					Administración de Usuarios
-				</Typography.Title>
-				<Button type="primary" icon={<PlusOutlined />}>
-					Nuevo Usuario
-				</Button>
-			</div>
+		<>
+			<PageHeader
+				title="Administración de Usuarios"
+				newItemText="Nuevo Usuario"
+				onNewItemClick={() => console.log('Crear nuevo usuario')}
+			/>
 
 			<Table
 				className={styles.table}
@@ -81,7 +73,7 @@ export const Users: React.FC = () => {
 				}}
 				onChange={(args) => onPaginationChange(args)}
 			/>
-		</div>
+		</>
 	)
 }
 
