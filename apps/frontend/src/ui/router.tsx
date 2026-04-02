@@ -39,6 +39,11 @@ export const router = createBrowserRouter([
 								lazy: () =>
 									import('@/ui/pages/users').then((module) => ({ Component: module.Users })),
 							},
+							{
+								path: 'roles',
+								lazy: () =>
+									import('@/ui/pages/roles').then((module) => ({ Component: module.Roles })),
+							},
 						],
 					},
 				],
