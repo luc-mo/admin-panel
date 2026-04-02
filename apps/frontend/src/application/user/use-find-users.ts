@@ -9,30 +9,40 @@ interface IUseFindUsersProps {
 }
 
 export const useFindUsers = ({ coreServices, toast }: IUseFindUsersProps) => {
-	const [usersData, setUsersData] = useState({
-		users: [] as IUser[],
-		limit: 10,
-		offset: 0,
-		total: 0,
-		loading: false,
-	})
+	const [data, setData] = useState<IUser[]>([])
+	const [loading, setLoading] = useState(false)
+	const [pagination, setPagination] = useState(_initialPagination)
 
-	const findUsers = async (limit: number, offset: number) => {
+	const execute = async (limit: number, offset: number) => {
 		try {
-			setUsersData((prev) => ({ ...prev, loading: true }))
+			setLoading(true)
 			const response = await coreServices.usersService.findUsers({ limit, offset })
-			setUsersData({
-				users: response.data,
+			setData(response.data)
+			setPagination({
 				limit: response.limit,
 				offset: response.offset,
 				total: response.total,
-				loading: false,
+				page: Math.floor(response.offset / response.limit) + 1,
 			})
+			setLoading(false)
 		} catch {
 			toast.show('error', 'Ocurrió un error al obtener los usuarios')
-			setUsersData((prev) => ({ ...prev, loading: false }))
+			setData([])
+			setPagination(_initialPagination)
 		}
 	}
 
-	return { usersData, findUsers }
+	return {
+		data,
+		pagination,
+		loading,
+		execute,
+	}
+}
+
+const _initialPagination = {
+	limit: 10,
+	offset: 0,
+	total: 0,
+	page: 1,
 }

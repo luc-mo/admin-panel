@@ -7,34 +7,38 @@ import type { IUser } from '@princesitas/core'
 import styles from './styles.module.css'
 
 export const Users: React.FC = () => {
-	const { users, limit, total, page, loading, onPaginationChange } = useUsers()
+	const { data, pagination, loadings, removeUserPopUp, onRemoveUser, onPaginationChange } =
+		useUsers()
 
 	const actionsRender = {
 		title: 'Acciones',
 		key: 'actions',
 		dataIndex: 'id',
 		width: 150,
-		render: (_: any, record: IUser) => (
+		render: (_: any, user: IUser) => (
 			<Space size="small">
 				<Button
 					type="text"
 					icon={<EyeOutlined />}
-					onClick={() => console.log('Ver usuario:', record)}
+					onClick={() => console.log('Ver usuario:', user)}
 					title="Ver"
 				/>
 				<Button
 					type="text"
 					icon={<EditOutlined />}
-					onClick={() => console.log('Editar usuario:', record)}
+					onClick={() => console.log('Editar usuario:', user)}
 					title="Editar"
 				/>
 				<Popconfirm
+					open={removeUserPopUp.isOpen(user.id)}
 					title="Eliminar usuario"
 					description="¿Estás seguro de eliminar este usuario?"
 					okText="Sí"
 					cancelText="No"
 					placement="leftTop"
-					onConfirm={console.log}
+					onConfirm={() => onRemoveUser(user.id)}
+					onOpenChange={removeUserPopUp.toggle(user.id)}
+					okButtonProps={{ loading: loadings.removeUser }}
 					classNames={{ root: styles.pup_up_buttons }}
 					cancelButtonProps={{ className: styles.popup_cancell_button }}
 				>
@@ -66,12 +70,12 @@ export const Users: React.FC = () => {
 				className={styles.table}
 				rowKey="id"
 				columns={[...tableColumns, actionsRender]}
-				dataSource={users}
-				loading={loading}
+				dataSource={data}
+				loading={loadings.findUsers}
 				pagination={{
-					total,
-					current: page,
-					pageSize: limit,
+					total: pagination.total,
+					current: pagination.page,
+					pageSize: pagination.limit,
 					showSizeChanger: true,
 					showTotal: (total, range) => `${range[0]}-${range[1]} de ${total} usuarios`,
 				}}
