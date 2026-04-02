@@ -25,8 +25,12 @@ export const coreServicesProvider = createProvider({
 			const baseURL = config.app.apiBaseUrl
 			const httpClient = services.http.create({ baseURL })
 			httpClient.addAuthentication(auth.session.accessToken)
+			httpClient.addRetryOnExpiration(
+				() => auth.getAccessToken(true),
+				() => auth.forceLogOut()
+			)
 			return httpClient
-		}, [config.app.apiBaseUrl, services.http, auth.session.accessToken])
+		}, [auth.session.accessToken])
 
 		const usersService = useMemo(() => new UsersService({ http }), [http])
 

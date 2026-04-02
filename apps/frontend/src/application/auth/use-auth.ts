@@ -53,30 +53,54 @@ export const useAuth = ({ services, router, toast }: IUseAuthProps) => {
 		setLoading({ logOut: false })
 	}
 
+	const forceLogOut = async () => {
+		try {
+			await services.auth.logOut()
+		} finally {
+			_removeSession()
+			toast.show('error', 'La sesión ha expirado. Por favor, inicia sesión nuevamente.')
+			router.navigate('/auth/login')
+		}
+	}
+
+	const getAccessToken = async (forceRefresh: boolean) => {
+		try {
+			return await services.auth.getAccessToken(forceRefresh)
+		} catch {
+			return null
+		}
+	}
+
 	useEffect(() => {
 		const unsubscribe = services.auth.onSessionChange((accessToken) => {
 			if (accessToken) {
 				_applySession(accessToken)
 				if (isFirstSessionLoad.current) {
-					isFirstSessionLoad.current = false
 					toast.show('success', 'Sesión reanudada exitosamente')
 				}
 			} else {
 				const alreadyHadSession = services.localStorage.getItem('accessToken')
 				_removeSession()
-				if (isFirstSessionLoad.current) {
-					isFirstSessionLoad.current = false
-					if (alreadyHadSession) {
-						toast.show('info', 'La sesión ha expirado, por favor inicia sesión nuevamente')
-					}
+				if (isFirstSessionLoad.current && alreadyHadSession) {
+					toast.show('info', 'La sesión ha expirado, por favor inicia sesión nuevamente')
 				}
+			}
+			if (isFirstSessionLoad.current) {
+				isFirstSessionLoad.current = false
 			}
 			setLoading({ session: false })
 		})
 		return unsubscribe
 	}, [])
 
-	return { session, loadings, logIn, logOut }
+	return {
+		session,
+		loadings,
+		logIn,
+		logOut,
+		forceLogOut,
+		getAccessToken,
+	}
 }
 
 const _initialLoadings = {

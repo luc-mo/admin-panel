@@ -17,6 +17,8 @@ export interface IAuthContext {
 	}
 	logIn: (credentials: ICredentials) => Promise<void>
 	logOut: () => Promise<void>
+	forceLogOut: () => Promise<void>
+	getAccessToken: (forceRefresh: boolean) => Promise<string | null>
 }
 
 export const authProvider = createProvider({
