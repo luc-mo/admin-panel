@@ -2,7 +2,7 @@ import type { IUser, IJsonUser } from '@princesitas/core'
 import type { IHttpClient } from '@/infrastructure/services/http-service'
 import type { IFindUsers, IFindUserById, ICreateUser, IUpdateUser, IRemoveUser } from './types'
 
-export class UsersService {
+export class UserService {
 	private readonly _http: IHttpClient
 
 	constructor({ http }: IDependencies) {

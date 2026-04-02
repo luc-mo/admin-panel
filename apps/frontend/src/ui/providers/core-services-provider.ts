@@ -5,16 +5,16 @@ import { useProviders } from './utils/use-providers'
 import { configProvider } from './config-provider'
 import { servicesProvider } from './services-provider'
 import { authProvider } from './auth-provider'
-import { UsersService } from '@/infrastructure/services/api/users-service'
+import { UserService } from '@/infrastructure/services/api/user-service'
 
 export interface ICoreServicesContext {
-	usersService: UsersService
+	userService: UserService
 }
 
 export const coreServicesProvider = createProvider({
 	providerName: 'CoreServicesProvider',
 	contextName: 'coreServices',
-	useValue: () => {
+	useValue: (): ICoreServicesContext => {
 		const { config, services, auth } = useProviders([
 			configProvider,
 			servicesProvider,
@@ -32,8 +32,8 @@ export const coreServicesProvider = createProvider({
 			return httpClient
 		}, [auth.session.accessToken])
 
-		const usersService = useMemo(() => new UsersService({ http }), [http])
+		const userService = useMemo(() => new UserService({ http }), [http])
 
-		return { usersService }
+		return { userService }
 	},
 })
