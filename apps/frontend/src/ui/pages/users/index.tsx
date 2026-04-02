@@ -79,19 +79,18 @@ export const Users: React.FC = () => {
 
 const tableColumns: ColumnsType<IUser> = [
 	{
-		title: 'ID',
-		dataIndex: 'id',
-		key: 'id',
+		title: 'Nombre de usuario',
+		dataIndex: 'username',
+		key: 'username',
+		minWidth: 150,
+		width: 250,
 	},
 	{
 		title: 'Email',
 		dataIndex: 'email',
 		key: 'email',
-	},
-	{
-		title: 'Nombre de usuario',
-		dataIndex: 'username',
-		key: 'username',
+		minWidth: 200,
+		width: 300,
 	},
 	{
 		title: 'Roles',
@@ -101,12 +100,8 @@ const tableColumns: ColumnsType<IUser> = [
 		title: 'Fecha de creación',
 		dataIndex: 'createdAt',
 		key: 'createdAt',
-		render: (date: Date) => date.toLocaleDateString(),
-	},
-	{
-		title: 'Fecha de actualización',
-		dataIndex: 'updatedAt',
-		key: 'updatedAt',
+		minWidth: 150,
+		width: 200,
 		render: (date: Date) => date.toLocaleDateString(),
 	},
 ]
