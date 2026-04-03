@@ -1,4 +1,4 @@
-import type { IRole } from './types'
+import type { IRole, IJsonRole } from './types'
 
 export class Role {
 	private readonly _id: string
@@ -15,6 +15,17 @@ export class Role {
 		this._permissions = data.permissions
 		this._createdAt = data.createdAt
 		this._updatedAt = data.updatedAt
+	}
+
+	public toJSON(): IJsonRole {
+		return {
+			id: this._id,
+			name: this._name,
+			description: this._description,
+			permissions: this._permissions,
+			createdAt: this._createdAt.toISOString(),
+			updatedAt: this._updatedAt.toISOString(),
+		}
 	}
 
 	public get id() {

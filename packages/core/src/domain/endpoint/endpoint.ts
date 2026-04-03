@@ -1,4 +1,4 @@
-import type { IEndpoint } from './types'
+import type { IEndpoint, IJsonEndpoint } from './types'
 
 export class Endpoint {
 	private readonly _id: string
@@ -13,6 +13,16 @@ export class Endpoint {
 		this._roles = data.roles
 		this._createdAt = data.createdAt
 		this._updatedAt = data.updatedAt
+	}
+
+	public toJSON(): IJsonEndpoint {
+		return {
+			id: this._id,
+			path: this._path,
+			roles: this._roles,
+			createdAt: this._createdAt.toISOString(),
+			updatedAt: this._updatedAt.toISOString(),
+		}
 	}
 
 	public get id() {

@@ -1,4 +1,4 @@
-import type { IUser } from './types'
+import type { IUser, IJsonUser } from './types'
 
 export class User {
 	private readonly _id: string
@@ -17,6 +17,18 @@ export class User {
 		this._isSuperAdmin = data.isSuperAdmin
 		this._createdAt = data.createdAt
 		this._updatedAt = data.updatedAt
+	}
+
+	public toJSON(): IJsonUser {
+		return {
+			id: this._id,
+			email: this._email,
+			username: this._username,
+			roles: this._roles,
+			isSuperAdmin: this._isSuperAdmin,
+			createdAt: this._createdAt.toISOString(),
+			updatedAt: this._updatedAt.toISOString(),
+		}
 	}
 
 	public get id() {

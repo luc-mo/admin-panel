@@ -1,4 +1,4 @@
-import type { IPermission } from './types'
+import type { IPermission, IJsonPermission } from './types'
 
 export class Permission {
 	private readonly _id: string
@@ -13,6 +13,16 @@ export class Permission {
 		this._name = data.name
 		this._createdAt = data.createdAt
 		this._updatedAt = data.updatedAt
+	}
+
+	public toJSON(): IJsonPermission {
+		return {
+			id: this._id,
+			key: this._key,
+			name: this._name,
+			createdAt: this._createdAt.toISOString(),
+			updatedAt: this._updatedAt.toISOString(),
+		}
 	}
 
 	public get id() {
