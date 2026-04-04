@@ -5,12 +5,13 @@ import { HomeOutlined, LogoutOutlined, TeamOutlined, UserOutlined } from '@ant-d
 import { withProviders } from '@/ui/providers/utils/with-providers'
 import { routerProvider } from '@/ui/providers/router-provider'
 import { coreServicesProvider } from '@/ui/providers/core-services-provider'
+import { allRolesProvider } from '@/ui/providers/roles-provider'
 import { useDashboard } from './use-dashboard'
 
 import { cn } from '@/ui/styles/cn'
 import styles from './styles.module.css'
 
-export const Dashboard: React.FC = withProviders([coreServicesProvider], () => {
+export const Dashboard: React.FC = withProviders([coreServicesProvider, allRolesProvider], () => {
 	const router = routerProvider.use()
 	const { onMenuClick } = useDashboard()
 
