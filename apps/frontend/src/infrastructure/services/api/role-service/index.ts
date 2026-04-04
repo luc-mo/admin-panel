@@ -1,6 +1,13 @@
 import type { IRole, IJsonRole } from '@princesitas/core'
 import type { IHttpClient } from '@/infrastructure/services/http-service'
-import type { IFindRoles, IFindRoleById, ICreateRole, IUpdateRole, IRemoveRole } from './types'
+import type {
+	IFindRoles,
+	IFindAllRoles,
+	IFindRoleById,
+	ICreateRole,
+	IUpdateRole,
+	IRemoveRole,
+} from './types'
 
 export class RoleService {
 	private readonly _http: IHttpClient
@@ -16,6 +23,15 @@ export class RoleService {
 			data: roles,
 			limit: response.data.limit,
 			offset: response.data.offset,
+			total: response.data.total,
+		}
+	}
+
+	public async findAllRoles() {
+		const response = await this._http.client.get<IFindAllRoles['response']>('/roles/all')
+		const roles = response.data.data.map(this._parseRole)
+		return {
+			data: roles,
 			total: response.data.total,
 		}
 	}

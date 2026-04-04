@@ -13,6 +13,13 @@ export interface IFindRoles {
 	}
 }
 
+export interface IFindAllRoles {
+	response: {
+		data: IJsonRole[]
+		total: number
+	}
+}
+
 export interface IFindRoleById {
 	request: {
 		id: string
