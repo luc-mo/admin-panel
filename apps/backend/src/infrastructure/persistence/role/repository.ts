@@ -13,6 +13,12 @@ export class RoleRepository extends InjectableDependency('dbHandler', 'roleDocum
 		return snapshot.data().count
 	}
 
+	public async findAll() {
+		const collection = this._getCollection()
+		const documents = await collection.get()
+		return documents.docs.map((document) => this._roleDocumentParser.toDomain(document.data()))
+	}
+
 	public async find(limit: number, offset: number) {
 		const collection = this._getCollection()
 		const documents = await collection.limit(limit).offset(offset).get()

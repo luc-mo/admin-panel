@@ -34,6 +34,7 @@ export interface IContainer {
 
 	// Role
 	findRoles: import('@/application/role/find-roles').FindRoles
+	findAllRoles: import('@/application/role/find-all-roles').FindAllRoles
 	findRoleById: import('@/application/role/find-role-by-id').FindRoleById
 	createRole: import('@/application/role/create-role').CreateRole
 	updateRole: import('@/application/role/update-role').UpdateRole

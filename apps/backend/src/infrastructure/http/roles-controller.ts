@@ -29,6 +29,16 @@ export const rolesController = container.resolve('controllerFactory').createCont
 		},
 		{
 			method: 'get',
+			path: '/all',
+			middlewares: [],
+			handler: async (_, res) => {
+				const findAllRoles = container.resolve('findAllRoles')
+				const response = await findAllRoles.execute()
+				res.status(200).send(response)
+			},
+		},
+		{
+			method: 'get',
 			path: '/:id',
 			middlewares: [],
 			handler: async (req, res) => {
