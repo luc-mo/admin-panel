@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import type { IRole } from '@princesitas/core'
+import { useState, useMemo, useEffect } from 'react'
+import type { IRole, StrictOmit } from '@princesitas/core'
 import type { IPagination } from '@/domain/pagination'
 import type { ICoreServicesContext } from '@/ui/providers/core-services-provider'
 import type { IToastContext } from '@/ui/providers/toast-provider'
@@ -13,10 +13,7 @@ export const useFindAllRoles = ({ coreServices, toast }: IUseFindAllRolesProps) 
 	const [data, setData] = useState<IRole[]>([])
 	const [loading, setLoading] = useState(false)
 	const [pagination, setPagination] = useState(_initialPagination)
-
-	const onPaginationChange = (pagination: StrictOmit<IPagination, 'total'>) => {
-		setPagination((prev) => ({ ...prev, ...pagination }))
-	}
+	const dataMap = useMemo(() => new Map(data.map((item) => [item.id, item])), [data])
 
 	const execute = async () => {
 		try {
@@ -37,12 +34,17 @@ export const useFindAllRoles = ({ coreServices, toast }: IUseFindAllRolesProps) 
 		}
 	}
 
+	const onPaginationChange = (pagination: StrictOmit<IPagination, 'total'>) => {
+		setPagination((prev) => ({ ...prev, ...pagination }))
+	}
+
 	useEffect(() => {
 		execute()
 	}, [])
 
 	return {
 		data,
+		dataMap,
 		pagination,
 		loading,
 		execute,

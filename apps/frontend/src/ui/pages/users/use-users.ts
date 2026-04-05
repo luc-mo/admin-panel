@@ -5,15 +5,28 @@ import { usePopUp } from '@/shared/hooks/use-pop-up'
 import { useProviders } from '@/ui/providers/utils/use-providers'
 import { coreServicesProvider } from '@/ui/providers/core-services-provider'
 import { toastProvider } from '@/ui/providers/toast-provider'
+import { allRolesProvider } from '@/ui/providers/roles-provider'
 
 import { useFindUsers } from '@/application/user/use-find-users'
 import { useRemoveUser } from '@/application/user/use-remove-user'
+import type { IUserWithRoles } from '@princesitas/core'
 
 export const useUsers = () => {
-	const providers = useProviders([coreServicesProvider, toastProvider])
+	const { allRoles, ...providers } = useProviders([
+		allRolesProvider,
+		coreServicesProvider,
+		toastProvider,
+	])
 	const findUsers = useFindUsers(providers)
 	const removeUser = useRemoveUser(providers)
 	const removeUserPopUp = usePopUp()
+
+	const usersWithRoles: IUserWithRoles[] = useMemo(() => {
+		return findUsers.data.map((user) => {
+			const roles = user.roles.map((roleId) => allRoles.dataMap.get(roleId)!)
+			return { ...user, roles }
+		})
+	}, [findUsers.data, allRoles.dataMap])
 
 	const loadings = useMemo(
 		() => ({
@@ -41,7 +54,7 @@ export const useUsers = () => {
 	}, [])
 
 	return {
-		data: findUsers.data,
+		data: usersWithRoles,
 		pagination: findUsers.pagination,
 		loadings,
 		removeUserPopUp,

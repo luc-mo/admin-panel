@@ -1,9 +1,9 @@
-import { Table, Button, Space, Popconfirm } from 'antd'
+import { Table, Button, Space, Popconfirm, Tag } from 'antd'
 import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons'
 import type { ColumnsType } from 'antd/es/table'
 
 import { useUsers } from './use-users'
-import type { IUser } from '@princesitas/core'
+import type { IUserWithRoles } from '@princesitas/core'
 
 import { PageHeader } from '@/ui/components/page-header'
 import styles from './styles.module.css'
@@ -17,7 +17,7 @@ export const Users: React.FC = () => {
 		key: 'actions',
 		dataIndex: 'id',
 		width: 150,
-		render: (_: any, user: IUser) => (
+		render: (_: any, user: IUserWithRoles) => (
 			<Space size="small">
 				<Button
 					type="text"
@@ -77,7 +77,7 @@ export const Users: React.FC = () => {
 	)
 }
 
-const tableColumns: ColumnsType<IUser> = [
+const tableColumns: ColumnsType<IUserWithRoles> = [
 	{
 		title: 'Nombre de usuario',
 		dataIndex: 'username',
@@ -94,7 +94,22 @@ const tableColumns: ColumnsType<IUser> = [
 	},
 	{
 		title: 'Roles',
-		render: (user: IUser) => (user.isSuperAdmin ? ['Super Admin'].concat(user.roles) : user.roles),
+		render: (user: IUserWithRoles) => {
+			const roleNames = user.roles.map((role) => role.name)
+			const roles = user.isSuperAdmin ? ['Super Admin', ...roleNames] : roleNames
+			const visibleRoles = roles.slice(0, 4)
+			const remainingRolesCount = roles.length - visibleRoles.length
+			return (
+				<Space size={6} wrap>
+					{visibleRoles.map((role) => (
+						<Tag key={role} color="blue">
+							{role}
+						</Tag>
+					))}
+					{remainingRolesCount > 0 && <Tag color="grey">+{remainingRolesCount} más</Tag>}
+				</Space>
+			)
+		},
 	},
 	{
 		title: 'Fecha de creación',
