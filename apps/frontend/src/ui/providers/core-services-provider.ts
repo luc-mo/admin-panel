@@ -8,10 +8,12 @@ import { authProvider } from './auth-provider'
 
 import { UserService } from '@/infrastructure/services/api/user-service'
 import { RoleService } from '@/infrastructure/services/api/role-service'
+import { PermissionService } from '@/infrastructure/services/api/permission-service'
 
 export interface ICoreServicesContext {
 	userService: UserService
 	roleService: RoleService
+	permissionService: PermissionService
 }
 
 export const coreServicesProvider = createProvider({
@@ -37,10 +39,12 @@ export const coreServicesProvider = createProvider({
 
 		const userService = useMemo(() => new UserService({ http }), [http])
 		const roleService = useMemo(() => new RoleService({ http }), [http])
+		const permissionService = useMemo(() => new PermissionService({ http }), [http])
 
 		return {
 			userService,
 			roleService,
+			permissionService,
 		}
 	},
 })
