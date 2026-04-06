@@ -5,17 +5,17 @@ import { usePopUp } from '@/shared/hooks/use-pop-up'
 import { useProviders } from '@/ui/providers/utils/use-providers'
 import { coreServicesProvider } from '@/ui/providers/core-services-provider'
 import { toastProvider } from '@/ui/providers/toast-provider'
-import { allRolesProvider } from '@/ui/providers/roles-provider'
+import { sharedDataProvider } from '@/ui/providers/shared-data-provider'
 
 import { useFindUsers } from '@/application/user/use-find-users'
 import { useRemoveUser } from '@/application/user/use-remove-user'
 import type { IUserWithRoles } from '@princesitas/core'
 
 export const useUsers = () => {
-	const { allRoles, ...providers } = useProviders([
-		allRolesProvider,
+	const { sharedData, ...providers } = useProviders([
 		coreServicesProvider,
 		toastProvider,
+		sharedDataProvider,
 	])
 	const findUsers = useFindUsers(providers)
 	const removeUser = useRemoveUser(providers)
@@ -23,10 +23,12 @@ export const useUsers = () => {
 
 	const usersWithRoles: IUserWithRoles[] = useMemo(() => {
 		return findUsers.data.map((user) => {
-			const roles = user.roles.map((roleId) => allRoles.dataMap.get(roleId)!)
+			const roles = user.roles
+				.map((roleId) => sharedData.allRoles.dataMap.get(roleId)!)
+				.filter(Boolean)
 			return { ...user, roles }
 		})
-	}, [findUsers.data, allRoles.dataMap])
+	}, [findUsers.data, sharedData.allRoles.dataMap])
 
 	const loadings = useMemo(
 		() => ({

@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 import type { IRole, StrictOmit } from '@princesitas/core'
 import type { IPagination } from '@/domain/pagination'
 import type { ICoreServicesContext } from '@/ui/providers/core-services-provider'
@@ -37,10 +37,6 @@ export const useFindAllRoles = ({ coreServices, toast }: IUseFindAllRolesProps) 
 	const onPaginationChange = (pagination: StrictOmit<IPagination, 'total'>) => {
 		setPagination((prev) => ({ ...prev, ...pagination }))
 	}
-
-	useEffect(() => {
-		execute()
-	}, [])
 
 	return {
 		data,

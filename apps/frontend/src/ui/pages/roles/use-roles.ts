@@ -5,30 +5,30 @@ import { usePopUp } from '@/shared/hooks/use-pop-up'
 import { useProviders } from '@/ui/providers/utils/use-providers'
 import { coreServicesProvider } from '@/ui/providers/core-services-provider'
 import { toastProvider } from '@/ui/providers/toast-provider'
-import { allRolesProvider } from '@/ui/providers/roles-provider'
+import { sharedDataProvider } from '@/ui/providers/shared-data-provider'
 import { useRemoveRole } from '@/application/role/use-remove-role'
 
 export const useRoles = () => {
-	const { allRoles, ...providers } = useProviders([
+	const { sharedData, ...providers } = useProviders([
 		coreServicesProvider,
 		toastProvider,
-		allRolesProvider,
+		sharedDataProvider
 	])
 	const removeRole = useRemoveRole(providers)
 	const removeRolePopUp = usePopUp()
 
 	const loadings = useMemo(
 		() => ({
-			findAllRoles: allRoles.loading,
+			findAllRoles: sharedData.allRoles.loading,
 			removeRole: removeRole.loading,
 		}),
-		[allRoles.loading, removeRole.loading]
+		[sharedData.allRoles.loading, removeRole.loading]
 	)
 
 	const onRemoveRole = async (id: string) => {
 		await removeRole.execute(id)
 		removeRolePopUp.close()
-		await allRoles.execute()
+		await sharedData.allRoles.execute()
 	}
 
 	const onPaginationChange = (event: TablePaginationConfig) => {
@@ -36,12 +36,12 @@ export const useRoles = () => {
 		const limit = event.pageSize!
 		const offset = (page - 1) * limit
 		const newPagination = { page, limit, offset }
-		allRoles.onPaginationChange(newPagination)
+		sharedData.allRoles.onPaginationChange(newPagination)
 	}
 
 	return {
-		data: allRoles.data,
-		pagination: allRoles.pagination,
+		data: sharedData.allRoles.data,
+		pagination: sharedData.allRoles.pagination,
 		loadings,
 		removeRolePopUp,
 		onRemoveRole,
