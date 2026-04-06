@@ -38,6 +38,7 @@ import { UpdateRole } from '@/application/role/update-role'
 import { RemoveRole } from '@/application/role/remove-role'
 
 import { FindPermissions } from '@/application/permission/find-permissions'
+import { FindAllPermissions } from '@/application/permission/find-all-permissions'
 import { FindPermissionById } from '@/application/permission/find-permission-by-id'
 import { CreatePermission } from '@/application/permission/create-permission'
 import { UpdatePermission } from '@/application/permission/update-permission'
@@ -94,6 +95,7 @@ container.register({
 	removeRole: asClass(RemoveRole),
 
 	findPermissions: asClass(FindPermissions),
+	findAllPermissions: asClass(FindAllPermissions),
 	findPermissionById: asClass(FindPermissionById),
 	createPermission: asClass(CreatePermission),
 	updatePermission: asClass(UpdatePermission),

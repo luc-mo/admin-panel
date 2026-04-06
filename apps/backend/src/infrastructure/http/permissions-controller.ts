@@ -29,6 +29,16 @@ export const permissionsController = container.resolve('controllerFactory').crea
 		},
 		{
 			method: 'get',
+			path: '/all',
+			middlewares: [],
+			handler: async (_, res) => {
+				const findAllPermissions = container.resolve('findAllPermissions')
+				const response = await findAllPermissions.execute()
+				res.status(200).send(response)
+			},
+		},
+		{
+			method: 'get',
 			path: '/:id',
 			middlewares: [],
 			handler: async (req, res) => {

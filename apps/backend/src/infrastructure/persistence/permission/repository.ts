@@ -23,6 +23,14 @@ export class PermissionRepository extends InjectableDependency(
 		)
 	}
 
+	public async findAll() {
+		const collection = this._getCollection()
+		const documents = await collection.get()
+		return documents.docs.map((document) =>
+			this._permissionDocumentParser.toDomain(document.data())
+		)
+	}
+
 	public async findById(id: string) {
 		const collection = this._getCollection()
 		const document = await collection.doc(id).get()

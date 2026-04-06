@@ -42,6 +42,7 @@ export interface IContainer {
 
 	// Permission
 	findPermissions: import('@/application/permission/find-permissions').FindPermissions
+	findAllPermissions: import('@/application/permission/find-all-permissions').FindAllPermissions
 	findPermissionById: import('@/application/permission/find-permission-by-id').FindPermissionById
 	createPermission: import('@/application/permission/create-permission').CreatePermission
 	updatePermission: import('@/application/permission/update-permission').UpdatePermission
