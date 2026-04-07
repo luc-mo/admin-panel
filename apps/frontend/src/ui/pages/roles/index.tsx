@@ -6,6 +6,7 @@ import { useRoles } from './use-roles'
 import type { IRoleWithPermissions, IRoleCategory } from '@princesitas/core'
 
 import { PageHeader } from '@/ui/components/page-header'
+import { permissionTagColors } from '@/ui/constants/tags'
 import styles from './styles.module.css'
 
 export const Roles: React.FC = () => {
@@ -86,14 +87,6 @@ const tableColumns: ColumnsType<IRoleWithPermissions> = [
 	{
 		title: 'Permisos',
 		render: (role: IRoleWithPermissions) => {
-			const permissionColors: Record<string, string> = {
-				create: 'green',
-				list: 'blue',
-				view: 'purple',
-				update: 'orange',
-				delete: 'red',
-			}
-
 			const visiblePermissions = role.permissions.slice(0, 2)
 			const remainingPermissionsCount = role.permissions.length - visiblePermissions.length
 
@@ -102,7 +95,7 @@ const tableColumns: ColumnsType<IRoleWithPermissions> = [
 					{visiblePermissions.map((permission) => (
 						<Tag
 							key={permission.id}
-							color={permissionColors[permission.key.split(':')[1]] || 'default'}
+							color={permissionTagColors[permission.key.split(':')[1]] || 'default'}
 						>
 							{permission.name}
 						</Tag>
