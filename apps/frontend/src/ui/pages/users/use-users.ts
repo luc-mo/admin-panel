@@ -9,7 +9,7 @@ import { sharedDataProvider } from '@/ui/providers/shared-data-provider'
 
 import { useFindUsers } from '@/application/user/use-find-users'
 import { useRemoveUser } from '@/application/user/use-remove-user'
-import type { IUserWithRoles } from '@princesitas/core'
+import type { IUserWithRoles, IRoleCategory } from '@princesitas/core'
 
 export const useUsers = () => {
 	const { sharedData, ...providers } = useProviders([
@@ -26,6 +26,10 @@ export const useUsers = () => {
 			const roles = user.roles
 				.map((roleId) => sharedData.allRoles.dataMap.get(roleId)!)
 				.filter(Boolean)
+				.sort((a, b) => {
+					const categoryOrder: IRoleCategory[] = ['ADMIN', 'EDITOR', 'READER', 'OTHER']
+					return categoryOrder.indexOf(a.category) - categoryOrder.indexOf(b.category)
+				})
 			return { ...user, roles }
 		})
 	}, [findUsers.data, sharedData.allRoles.dataMap])

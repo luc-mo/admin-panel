@@ -6,16 +6,33 @@ import { useProviders } from '@/ui/providers/utils/use-providers'
 import { coreServicesProvider } from '@/ui/providers/core-services-provider'
 import { toastProvider } from '@/ui/providers/toast-provider'
 import { sharedDataProvider } from '@/ui/providers/shared-data-provider'
+
 import { useRemoveRole } from '@/application/role/use-remove-role'
+import type { IRoleWithPermissions } from '@princesitas/core'
 
 export const useRoles = () => {
 	const { sharedData, ...providers } = useProviders([
 		coreServicesProvider,
 		toastProvider,
-		sharedDataProvider
+		sharedDataProvider,
 	])
 	const removeRole = useRemoveRole(providers)
 	const removeRolePopUp = usePopUp()
+
+	const rolesWithPermissions: IRoleWithPermissions[] = useMemo(() => {
+		return sharedData.allRoles.data.map((role) => {
+			const permissions = role.permissions
+				.map((permissionId) => sharedData.allPermissions.dataMap.get(permissionId)!)
+				.filter(Boolean)
+				.sort((a, b) => {
+					const aKey = a.key.split(':')[1]
+					const bKey = b.key.split(':')[1]
+					const order = ['create', 'list', 'view', 'update', 'delete']
+					return order.indexOf(aKey) - order.indexOf(bKey)
+				})
+			return { ...role, permissions }
+		})
+	}, [sharedData.allRoles.data, sharedData.allPermissions.dataMap])
 
 	const loadings = useMemo(
 		() => ({
@@ -40,7 +57,7 @@ export const useRoles = () => {
 	}
 
 	return {
-		data: sharedData.allRoles.data,
+		data: rolesWithPermissions,
 		pagination: sharedData.allRoles.pagination,
 		loadings,
 		removeRolePopUp,

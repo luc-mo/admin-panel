@@ -1,9 +1,9 @@
-import { Table, Button, Space, Popconfirm } from 'antd'
+import { Table, Button, Space, Popconfirm, Tag } from 'antd'
 import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons'
 import type { ColumnsType } from 'antd/es/table'
 
 import { useRoles } from './use-roles'
-import type { IRole } from '@princesitas/core'
+import type { IRoleWithPermissions, IRoleCategory } from '@princesitas/core'
 
 import { PageHeader } from '@/ui/components/page-header'
 import styles from './styles.module.css'
@@ -17,7 +17,7 @@ export const Roles: React.FC = () => {
 		key: 'actions',
 		dataIndex: 'id',
 		width: 150,
-		render: (_: any, role: IRole) => (
+		render: (_: any, role: IRoleWithPermissions) => (
 			<Space size="small">
 				<Button
 					type="text"
@@ -77,36 +77,67 @@ export const Roles: React.FC = () => {
 	)
 }
 
-const tableColumns: ColumnsType<IRole> = [
-	{
-		title: 'ID',
-		dataIndex: 'id',
-		key: 'id',
-	},
+const tableColumns: ColumnsType<IRoleWithPermissions> = [
 	{
 		title: 'Nombre',
 		dataIndex: 'name',
 		key: 'name',
 	},
 	{
-		title: 'Descripción',
-		dataIndex: 'description',
-		key: 'description',
+		title: 'Permisos',
+		render: (role: IRoleWithPermissions) => {
+			const permissionColors: Record<string, string> = {
+				create: 'green',
+				list: 'blue',
+				view: 'purple',
+				update: 'orange',
+				delete: 'red',
+			}
+
+			const visiblePermissions = role.permissions.slice(0, 2)
+			const remainingPermissionsCount = role.permissions.length - visiblePermissions.length
+
+			return (
+				<Space size={6} wrap>
+					{visiblePermissions.map((permission) => (
+						<Tag
+							key={permission.id}
+							color={permissionColors[permission.key.split(':')[1]] || 'default'}
+						>
+							{permission.name}
+						</Tag>
+					))}
+					{remainingPermissionsCount > 0 && (
+						<Tag color="grey">+{remainingPermissionsCount} más</Tag>
+					)}
+				</Space>
+			)
+		},
 	},
 	{
-		title: 'Permisos',
-		render: (user: IRole) => user.permissions.join(', '),
+		title: 'Categoría',
+		dataIndex: 'category',
+		key: 'category',
+		render: (category: IRoleCategory) => {
+			const categoryColors: Record<IRoleCategory, string> = {
+				ADMIN: 'blue',
+				EDITOR: 'green',
+				READER: 'geekblue',
+				OTHER: 'default',
+			}
+			const categoryLabels: Record<IRoleCategory, string> = {
+				ADMIN: 'Administrador',
+				EDITOR: 'Editor',
+				READER: 'Lector',
+				OTHER: 'Otro',
+			}
+			return <Tag color={categoryColors[category] || 'default'}>{categoryLabels[category]}</Tag>
+		},
 	},
 	{
 		title: 'Fecha de creación',
 		dataIndex: 'createdAt',
 		key: 'createdAt',
-		render: (date: Date) => date.toLocaleDateString(),
-	},
-	{
-		title: 'Fecha de actualización',
-		dataIndex: 'updatedAt',
-		key: 'updatedAt',
 		render: (date: Date) => date.toLocaleDateString(),
 	},
 ]
