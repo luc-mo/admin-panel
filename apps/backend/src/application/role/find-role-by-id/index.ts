@@ -10,16 +10,7 @@ export class FindRoleById extends InjectableDependency('roleRepository') {
 		const role = await this._roleRepository.findById(command.id)
 		this._assertRoleExists(role)
 
-		return new FindRoleByIdResponse({
-			data: {
-				id: role.id,
-				name: role.name,
-				description: role.description,
-				permissions: role.permissions,
-				createdAt: role.createdAt.toISOString(),
-				updatedAt: role.updatedAt.toISOString(),
-			},
-		})
+		return new FindRoleByIdResponse({ data: role.toJSON() })
 	}
 
 	private _assertRoleExists(role: Role | null): asserts role is Role {

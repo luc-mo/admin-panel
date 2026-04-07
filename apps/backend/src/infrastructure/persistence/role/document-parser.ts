@@ -11,6 +11,7 @@ export class RoleDocumentParser {
 			name: document.name,
 			description: document.description,
 			permissions: document.permissions,
+			category: document.category,
 			createdAt: document.createdAt.toDate(),
 			updatedAt: document.updatedAt.toDate(),
 		})
@@ -22,6 +23,7 @@ export class RoleDocumentParser {
 			name: role.name,
 			description: role.description,
 			permissions: role.permissions,
+			category: role.category,
 			createdAt: Timestamp.fromDate(role.createdAt),
 			updatedAt: Timestamp.fromDate(role.updatedAt),
 		}

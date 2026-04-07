@@ -13,14 +13,7 @@ export class RemoveRole extends InjectableDependency('roleRepository') {
 		await this._roleRepository.remove(command.id)
 
 		return new RemoveRoleResponse({
-			data: {
-				id: role.id,
-				name: role.name,
-				description: role.description,
-				permissions: role.permissions,
-				createdAt: role.createdAt.toISOString(),
-				updatedAt: role.updatedAt.toISOString(),
-			},
+			data: role.toJSON(),
 			message: 'Rol eliminado exitosamente',
 		})
 	}
