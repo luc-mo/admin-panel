@@ -3,6 +3,7 @@ export interface IRole {
 	name: string
 	description: string
 	permissions: string[]
+	category: IRoleCategory
 	createdAt: Date
 	updatedAt: Date
 }
@@ -12,6 +13,9 @@ export interface IJsonRole {
 	name: string
 	description: string
 	permissions: string[]
+	category: IRoleCategory
 	createdAt: string
 	updatedAt: string
 }
+
+export type IRoleCategory = 'ADMIN' | 'EDITOR' | 'READER' | 'OTHER'
