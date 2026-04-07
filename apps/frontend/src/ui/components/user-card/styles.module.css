@@ -1,0 +1,41 @@
+@layer components {
+	.container {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		gap: 12px;
+		padding: 12px;
+		margin: 16px;
+		background-color: rgba(255, 255, 255, 0.1);
+		border-radius: 8px;
+	}
+
+	.avatar {
+		flex-shrink: 0;
+		border: 2px solid rgba(255, 255, 255, 0.3);
+	}
+
+	.user_info {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		width: 100%;
+	}
+
+	.user_skeleton {
+		width: 100%;
+	}
+
+	.user_name {
+		color: #ffffff;
+		font-size: 14px;
+		font-weight: 600;
+		white-space: nowrap;
+	}
+
+	.user_email {
+		color: rgba(255, 255, 255, 0.65);
+		font-size: 12px;
+		white-space: nowrap;
+	}
+}

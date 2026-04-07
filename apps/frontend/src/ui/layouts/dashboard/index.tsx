@@ -1,35 +1,26 @@
 import { Outlet } from 'react-router-dom'
-import { Layout, Menu, Avatar } from 'antd'
+import { Layout, Menu } from 'antd'
 import { HomeOutlined, LogoutOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons'
 
 import { withProviders } from '@/ui/providers/utils/with-providers'
+import { useProviders } from '@/ui/providers/utils/use-providers'
+
 import { routerProvider } from '@/ui/providers/router-provider'
 import { coreServicesProvider } from '@/ui/providers/core-services-provider'
 import { sharedDataProvider } from '@/ui/providers/shared-data-provider'
 import { useDashboard } from './use-dashboard'
 
-import { cn } from '@/ui/styles/cn'
+import { UserCard } from '@/ui/components/user-card'
 import styles from './styles.module.css'
 
 export const Dashboard: React.FC = withProviders([coreServicesProvider, sharedDataProvider], () => {
-	const router = routerProvider.use()
+	const { router, sharedData } = useProviders([routerProvider, sharedDataProvider])
 	const { onMenuClick } = useDashboard()
 
 	return (
 		<Layout className={styles.layout}>
 			<Layout.Sider width={300} theme="dark">
-				<div className={cn(styles.avatar_container)}>
-					<Avatar
-						className={styles.avatar}
-						size={48}
-						alt="Avatar del usuario"
-						src="https://cataas.com/cat/0BTTVEVWXNyOgXYd?width=150"
-					/>
-					<section>
-						<div className={styles.user_name}>Administrador</div>
-						<div className={styles.user_email}>admin@sistema.com</div>
-					</section>
-				</div>
+				<UserCard user={sharedData.currentUser.data} loading={sharedData.currentUser.loading} />
 
 				<Menu
 					theme="dark"
