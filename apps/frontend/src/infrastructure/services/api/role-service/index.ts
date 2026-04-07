@@ -78,6 +78,7 @@ export class RoleService {
 			name: role.name,
 			description: role.description,
 			permissions: role.permissions,
+			category: role.category,
 			createdAt: new Date(role.createdAt),
 			updatedAt: new Date(role.updatedAt),
 		}

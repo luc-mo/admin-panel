@@ -3,7 +3,7 @@ import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons'
 import type { ColumnsType } from 'antd/es/table'
 
 import { useUsers } from './use-users'
-import type { IUserWithRoles } from '@princesitas/core'
+import type { IUserWithRoles, IRoleCategory } from '@princesitas/core'
 
 import { PageHeader } from '@/ui/components/page-header'
 import styles from './styles.module.css'
@@ -95,15 +95,20 @@ const tableColumns: ColumnsType<IUserWithRoles> = [
 	{
 		title: 'Roles',
 		render: (user: IUserWithRoles) => {
-			const roleNames = user.roles.map((role) => role.name)
-			const roles = user.isSuperAdmin ? ['Super Admin', ...roleNames] : roleNames
-			const visibleRoles = roles.slice(0, 4)
-			const remainingRolesCount = roles.length - visibleRoles.length
+			const roleColors: Record<IRoleCategory, string> = {
+				ADMIN: 'blue',
+				EDITOR: 'green',
+				READER: 'geekblue',
+				OTHER: 'default',
+			}
+			const visibleRoles = user.roles.slice(0, user.isSuperAdmin ? 1 : 2)
+			const remainingRolesCount = user.roles.length - visibleRoles.length
 			return (
 				<Space size={6} wrap>
+					{user.isSuperAdmin && <Tag color="purple"> Super Admin</Tag>}
 					{visibleRoles.map((role) => (
-						<Tag key={role} color="blue">
-							{role}
+						<Tag key={role.id} color={roleColors[role.category] || 'default'}>
+							{role.name}
 						</Tag>
 					))}
 					{remainingRolesCount > 0 && <Tag color="grey">+{remainingRolesCount} más</Tag>}

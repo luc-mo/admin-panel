@@ -63,7 +63,7 @@ export const Roles: React.FC = () => {
 				rowKey="id"
 				columns={[...tableColumns, actionsRender]}
 				dataSource={data}
-				loading={loadings.findRoles}
+				loading={loadings.findAllRoles}
 				pagination={{
 					total: pagination.total,
 					current: pagination.page,
