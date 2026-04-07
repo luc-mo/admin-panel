@@ -1,5 +1,5 @@
 import type { IRole, IJsonRole } from '@princesitas/core'
-import type { IHttpClient } from '@/infrastructure/services/http-service'
+import type { IHttpService } from '@/infrastructure/services/http-service'
 import type {
 	IFindRoles,
 	IFindAllRoles,
@@ -10,7 +10,7 @@ import type {
 } from './types'
 
 export class RoleService {
-	private readonly _http: IHttpClient
+	private readonly _http: IHttpService
 
 	constructor({ http }: IDependencies) {
 		this._http = http
@@ -86,5 +86,5 @@ export class RoleService {
 }
 
 interface IDependencies {
-	http: IHttpClient
+	http: IHttpService
 }

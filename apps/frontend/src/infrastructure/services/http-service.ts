@@ -1,6 +1,6 @@
 import axios, { type AxiosInstance, type CreateAxiosDefaults } from 'axios'
 
-export interface IHttpClient {
+export interface IHttpService {
 	client: AxiosInstance
 	addAuthentication: (accessToken: string | null) => void
 	addRetryOnExpiration: (
@@ -10,7 +10,7 @@ export interface IHttpClient {
 }
 
 export const httpService = {
-	create: (config: CreateAxiosDefaults): IHttpClient => {
+	create: (config: CreateAxiosDefaults): IHttpService => {
 		const client = axios.create(config)
 
 		const addAuthentication = (accessToken: string | null) => {

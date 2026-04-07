@@ -1,9 +1,9 @@
 import type { IUser, IJsonUser } from '@princesitas/core'
-import type { IHttpClient } from '@/infrastructure/services/http-service'
+import type { IHttpService } from '@/infrastructure/services/http-service'
 import type { IFindUsers, IFindUserById, ICreateUser, IUpdateUser, IRemoveUser } from './types'
 
 export class UserService {
-	private readonly _http: IHttpClient
+	private readonly _http: IHttpService
 
 	constructor({ http }: IDependencies) {
 		this._http = http
@@ -76,5 +76,5 @@ export class UserService {
 }
 
 interface IDependencies {
-	http: IHttpClient
+	http: IHttpService
 }

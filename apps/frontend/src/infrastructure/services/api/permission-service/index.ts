@@ -1,5 +1,5 @@
 import type { IPermission, IJsonPermission } from '@princesitas/core'
-import type { IHttpClient } from '@/infrastructure/services/http-service'
+import type { IHttpService } from '@/infrastructure/services/http-service'
 import type {
 	IFindPermissions,
 	IFindAllPermissions,
@@ -10,7 +10,7 @@ import type {
 } from './types'
 
 export class PermissionService {
-	private readonly _http: IHttpClient
+	private readonly _http: IHttpService
 
 	constructor({ http }: IDependencies) {
 		this._http = http
@@ -90,5 +90,5 @@ export class PermissionService {
 }
 
 interface IDependencies {
-	http: IHttpClient
+	http: IHttpService
 }
