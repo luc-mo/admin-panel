@@ -24,12 +24,12 @@ export const useFindUsers = ({ coreServices, toast }: IUseFindUsersProps) => {
 				total: response.total,
 				page: Math.floor(response.offset / response.limit) + 1,
 			})
-			setLoading(false)
 		} catch {
 			toast.show('error', 'Ocurrió un error al obtener los usuarios')
 			setData([])
 			setPagination(_initialPagination)
 		}
+		setLoading(false)
 	}
 
 	return {

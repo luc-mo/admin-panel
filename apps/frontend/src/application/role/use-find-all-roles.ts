@@ -26,12 +26,12 @@ export const useFindAllRoles = ({ coreServices, toast }: IUseFindAllRolesProps) 
 				offset: 0,
 				page: 1,
 			}))
-			setLoading(false)
 		} catch {
 			toast.show('error', 'Ocurrió un error al obtener los roles')
 			setData([])
 			setPagination(_initialPagination)
 		}
+		setLoading(false)
 	}
 
 	const onPaginationChange = (pagination: StrictOmit<IPagination, 'total'>) => {
