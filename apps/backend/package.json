@@ -6,11 +6,7 @@
 	"scripts": {
 		"dev": "tsx watch --env-file=.env ./src/index.dev.ts",
 		"emulator": "tsup && firebase emulators:start --only functions",
-		"build": "tsup",
-		"lint": "biome check . --write",
-		"format": "biome format --write .",
-		"lint:check": "biome check .",
-		"format:check": "biome format ."
+		"build": "tsup"
 	},
 	"dependencies": {
 		"@princesitas/core": "workspace:*",
@@ -26,7 +22,6 @@
 	},
 	"devDependencies": {
 		"@types/cors": "2.8.19",
-		"@types/express": "5.0.6",
-		"@types/node": "25.3.0"
+		"@types/express": "5.0.6"
 	}
 }
