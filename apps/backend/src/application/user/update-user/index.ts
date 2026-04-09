@@ -13,7 +13,7 @@ export class UpdateUser extends InjectableDependency('userRepository') {
 		const updatedUser = new User({
 			id: exists.id,
 			email: exists.email,
-			username: exists.username ?? command.username,
+			username: command.username ?? exists.username,
 			roles: command.roles ?? exists.roles,
 			isSuperAdmin: exists.isSuperAdmin,
 			createdAt: exists.createdAt,
