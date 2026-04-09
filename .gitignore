@@ -1,4 +1,12 @@
+# Directories
 node_modules
 dist
+
+# Files
 .env*
 pnpm-lock.yaml
+
+# Serena
+.serena/cache
+.serena/logs
+.serena/project.local.yml

@@ -1,0 +1,13 @@
+{
+  "servers": {
+    "serena": {
+      "type": "stdio",
+      "command": "/Users/consultor/.local/bin/serena",
+      "args": [
+        "start-mcp-server",
+        "--context", "ide",
+        "--project", "${workspaceFolder}"
+      ]
+    }
+  }
+}
