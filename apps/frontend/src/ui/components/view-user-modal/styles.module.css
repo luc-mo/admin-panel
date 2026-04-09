@@ -1,0 +1,5 @@
+@layer components {
+	.input:disabled {
+		cursor: default;
+	}
+}

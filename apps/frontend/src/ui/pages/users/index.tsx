@@ -8,6 +8,7 @@ import { sharedDataProvider } from '@/ui/providers/shared-data-provider'
 import type { IUserWithRoles, IRoleCategory } from '@princesitas/core'
 
 import { PageHeader } from '@/ui/components/page-header'
+import { ViewUserModal } from '@/ui/components/view-user-modal'
 import { CreateUserModal } from '@/ui/components/create-user-modal'
 import { UpdateUserModal } from '@/ui/components/update-user-modal'
 import styles from './styles.module.css'
@@ -26,7 +27,7 @@ export const Users: React.FC = () => {
 				<Button
 					type="text"
 					icon={<EyeOutlined />}
-					onClick={() => console.log('Ver usuario:', user)}
+					onClick={() => users.viewUserPopUp.open(user.id)}
 					title="Ver"
 				/>
 				<Button
@@ -82,6 +83,12 @@ export const Users: React.FC = () => {
 					showTotal: (total, range) => `${range[0]}-${range[1]} de ${total} usuarios`,
 				}}
 				onChange={(args) => users.onPaginationChange(args)}
+			/>
+
+			<ViewUserModal
+				openId={users.viewUserPopUp.openId}
+				users={users.data}
+				onCancel={users.viewUserPopUp.close}
 			/>
 
 			<CreateUserModal

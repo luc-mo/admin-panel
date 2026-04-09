@@ -26,6 +26,7 @@ export const useUsers = () => {
 	const removeUser = useRemoveUser(providers)
 
 	const createUserToggle = useToggle(false)
+	const viewUserPopUp = usePopUp()
 	const updateUserToggle = usePopUp()
 	const removeUserPopUp = usePopUp()
 
@@ -93,6 +94,7 @@ export const useUsers = () => {
 		pagination: findUsers.pagination,
 		loadings,
 		createUserToggle,
+		viewUserPopUp,
 		updateUserToggle,
 		removeUserPopUp,
 		onRefreshUsers,
