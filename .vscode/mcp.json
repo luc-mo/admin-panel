@@ -6,7 +6,8 @@
       "args": [
         "start-mcp-server",
         "--context", "ide",
-        "--project", "${workspaceFolder}"
+        "--project", "${workspaceFolder}",
+        "--enable-web-dashboard", "false"
       ]
     }
   }
