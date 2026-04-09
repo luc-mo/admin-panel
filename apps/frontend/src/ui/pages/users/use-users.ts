@@ -1,6 +1,7 @@
 import { useMemo, useEffect } from 'react'
 import type { TablePaginationConfig } from 'antd'
 
+import { useToggle } from '@/shared/hooks/use-toggle'
 import { usePopUp } from '@/shared/hooks/use-pop-up'
 import { useProviders } from '@/ui/providers/utils/use-providers'
 import { coreServicesProvider } from '@/ui/providers/core-services-provider'
@@ -8,8 +9,9 @@ import { toastProvider } from '@/ui/providers/toast-provider'
 import { sharedDataProvider } from '@/ui/providers/shared-data-provider'
 
 import { useFindUsers } from '@/application/user/use-find-users'
+import { useCreateUser } from '@/application/user/use-create-user'
 import { useRemoveUser } from '@/application/user/use-remove-user'
-import type { IUserWithRoles, IRoleCategory } from '@princesitas/core'
+import type { IUserWithRoles, IRoleCategory, ParameterCommand } from '@princesitas/core'
 
 export const useUsers = () => {
 	const { sharedData, ...providers } = useProviders([
@@ -18,7 +20,10 @@ export const useUsers = () => {
 		sharedDataProvider,
 	])
 	const findUsers = useFindUsers(providers)
+	const createUser = useCreateUser(providers)
 	const removeUser = useRemoveUser(providers)
+
+	const createUserToggle = useToggle(false)
 	const removeUserPopUp = usePopUp()
 
 	const usersWithRoles: IUserWithRoles[] = useMemo(() => {
@@ -37,15 +42,28 @@ export const useUsers = () => {
 	const loadings = useMemo(
 		() => ({
 			findUsers: findUsers.loading,
+			createUser: createUser.loading,
 			removeUser: removeUser.loading,
 		}),
-		[findUsers.loading, removeUser.loading]
+		[findUsers.loading, createUser.loading, removeUser.loading]
 	)
 
-	const onRemoveUser = async (id: string) => {
-		await removeUser.execute(id)
-		removeUserPopUp.close()
+	const onRefreshUsers = async () => {
 		await findUsers.execute(findUsers.pagination.limit, findUsers.pagination.offset)
+	}
+
+	const onCreateUser = async (params: ParameterCommand<typeof createUser.execute>) => {
+		const createdUser = await createUser.execute(params)
+		if (!createdUser) return
+		createUserToggle.close()
+		await onRefreshUsers()
+	}
+
+	const onRemoveUser = async (id: string) => {
+		const removedUser = await removeUser.execute(id)
+		if (!removedUser) return
+		removeUserPopUp.close()
+		await onRefreshUsers()
 	}
 
 	const onPaginationChange = (event: TablePaginationConfig) => {
@@ -63,7 +81,10 @@ export const useUsers = () => {
 		data: usersWithRoles,
 		pagination: findUsers.pagination,
 		loadings,
+		createUserToggle,
 		removeUserPopUp,
+		onRefreshUsers,
+		onCreateUser,
 		onRemoveUser,
 		onPaginationChange,
 	}

@@ -11,4 +11,8 @@
 	.popup_cancell_button {
 		cursor: pointer;
 	}
+
+	.popup_cancell_button:disabled {
+		cursor: default;
+	}
 }

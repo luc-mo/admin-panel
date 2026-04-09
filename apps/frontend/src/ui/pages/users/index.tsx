@@ -3,14 +3,17 @@ import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons'
 import type { ColumnsType } from 'antd/es/table'
 
 import { useUsers } from './use-users'
+import { useProviders } from '@/ui/providers/utils/use-providers'
+import { sharedDataProvider } from '@/ui/providers/shared-data-provider'
 import type { IUserWithRoles, IRoleCategory } from '@princesitas/core'
 
 import { PageHeader } from '@/ui/components/page-header'
+import { UserModal } from '@/ui/components/user-modal'
 import styles from './styles.module.css'
 
 export const Users: React.FC = () => {
-	const { data, pagination, loadings, removeUserPopUp, onRemoveUser, onPaginationChange } =
-		useUsers()
+	const { sharedData } = useProviders([sharedDataProvider])
+	const users = useUsers()
 
 	const actionsRender = {
 		title: 'Acciones',
@@ -32,17 +35,20 @@ export const Users: React.FC = () => {
 					title="Editar"
 				/>
 				<Popconfirm
-					open={removeUserPopUp.isOpen(user.id)}
+					open={users.removeUserPopUp.isOpen(user.id)}
 					title="Eliminar usuario"
 					description="¿Estás seguro de eliminar este usuario?"
 					okText="Sí"
 					cancelText="No"
 					placement="leftTop"
-					onConfirm={() => onRemoveUser(user.id)}
-					onOpenChange={removeUserPopUp.toggle(user.id)}
-					okButtonProps={{ loading: loadings.removeUser }}
+					onConfirm={() => users.onRemoveUser(user.id)}
+					onOpenChange={users.removeUserPopUp.toggle(user.id)}
+					okButtonProps={{ loading: users.loadings.removeUser }}
 					classNames={{ root: styles.pup_up_buttons }}
-					cancelButtonProps={{ className: styles.popup_cancell_button }}
+					cancelButtonProps={{
+						className: styles.popup_cancell_button,
+						disabled: users.loadings.removeUser,
+					}}
 				>
 					<Button type="text" title="Eliminar" icon={<DeleteOutlined />} danger />
 				</Popconfirm>
@@ -55,23 +61,32 @@ export const Users: React.FC = () => {
 			<PageHeader
 				title="Administración de Usuarios"
 				newItemText="Nuevo Usuario"
-				onNewItemClick={() => console.log('Crear nuevo usuario')}
+				onNewItemClick={users.createUserToggle.open}
 			/>
 
 			<Table
 				className={styles.table}
 				rowKey="id"
 				columns={[...tableColumns, actionsRender]}
-				dataSource={data}
-				loading={loadings.findUsers}
+				dataSource={users.data}
+				loading={users.loadings.findUsers}
 				pagination={{
-					total: pagination.total,
-					current: pagination.page,
-					pageSize: pagination.limit,
+					total: users.pagination.total,
+					current: users.pagination.page,
+					pageSize: users.pagination.limit,
 					showSizeChanger: true,
 					showTotal: (total, range) => `${range[0]}-${range[1]} de ${total} usuarios`,
 				}}
-				onChange={(args) => onPaginationChange(args)}
+				onChange={(args) => users.onPaginationChange(args)}
+			/>
+
+			<UserModal
+				isOpen={users.createUserToggle.isOpen}
+				isLoading={users.loadings.createUser}
+				title="Crear Nuevo Usuario"
+				roles={sharedData.allRoles.data}
+				onCancel={users.createUserToggle.close}
+				onSubmit={users.onCreateUser}
 			/>
 		</>
 	)
