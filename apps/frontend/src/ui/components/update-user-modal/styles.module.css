@@ -1,0 +1,13 @@
+@layer components {
+	.input:disabled {
+		cursor: default;
+	}
+
+	.cancel_button {
+		cursor: pointer;
+	}
+
+	.cancel_button:disabled {
+		cursor: default;
+	}
+}
