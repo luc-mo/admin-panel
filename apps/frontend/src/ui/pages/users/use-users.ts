@@ -10,6 +10,7 @@ import { sharedDataProvider } from '@/ui/providers/shared-data-provider'
 
 import { useFindUsers } from '@/application/user/use-find-users'
 import { useCreateUser } from '@/application/user/use-create-user'
+import { useUpdateUser } from '@/application/user/use-update-user'
 import { useRemoveUser } from '@/application/user/use-remove-user'
 import type { IUserWithRoles, IRoleCategory, ParameterCommand } from '@princesitas/core'
 
@@ -21,9 +22,11 @@ export const useUsers = () => {
 	])
 	const findUsers = useFindUsers(providers)
 	const createUser = useCreateUser(providers)
+	const updateUser = useUpdateUser(providers)
 	const removeUser = useRemoveUser(providers)
 
 	const createUserToggle = useToggle(false)
+	const updateUserToggle = usePopUp()
 	const removeUserPopUp = usePopUp()
 
 	const usersWithRoles: IUserWithRoles[] = useMemo(() => {
@@ -43,9 +46,10 @@ export const useUsers = () => {
 		() => ({
 			findUsers: findUsers.loading,
 			createUser: createUser.loading,
+			updateUser: updateUser.loading,
 			removeUser: removeUser.loading,
 		}),
-		[findUsers.loading, createUser.loading, removeUser.loading]
+		[findUsers.loading, createUser.loading, updateUser.loading, removeUser.loading]
 	)
 
 	const onRefreshUsers = async () => {
@@ -56,6 +60,13 @@ export const useUsers = () => {
 		const createdUser = await createUser.execute(params)
 		if (!createdUser) return
 		createUserToggle.close()
+		await onRefreshUsers()
+	}
+
+	const onUpdateUser = async (params: ParameterCommand<typeof updateUser.execute>) => {
+		const updatedUser = await updateUser.execute(params)
+		if (!updatedUser) return
+		updateUserToggle.close()
 		await onRefreshUsers()
 	}
 
@@ -82,9 +93,11 @@ export const useUsers = () => {
 		pagination: findUsers.pagination,
 		loadings,
 		createUserToggle,
+		updateUserToggle,
 		removeUserPopUp,
 		onRefreshUsers,
 		onCreateUser,
+		onUpdateUser,
 		onRemoveUser,
 		onPaginationChange,
 	}

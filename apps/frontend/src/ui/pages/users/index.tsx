@@ -9,6 +9,7 @@ import type { IUserWithRoles, IRoleCategory } from '@princesitas/core'
 
 import { PageHeader } from '@/ui/components/page-header'
 import { UserModal } from '@/ui/components/user-modal'
+import { UpdateUserModal } from '@/ui/components/update-user-modal'
 import styles from './styles.module.css'
 
 export const Users: React.FC = () => {
@@ -31,7 +32,7 @@ export const Users: React.FC = () => {
 				<Button
 					type="text"
 					icon={<EditOutlined />}
-					onClick={() => console.log('Editar usuario:', user)}
+					onClick={() => users.updateUserToggle.open(user.id)}
 					title="Editar"
 				/>
 				<Popconfirm
@@ -90,6 +91,15 @@ export const Users: React.FC = () => {
 				roles={sharedData.allRoles.data}
 				onCancel={users.createUserToggle.close}
 				onSubmit={users.onCreateUser}
+			/>
+
+			<UpdateUserModal
+				openId={users.updateUserToggle.openId}
+				isLoading={users.loadings.updateUser}
+				users={users.data}
+				roles={sharedData.allRoles.data}
+				onCancel={users.updateUserToggle.close}
+				onSubmit={users.onUpdateUser}
 			/>
 		</>
 	)
