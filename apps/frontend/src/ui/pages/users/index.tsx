@@ -8,7 +8,7 @@ import { sharedDataProvider } from '@/ui/providers/shared-data-provider'
 import type { IUserWithRoles, IRoleCategory } from '@princesitas/core'
 
 import { PageHeader } from '@/ui/components/page-header'
-import { UserModal } from '@/ui/components/user-modal'
+import { CreateUserModal } from '@/ui/components/create-user-modal'
 import { UpdateUserModal } from '@/ui/components/update-user-modal'
 import styles from './styles.module.css'
 
@@ -84,7 +84,7 @@ export const Users: React.FC = () => {
 				onChange={(args) => users.onPaginationChange(args)}
 			/>
 
-			<UserModal
+			<CreateUserModal
 				isOpen={users.createUserToggle.isOpen}
 				isLoading={users.loadings.createUser}
 				title="Crear Nuevo Usuario"

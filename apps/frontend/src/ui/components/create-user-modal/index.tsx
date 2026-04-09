@@ -13,7 +13,7 @@ interface IUserModalProps {
 	onCancel: () => void
 }
 
-export const UserModal: React.FC<IUserModalProps> = ({
+export const CreateUserModal: React.FC<IUserModalProps> = ({
 	isOpen,
 	isLoading,
 	title,
