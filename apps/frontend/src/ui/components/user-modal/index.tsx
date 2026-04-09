@@ -35,11 +35,12 @@ export const UserModal: React.FC<IUserModalProps> = ({
 
 	return (
 		<Modal
-			title={title}
 			open={isOpen}
-			confirmLoading={isLoading}
+			title={title}
 			okText="Crear usuario"
 			cancelText="Cancelar"
+			confirmLoading={isLoading}
+			closable={{ disabled: isLoading }}
 			cancelButtonProps={{
 				className: styles.cancel_button,
 				disabled: isLoading,

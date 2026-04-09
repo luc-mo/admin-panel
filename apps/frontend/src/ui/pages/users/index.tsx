@@ -36,18 +36,21 @@ export const Users: React.FC = () => {
 				/>
 				<Popconfirm
 					open={users.removeUserPopUp.isOpen(user.id)}
+					placement="leftTop"
 					title="Eliminar usuario"
 					description="¿Estás seguro de eliminar este usuario?"
 					okText="Sí"
 					cancelText="No"
-					placement="leftTop"
-					onConfirm={() => users.onRemoveUser(user.id)}
-					onOpenChange={users.removeUserPopUp.toggle(user.id)}
-					okButtonProps={{ loading: users.loadings.removeUser }}
 					classNames={{ root: styles.pup_up_buttons }}
+					okButtonProps={{ loading: users.loadings.removeUser }}
 					cancelButtonProps={{
 						className: styles.popup_cancell_button,
 						disabled: users.loadings.removeUser,
+					}}
+					onConfirm={() => users.onRemoveUser(user.id)}
+					onOpenChange={(isOpen) => {
+						if (!isOpen && users.loadings.removeUser) return
+						users.removeUserPopUp.toggle(user.id)(isOpen)
 					}}
 				>
 					<Button type="text" title="Eliminar" icon={<DeleteOutlined />} danger />
