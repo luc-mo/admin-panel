@@ -58,6 +58,7 @@ export const rolesController = container.resolve('controllerFactory').createCont
 					name: req.body.name,
 					description: req.body.description,
 					permissions: req.body.permissions,
+					category: req.body.category,
 				})
 				const createRole = container.resolve('createRole')
 				const response = await createRole.execute(command)
@@ -74,6 +75,7 @@ export const rolesController = container.resolve('controllerFactory').createCont
 					name: req.body.name,
 					description: req.body.description,
 					permissions: req.body.permissions,
+					category: req.body.category,
 				})
 				const updateRole = container.resolve('updateRole')
 				const response = await updateRole.execute(command)
