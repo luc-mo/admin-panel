@@ -1,4 +1,4 @@
-import type { IJsonRole } from '@princesitas/core'
+import type { IJsonRole, IRoleCategory } from '@princesitas/core'
 
 export interface IFindRoles {
 	request: {
@@ -34,6 +34,7 @@ export interface ICreateRole {
 		name: string
 		description: string
 		permissions: string[]
+		category: IRoleCategory
 	}
 	response: {
 		data: IJsonRole
@@ -47,6 +48,7 @@ export interface IUpdateRole {
 		name?: string
 		description?: string
 		permissions?: string[]
+		category?: IRoleCategory
 	}
 	response: {
 		data: IJsonRole
