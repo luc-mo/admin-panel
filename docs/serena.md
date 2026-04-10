@@ -25,9 +25,36 @@ source ~/.bashrc  # bash
 uv tool install --python 3.13 git+https://github.com/oraios/serena
 ```
 
-### 4. Actualizar Serena
+## Actualización
 ```bash
 uv tool upgrade serena
+```
+
+## Configuración
+
+### 1. Añadir a archivo de MCPs
+Agrega el siguiente bloque a tu archivo `.vscode/mcp.json`:
+```json
+{
+  "servers": {
+    "serena": {
+      "type": "stdio",
+      "command": "/Users/<TU_USUARIO>/.local/bin/serena",
+      "args": [
+        "start-mcp-server",
+        "--context", "ide",
+        "--project", "${workspaceFolder}",
+        "--enable-web-dashboard", "false" // Opcional: habilitar dashboard web para monitoreo
+      ]
+    }
+  }
+}
+```
+
+### Crear proyecto en Serena
+```bash
+cd /ruta/del/proyecto
+serena project create --language typescript
 ```
 
 ## Uso
