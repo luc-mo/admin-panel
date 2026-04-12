@@ -5,13 +5,16 @@ import type { ColumnsType } from 'antd/es/table'
 import { useRoles } from './use-roles'
 import type { IRoleWithPermissions, IRoleCategory } from '@princesitas/core'
 
+import { useProviders } from '@/ui/providers/utils/use-providers'
+import { sharedDataProvider } from '@/ui/providers/shared-data-provider'
 import { PageHeader } from '@/ui/components/page-header'
+import { CreateRoleModal } from '@/ui/components/create-role-modal'
 import { permissionTagColors } from '@/ui/constants/tags'
 import styles from './styles.module.css'
 
 export const Roles: React.FC = () => {
-	const { data, pagination, loadings, removeRolePopUp, onRemoveRole, onPaginationChange } =
-		useRoles()
+	const { sharedData } = useProviders([sharedDataProvider])
+	const roles = useRoles()
 
 	const actionsRender = {
 		title: 'Acciones',
@@ -33,15 +36,15 @@ export const Roles: React.FC = () => {
 					title="Editar"
 				/>
 				<Popconfirm
-					open={removeRolePopUp.isOpen(role.id)}
+					open={roles.removeRolePopUp.isOpen(role.id)}
 					title="Eliminar rol"
 					description="¿Estás seguro de eliminar este rol?"
 					okText="Sí"
 					cancelText="No"
 					placement="leftTop"
-					onConfirm={() => onRemoveRole(role.id)}
-					onOpenChange={removeRolePopUp.toggle(role.id)}
-					okButtonProps={{ loading: loadings.removeRole }}
+					onConfirm={() => roles.onRemoveRole(role.id)}
+					onOpenChange={roles.removeRolePopUp.toggle(role.id)}
+					okButtonProps={{ loading: roles.loadings.removeRole }}
 					classNames={{ root: styles.pup_up_buttons }}
 					cancelButtonProps={{ className: styles.popup_cancell_button }}
 				>
@@ -56,23 +59,32 @@ export const Roles: React.FC = () => {
 			<PageHeader
 				title="Administración de Roles"
 				newItemText="Nuevo Rol"
-				onNewItemClick={() => console.log('Crear nuevo rol')}
+				onNewItemClick={roles.createRoleToggle.open}
 			/>
 
 			<Table
 				className={styles.table}
 				rowKey="id"
 				columns={[...tableColumns, actionsRender]}
-				dataSource={data}
-				loading={loadings.findAllRoles}
+				dataSource={roles.data}
+				loading={roles.loadings.findAllRoles}
 				pagination={{
-					total: pagination.total,
-					current: pagination.page,
-					pageSize: pagination.limit,
+					total: roles.pagination.total,
+					current: roles.pagination.page,
+					pageSize: roles.pagination.limit,
 					showSizeChanger: true,
 					showTotal: (total, range) => `${range[0]}-${range[1]} de ${total} roles`,
 				}}
-				onChange={(args) => onPaginationChange(args)}
+				onChange={(args) => roles.onPaginationChange(args)}
+			/>
+
+			<CreateRoleModal
+				isOpen={roles.createRoleToggle.isOpen}
+				isLoading={roles.loadings.createRole}
+				title="Crear Nuevo Rol"
+				permissions={sharedData.allPermissions.data}
+				onCancel={roles.createRoleToggle.close}
+				onSubmit={roles.onCreateRole}
 			/>
 		</>
 	)
