@@ -27,7 +27,7 @@ uv tool install --python 3.13 git+https://github.com/oraios/serena
 
 ## Actualización
 ```bash
-uv tool upgrade serena
+uv tool upgrade serena-agent
 ```
 
 ## Configuración
