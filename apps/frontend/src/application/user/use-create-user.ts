@@ -20,7 +20,7 @@ export const useCreateUser = ({ coreServices, toast }: IUseCreateUserProps) => {
 	const execute = async (params: ICreateUserParams) => {
 		try {
 			setLoading(true)
-			const response = await coreServices.userService.createUser(params)
+			const response = await coreServices.userService.create(params)
 			toast.show('success', 'Usuario creado exitosamente')
 			return response.data
 		} catch {

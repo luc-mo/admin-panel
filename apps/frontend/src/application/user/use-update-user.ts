@@ -19,7 +19,7 @@ export const useUpdateUser = ({ coreServices, toast }: IUseUpdateUserProps) => {
 	const execute = async (params: IUpdateUserParams) => {
 		try {
 			setLoading(true)
-			const response = await coreServices.userService.updateUser(params)
+			const response = await coreServices.userService.update(params)
 			toast.show('success', 'Usuario actualizado exitosamente')
 			return response.data
 		} catch {

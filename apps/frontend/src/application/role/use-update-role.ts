@@ -22,7 +22,7 @@ export const useUpdateRole = ({ coreServices, toast }: IUseUpdateRoleProps) => {
 	const execute = async (params: IUpdateRoleParams) => {
 		try {
 			setLoading(true)
-			const response = await coreServices.roleService.updateRole(params)
+			const response = await coreServices.roleService.update(params)
 			toast.show('success', 'Rol actualizado exitosamente')
 			return response.data
 		} catch {

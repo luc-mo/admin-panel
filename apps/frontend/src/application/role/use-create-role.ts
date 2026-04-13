@@ -21,7 +21,7 @@ export const useCreateRole = ({ coreServices, toast }: IUseCreateRoleProps) => {
 	const execute = async (params: ICreateRoleParams) => {
 		try {
 			setLoading(true)
-			const response = await coreServices.roleService.createRole(params)
+			const response = await coreServices.roleService.create(params)
 			toast.show('success', 'Rol creado exitosamente')
 			return response.data
 		} catch {

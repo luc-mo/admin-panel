@@ -16,7 +16,7 @@ export class RoleService {
 		this._http = http
 	}
 
-	public async findRoles(params: IFindRoles['request']) {
+	public async find(params: IFindRoles['request']) {
 		const response = await this._http.client.get<IFindRoles['response']>('/roles', { params })
 		const roles = response.data.data.map(this._parseRole)
 		return {
@@ -27,7 +27,7 @@ export class RoleService {
 		}
 	}
 
-	public async findAllRoles() {
+	public async findAll() {
 		const response = await this._http.client.get<IFindAllRoles['response']>('/roles/all')
 		const roles = response.data.data.map(this._parseRole)
 		return {
@@ -43,7 +43,7 @@ export class RoleService {
 		return { data: role }
 	}
 
-	public async createRole(params: ICreateRole['request']) {
+	public async create(params: ICreateRole['request']) {
 		const response = await this._http.client.post<ICreateRole['response']>('/roles', params)
 		const role = this._parseRole(response.data.data)
 		return {
@@ -52,7 +52,7 @@ export class RoleService {
 		}
 	}
 
-	public async updateRole(params: IUpdateRole['request']) {
+	public async update(params: IUpdateRole['request']) {
 		const url = `/roles/${params.id}`
 		const response = await this._http.client.patch<IUpdateRole['response']>(url, params)
 		const role = this._parseRole(response.data.data)
@@ -62,7 +62,7 @@ export class RoleService {
 		}
 	}
 
-	public async removeRole(params: IRemoveRole['request']) {
+	public async remove(params: IRemoveRole['request']) {
 		const url = `/roles/${params.id}`
 		const response = await this._http.client.delete<IRemoveRole['response']>(url)
 		const role = this._parseRole(response.data.data)

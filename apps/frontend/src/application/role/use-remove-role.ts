@@ -13,7 +13,7 @@ export const useRemoveRole = ({ coreServices, toast }: IUseRemoveRoleProps) => {
 	const execute = async (id: string) => {
 		try {
 			setLoading(true)
-			await coreServices.roleService.removeRole({ id })
+			await coreServices.roleService.remove({ id })
 			toast.show('success', 'Rol eliminado correctamente')
 		} catch {
 			toast.show('error', 'Ocurrió un error al eliminar el rol')
