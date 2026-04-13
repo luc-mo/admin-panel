@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
-import { HomeOutlined, LogoutOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons'
+import { HomeOutlined, LogoutOutlined, TeamOutlined, UserOutlined, KeyOutlined } from '@ant-design/icons'
 
 import { withProviders } from '@/ui/providers/utils/with-providers'
 import { useProviders } from '@/ui/providers/utils/use-providers'
@@ -55,6 +55,11 @@ const menuItems = [
 		key: '/dashboard/roles',
 		icon: <TeamOutlined />,
 		label: 'Roles',
+	},
+	{
+		key: '/dashboard/permissions',
+		icon: <KeyOutlined />,
+		label: 'Permisos',
 	},
 	{
 		key: 'logout',

@@ -1,0 +1,14 @@
+@layer components {
+	.table :global(.ant-pagination-disabled) button {
+		cursor: default;
+	}
+
+	.pup_up_buttons :global(.ant-popconfirm-buttons) {
+		display: flex;
+		flex-direction: row-reverse;
+	}
+
+	.popup_cancell_button {
+		cursor: pointer;
+	}
+}
