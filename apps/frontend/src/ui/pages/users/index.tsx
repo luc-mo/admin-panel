@@ -8,9 +8,9 @@ import { sharedDataProvider } from '@/ui/providers/shared-data-provider'
 import type { IUserWithRoles, IRoleCategory } from '@princesitas/core'
 
 import { PageHeader } from '@/ui/components/page-header'
-import { ViewUserModal } from '@/ui/components/view-user-modal'
-import { CreateUserModal } from '@/ui/components/create-user-modal'
-import { UpdateUserModal } from '@/ui/components/update-user-modal'
+import { ViewUserModal } from '@/ui/components/user/view-user-modal'
+import { CreateUserModal } from '@/ui/components/user/create-user-modal'
+import { UpdateUserModal } from '@/ui/components/user/update-user-modal'
 import styles from './styles.module.css'
 
 export const Users: React.FC = () => {
