@@ -7,6 +7,13 @@ export const roleTagColors: Record<IRoleCategory, string> = {
 	OTHER: 'default',
 }
 
+export const roleCategoryLabels: Record<IRoleCategory, string> = {
+	ADMIN: 'Administrador',
+	EDITOR: 'Editor',
+	READER: 'Lector',
+	OTHER: 'Otro',
+}
+
 export const permissionTagColors: Record<string, string> = {
 	create: 'green',
 	list: 'blue',

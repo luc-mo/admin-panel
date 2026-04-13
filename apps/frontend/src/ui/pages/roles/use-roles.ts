@@ -24,6 +24,7 @@ export const useRoles = () => {
 	const removeRole = useRemoveRole(providers)
 
 	const createRoleToggle = useToggle(false)
+	const viewRolePopUp = usePopUp()
 	const removeRolePopUp = usePopUp()
 	const updateRolePopUp = usePopUp()
 
@@ -85,6 +86,7 @@ export const useRoles = () => {
 		pagination: sharedData.allRoles.pagination,
 		loadings,
 		createRoleToggle,
+		viewRolePopUp,
 		updateRolePopUp,
 		removeRolePopUp,
 		onCreateRole,

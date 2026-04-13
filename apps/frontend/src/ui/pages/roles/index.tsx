@@ -10,7 +10,8 @@ import { sharedDataProvider } from '@/ui/providers/shared-data-provider'
 import { PageHeader } from '@/ui/components/page-header'
 import { CreateRoleModal } from '@/ui/components/create-role-modal'
 import { UpdateRoleModal } from '@/ui/components/update-role-modal'
-import { permissionTagColors } from '@/ui/constants/tags'
+import { ViewRoleModal } from '@/ui/components/view-role-modal'
+import { roleTagColors, roleCategoryLabels, permissionTagColors } from '@/ui/constants/tags'
 import styles from './styles.module.css'
 
 export const Roles: React.FC = () => {
@@ -27,7 +28,7 @@ export const Roles: React.FC = () => {
 				<Button
 					type="text"
 					icon={<EyeOutlined />}
-					onClick={() => console.log('Ver rol:', role)}
+					onClick={() => roles.viewRolePopUp.open(role.id)}
 					title="Ver"
 				/>
 				<Button
@@ -88,6 +89,12 @@ export const Roles: React.FC = () => {
 				onSubmit={roles.onCreateRole}
 			/>
 
+			<ViewRoleModal
+				openId={roles.viewRolePopUp.openId}
+				roles={roles.data}
+				onCancel={roles.viewRolePopUp.close}
+			/>
+
 			<UpdateRoleModal
 				openId={roles.updateRolePopUp.openId}
 				isLoading={roles.loadings.updateRole}
@@ -134,19 +141,7 @@ const tableColumns: ColumnsType<IRoleWithPermissions> = [
 		dataIndex: 'category',
 		key: 'category',
 		render: (category: IRoleCategory) => {
-			const categoryColors: Record<IRoleCategory, string> = {
-				ADMIN: 'blue',
-				EDITOR: 'green',
-				READER: 'geekblue',
-				OTHER: 'default',
-			}
-			const categoryLabels: Record<IRoleCategory, string> = {
-				ADMIN: 'Administrador',
-				EDITOR: 'Editor',
-				READER: 'Lector',
-				OTHER: 'Otro',
-			}
-			return <Tag color={categoryColors[category] || 'default'}>{categoryLabels[category]}</Tag>
+			return <Tag color={roleTagColors[category] || 'default'}>{roleCategoryLabels[category]}</Tag>
 		},
 	},
 	{
