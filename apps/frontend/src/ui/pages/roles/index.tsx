@@ -9,6 +9,7 @@ import { useProviders } from '@/ui/providers/utils/use-providers'
 import { sharedDataProvider } from '@/ui/providers/shared-data-provider'
 import { PageHeader } from '@/ui/components/page-header'
 import { CreateRoleModal } from '@/ui/components/create-role-modal'
+import { UpdateRoleModal } from '@/ui/components/update-role-modal'
 import { permissionTagColors } from '@/ui/constants/tags'
 import styles from './styles.module.css'
 
@@ -32,7 +33,7 @@ export const Roles: React.FC = () => {
 				<Button
 					type="text"
 					icon={<EditOutlined />}
-					onClick={() => console.log('Editar rol:', role)}
+					onClick={() => roles.updateRolePopUp.open(role.id)}
 					title="Editar"
 				/>
 				<Popconfirm
@@ -85,6 +86,15 @@ export const Roles: React.FC = () => {
 				permissions={sharedData.allPermissions.data}
 				onCancel={roles.createRoleToggle.close}
 				onSubmit={roles.onCreateRole}
+			/>
+
+			<UpdateRoleModal
+				openId={roles.updateRolePopUp.openId}
+				isLoading={roles.loadings.updateRole}
+				roles={roles.data}
+				permissions={sharedData.allPermissions.data}
+				onCancel={roles.updateRolePopUp.close}
+				onSubmit={roles.onUpdateRole}
 			/>
 		</>
 	)
