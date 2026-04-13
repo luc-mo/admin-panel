@@ -6,9 +6,9 @@ import { usePermissions } from './use-permissions'
 import type { IPermission } from '@princesitas/core'
 
 import { PageHeader } from '@/ui/components/page-header'
-import { CreatePermissionModal } from '@/ui/components/create-permission-modal'
-import { UpdatePermissionModal } from '@/ui/components/update-permission-modal'
-import { ViewPermissionModal } from '@/ui/components/view-permission-modal'
+import { CreatePermissionModal } from '@/ui/components/permission/create-permission-modal'
+import { UpdatePermissionModal } from '@/ui/components/permission/update-permission-modal'
+import { ViewPermissionModal } from '@/ui/components/permission/view-permission-modal'
 import { permissionTagColors } from '@/ui/constants/tags'
 import styles from './styles.module.css'
 
