@@ -6,6 +6,7 @@ import {
 	TeamOutlined,
 	UserOutlined,
 	KeyOutlined,
+	ApiOutlined,
 } from '@ant-design/icons'
 
 import { withProviders } from '@/ui/providers/utils/with-providers'
@@ -66,6 +67,11 @@ const menuItems = [
 		key: '/dashboard/permissions',
 		icon: <KeyOutlined />,
 		label: 'Permisos',
+	},
+	{
+		key: '/dashboard/endpoints',
+		icon: <ApiOutlined />,
+		label: 'Endpoints',
 	},
 	{
 		key: 'logout',
