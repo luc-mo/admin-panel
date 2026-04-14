@@ -44,6 +44,20 @@ export const router = createBrowserRouter([
 								lazy: () =>
 									import('@/ui/pages/roles').then((module) => ({ Component: module.Roles })),
 							},
+							{
+								path: 'permissions',
+								lazy: () =>
+									import('@/ui/pages/permissions').then((module) => ({
+										Component: module.Permissions,
+									})),
+							},
+							{
+								path: 'endpoints',
+								lazy: () =>
+									import('@/ui/pages/endpoints').then((module) => ({
+										Component: module.Endpoints,
+									})),
+							},
 						],
 					},
 				],

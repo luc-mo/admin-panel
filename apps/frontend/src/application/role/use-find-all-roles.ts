@@ -18,7 +18,7 @@ export const useFindAllRoles = ({ coreServices, toast }: IUseFindAllRolesProps) 
 	const execute = async () => {
 		try {
 			setLoading(true)
-			const response = await coreServices.roleService.findAllRoles()
+			const response = await coreServices.roleService.findAll()
 			setData(response.data)
 			setPagination((prev) => ({
 				total: response.total,

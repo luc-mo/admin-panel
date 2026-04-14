@@ -2,28 +2,22 @@ import { useState } from 'react'
 import type { ICoreServicesContext } from '@/ui/providers/core-services-provider'
 import type { IToastContext } from '@/ui/providers/toast-provider'
 
-interface IUseUpdateUserProps {
+interface IUseRemoveEndpointProps {
 	coreServices: ICoreServicesContext
 	toast: IToastContext
 }
 
-export interface IUpdateUserParams {
-	id: string
-	username?: string
-	roles?: string[]
-}
-
-export const useUpdateUser = ({ coreServices, toast }: IUseUpdateUserProps) => {
+export const useRemoveEndpoint = ({ coreServices, toast }: IUseRemoveEndpointProps) => {
 	const [loading, setLoading] = useState(false)
 
-	const execute = async (params: IUpdateUserParams) => {
+	const execute = async (id: string) => {
 		try {
 			setLoading(true)
-			const response = await coreServices.userService.update(params)
-			toast.show('success', 'Usuario actualizado exitosamente')
+			const response = await coreServices.endpointService.remove({ id })
+			toast.show('success', 'Endpoint eliminado correctamente')
 			return response.data
 		} catch {
-			toast.show('error', 'Ocurrió un error al actualizar el usuario')
+			toast.show('error', 'Ocurrió un error al eliminar el endpoint')
 			return null
 		} finally {
 			setLoading(false)

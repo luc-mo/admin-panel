@@ -10,6 +10,7 @@ import { sharedDataProvider } from '@/ui/providers/shared-data-provider'
 
 import { useRemoveRole } from '@/application/role/use-remove-role'
 import { useCreateRole } from '@/application/role/use-create-role'
+import { useUpdateRole } from '@/application/role/use-update-role'
 import type { IRoleWithPermissions, ParameterCommand } from '@princesitas/core'
 
 export const useRoles = () => {
@@ -19,10 +20,13 @@ export const useRoles = () => {
 		sharedDataProvider,
 	])
 	const createRole = useCreateRole(providers)
+	const updateRole = useUpdateRole(providers)
 	const removeRole = useRemoveRole(providers)
 
 	const createRoleToggle = useToggle(false)
+	const viewRolePopUp = usePopUp()
 	const removeRolePopUp = usePopUp()
+	const updateRolePopUp = usePopUp()
 
 	const rolesWithPermissions: IRoleWithPermissions[] = useMemo(() => {
 		return sharedData.allRoles.data.map((role) => {
@@ -43,15 +47,23 @@ export const useRoles = () => {
 		() => ({
 			findAllRoles: sharedData.allRoles.loading,
 			createRole: createRole.loading,
+			updateRole: updateRole.loading,
 			removeRole: removeRole.loading,
 		}),
-		[sharedData.allRoles.loading, createRole.loading, removeRole.loading]
+		[sharedData.allRoles.loading, createRole.loading, updateRole.loading, removeRole.loading]
 	)
 
 	const onCreateRole = async (params: ParameterCommand<typeof createRole.execute>) => {
 		const createdRole = await createRole.execute(params)
 		if (!createdRole) return
 		createRoleToggle.close()
+		await sharedData.allRoles.execute()
+	}
+
+	const onUpdateRole = async (params: ParameterCommand<typeof updateRole.execute>) => {
+		const updatedRole = await updateRole.execute(params)
+		if (!updatedRole) return
+		updateRolePopUp.close()
 		await sharedData.allRoles.execute()
 	}
 
@@ -74,8 +86,11 @@ export const useRoles = () => {
 		pagination: sharedData.allRoles.pagination,
 		loadings,
 		createRoleToggle,
+		viewRolePopUp,
+		updateRolePopUp,
 		removeRolePopUp,
 		onCreateRole,
+		onUpdateRole,
 		onRemoveRole,
 		onPaginationChange,
 	}

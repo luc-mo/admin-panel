@@ -15,7 +15,7 @@ export const useFindCurrentUser = ({ coreServices, toast }: IUseFindCurrentUserP
 	const execute = async () => {
 		try {
 			setLoading(true)
-			const response = await coreServices.userService.findMe()
+			const response = await coreServices.userService.me()
 			setData(response.data)
 		} catch {
 			toast.show('error', 'Ocurrió un error al obtener los datos del usuario')

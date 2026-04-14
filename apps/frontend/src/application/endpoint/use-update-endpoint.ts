@@ -2,28 +2,28 @@ import { useState } from 'react'
 import type { ICoreServicesContext } from '@/ui/providers/core-services-provider'
 import type { IToastContext } from '@/ui/providers/toast-provider'
 
-interface IUseUpdateUserProps {
+interface IUseUpdateEndpointProps {
 	coreServices: ICoreServicesContext
 	toast: IToastContext
 }
 
-export interface IUpdateUserParams {
+export interface IUpdateEndpointParams {
 	id: string
-	username?: string
+	path?: string
 	roles?: string[]
 }
 
-export const useUpdateUser = ({ coreServices, toast }: IUseUpdateUserProps) => {
+export const useUpdateEndpoint = ({ coreServices, toast }: IUseUpdateEndpointProps) => {
 	const [loading, setLoading] = useState(false)
 
-	const execute = async (params: IUpdateUserParams) => {
+	const execute = async (params: IUpdateEndpointParams) => {
 		try {
 			setLoading(true)
-			const response = await coreServices.userService.update(params)
-			toast.show('success', 'Usuario actualizado exitosamente')
+			const response = await coreServices.endpointService.update(params)
+			toast.show('success', 'Endpoint actualizado exitosamente')
 			return response.data
 		} catch {
-			toast.show('error', 'Ocurrió un error al actualizar el usuario')
+			toast.show('error', 'Ocurrió un error al actualizar el endpoint')
 			return null
 		} finally {
 			setLoading(false)

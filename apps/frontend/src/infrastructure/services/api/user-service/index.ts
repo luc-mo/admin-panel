@@ -9,7 +9,7 @@ export class UserService {
 		this._http = http
 	}
 
-	public async findUsers(params: IFindUsers['request']) {
+	public async find(params: IFindUsers['request']) {
 		const response = await this._http.client.get<IFindUsers['response']>('/users', { params })
 		const users = response.data.data.map(this._parseUser)
 		return {
@@ -20,20 +20,20 @@ export class UserService {
 		}
 	}
 
-	public async findMe() {
+	public async me() {
 		const response = await this._http.client.get<IFindUserById['response']>('/users/me')
 		const user = this._parseUser(response.data.data)
 		return { data: user }
 	}
 
-	public async findUserById(params: IFindUserById['request']) {
+	public async findById(params: IFindUserById['request']) {
 		const url = `/users/${params.id}`
 		const response = await this._http.client.get<IFindUserById['response']>(url)
 		const user = this._parseUser(response.data.data)
 		return { data: user }
 	}
 
-	public async createUser(params: ICreateUser['request']) {
+	public async create(params: ICreateUser['request']) {
 		const response = await this._http.client.post<ICreateUser['response']>('/users', params)
 		const user = this._parseUser(response.data.data)
 		return {
@@ -42,7 +42,7 @@ export class UserService {
 		}
 	}
 
-	public async updateUser(params: IUpdateUser['request']) {
+	public async update(params: IUpdateUser['request']) {
 		const url = `/users/${params.id}`
 		const response = await this._http.client.patch<IUpdateUser['response']>(url, params)
 		const user = this._parseUser(response.data.data)
@@ -52,7 +52,7 @@ export class UserService {
 		}
 	}
 
-	public async removeUser(params: IRemoveUser['request']) {
+	public async remove(params: IRemoveUser['request']) {
 		const url = `/users/${params.id}`
 		const response = await this._http.client.delete<IRemoveUser['response']>(url)
 		const user = this._parseUser(response.data.data)

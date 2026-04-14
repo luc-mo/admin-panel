@@ -1,6 +1,13 @@
 import { Outlet } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
-import { HomeOutlined, LogoutOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons'
+import {
+	HomeOutlined,
+	LogoutOutlined,
+	TeamOutlined,
+	UserOutlined,
+	KeyOutlined,
+	ApiOutlined,
+} from '@ant-design/icons'
 
 import { withProviders } from '@/ui/providers/utils/with-providers'
 import { useProviders } from '@/ui/providers/utils/use-providers'
@@ -10,7 +17,7 @@ import { coreServicesProvider } from '@/ui/providers/core-services-provider'
 import { sharedDataProvider } from '@/ui/providers/shared-data-provider'
 import { useDashboard } from './use-dashboard'
 
-import { UserCard } from '@/ui/components/user-card'
+import { UserCard } from '@/ui/components/user/user-card'
 import styles from './styles.module.css'
 
 export const Dashboard: React.FC = withProviders([coreServicesProvider, sharedDataProvider], () => {
@@ -55,6 +62,16 @@ const menuItems = [
 		key: '/dashboard/roles',
 		icon: <TeamOutlined />,
 		label: 'Roles',
+	},
+	{
+		key: '/dashboard/permissions',
+		icon: <KeyOutlined />,
+		label: 'Permisos',
+	},
+	{
+		key: '/dashboard/endpoints',
+		icon: <ApiOutlined />,
+		label: 'Endpoints',
 	},
 	{
 		key: 'logout',

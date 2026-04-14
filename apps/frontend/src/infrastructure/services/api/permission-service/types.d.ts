@@ -31,9 +31,8 @@ export interface IFindPermissionById {
 
 export interface ICreatePermission {
 	request: {
+		key: string
 		name: string
-		description: string
-		permissions: string[]
 	}
 	response: {
 		data: IJsonPermission
@@ -44,9 +43,8 @@ export interface ICreatePermission {
 export interface IUpdatePermission {
 	request: {
 		id: string
+		key?: string
 		name?: string
-		description?: string
-		permissions?: string[]
 	}
 	response: {
 		data: IJsonPermission

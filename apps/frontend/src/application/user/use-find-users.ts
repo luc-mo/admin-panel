@@ -16,7 +16,7 @@ export const useFindUsers = ({ coreServices, toast }: IUseFindUsersProps) => {
 	const execute = async (limit: number, offset: number) => {
 		try {
 			setLoading(true)
-			const response = await coreServices.userService.findUsers({ limit, offset })
+			const response = await coreServices.userService.find({ limit, offset })
 			setData(response.data)
 			setPagination({
 				limit: response.limit,

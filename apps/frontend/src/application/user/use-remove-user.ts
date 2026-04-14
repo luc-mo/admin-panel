@@ -13,7 +13,7 @@ export const useRemoveUser = ({ coreServices, toast }: IUseRemoveUserProps) => {
 	const execute = async (id: string) => {
 		try {
 			setLoading(true)
-			const response = await coreServices.userService.removeUser({ id })
+			const response = await coreServices.userService.remove({ id })
 			toast.show('success', 'Usuario eliminado correctamente')
 			return response.data
 		} catch {
