@@ -2,11 +2,11 @@ export interface IContainer {
 	admin: typeof import('firebase-admin')
 	express: typeof import('express')
 	cors: typeof import('cors')
+	controllerFactory: import('@snowdrive/utils').ControllerFactory
 
 	config: typeof import('@/infrastructure/config').config
 	cloudSdkService: import('@/infrastructure/services/cloud-sdk-service').FirebaseCloudSdkService
 	authService: import('@/infrastructure/services/auth-service').FirebaseAuthService
-	controllerFactory: import('@/infrastructure/http/controller-factory').ControllerFactory
 
 	dbHandler: import('@/infrastructure/persistence/db-handler').FirebaseDbHandler
 	userRepository: import('@/infrastructure/persistence/user/repository').UserRepository

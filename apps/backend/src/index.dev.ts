@@ -1,7 +1,8 @@
 import '@/infrastructure/config/logger'
-import { config } from '@/infrastructure/config'
 
+import { Logger } from '@snowdrive/logger'
 import { container } from '@/container'
+import { config } from '@/infrastructure/config'
 import { healthController } from '@/infrastructure/http/health-controller'
 import { usersController } from '@/infrastructure/http/users-controller'
 import { rolesController } from '@/infrastructure/http/roles-controller'
@@ -20,4 +21,6 @@ const app = container.resolve('controllerFactory').createApp({
 	],
 })
 
-app.listen()
+app.listen(() => {
+	Logger.info(`[Http] Server up and running on: http://localhost:${app.port}`)
+})

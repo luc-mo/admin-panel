@@ -1,4 +1,5 @@
 import { container } from '@/container'
+import { contextMiddleware } from './middlewares/context-middleware'
 import { loggerMiddleware } from './middlewares/logger-middleware'
 import { accessTokenMiddleware } from './middlewares/access-token-middleware'
 import { userRolesMiddleware } from './middlewares/user-roles-middleware'
@@ -10,8 +11,10 @@ import { UpdateEndpointCommand } from '@/application/endpoint/update-endpoint/co
 import { RemoveEndpointCommand } from '@/application/endpoint/remove-endpoint/command'
 
 export const endpointsController = container.resolve('controllerFactory').createController({
+	type: 'app',
 	path: '/api/endpoints',
-	middlewares: [loggerMiddleware, accessTokenMiddleware, userRolesMiddleware],
+	corsOptions: true,
+	middlewares: [contextMiddleware, loggerMiddleware, accessTokenMiddleware, userRolesMiddleware],
 	endpoints: [
 		{
 			method: 'get',

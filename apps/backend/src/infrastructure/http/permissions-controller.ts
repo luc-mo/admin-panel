@@ -1,4 +1,5 @@
 import { container } from '@/container'
+import { contextMiddleware } from './middlewares/context-middleware'
 import { loggerMiddleware } from './middlewares/logger-middleware'
 import { accessTokenMiddleware } from './middlewares/access-token-middleware'
 import { userRolesMiddleware } from './middlewares/user-roles-middleware'
@@ -10,8 +11,10 @@ import { UpdatePermissionCommand } from '@/application/permission/update-permiss
 import { RemovePermissionCommand } from '@/application/permission/remove-permission/command'
 
 export const permissionsController = container.resolve('controllerFactory').createController({
+	type: 'app',
 	path: '/api/permissions',
-	middlewares: [loggerMiddleware, accessTokenMiddleware, userRolesMiddleware],
+	corsOptions: true,
+	middlewares: [contextMiddleware, loggerMiddleware, accessTokenMiddleware, userRolesMiddleware],
 	endpoints: [
 		{
 			method: 'get',
