@@ -1,6 +1,6 @@
 import type admin from 'firebase-admin'
 import { Logger } from '@snowdrive/logger'
-import { InjectableDependency } from '@/shared/injectable-dependency'
+import { InjectableDependency } from '@snowdrive/utils'
 
 @Logger({ severity: 'DEBUG' })
 export class FirebaseAuthService extends InjectableDependency('admin', 'cloudSdkService') {

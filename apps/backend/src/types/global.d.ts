@@ -1,5 +1,6 @@
 import type { LeveledLogMethod } from 'winston'
 import type { DecodedIdToken } from 'firebase-admin/auth'
+import type { IContainer } from './container'
 
 declare global {
 	namespace Express {
@@ -20,4 +21,8 @@ declare module 'winston' {
 		debug: LeveledLogMethod
 		trace: LeveledLogMethod
 	}
+}
+
+declare module '@snowdrive/utils' {
+	export interface IDependencyMap extends IContainer {}
 }

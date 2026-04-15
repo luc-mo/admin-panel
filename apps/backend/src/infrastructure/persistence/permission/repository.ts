@@ -1,6 +1,6 @@
 import { Filter } from 'firebase-admin/firestore'
 import { Logger } from '@snowdrive/logger'
-import { InjectableDependency } from '@/shared/injectable-dependency'
+import { InjectableDependency } from '@snowdrive/utils'
 import type { Permission } from '@princesitas/core'
 import type { IPermissionDocument } from './types'
 

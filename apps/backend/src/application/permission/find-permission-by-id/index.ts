@@ -1,5 +1,5 @@
 import { Logger } from '@snowdrive/logger'
-import { InjectableDependency } from '@/shared/injectable-dependency'
+import { InjectableDependency } from '@snowdrive/utils'
 import { FindPermissionByIdResponse } from './response'
 import type { FindPermissionByIdCommand } from './command'
 import type { Permission } from '@princesitas/core'

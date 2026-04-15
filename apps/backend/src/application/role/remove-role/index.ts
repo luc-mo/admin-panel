@@ -1,5 +1,5 @@
 import { Logger } from '@snowdrive/logger'
-import { InjectableDependency } from '@/shared/injectable-dependency'
+import { InjectableDependency } from '@snowdrive/utils'
 import { RemoveRoleResponse } from './response'
 import type { RemoveRoleCommand } from './command'
 import type { Role } from '@princesitas/core'

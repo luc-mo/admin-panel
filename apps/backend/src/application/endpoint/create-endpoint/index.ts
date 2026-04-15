@@ -1,5 +1,5 @@
 import { Logger } from '@snowdrive/logger'
-import { InjectableDependency } from '@/shared/injectable-dependency'
+import { InjectableDependency } from '@snowdrive/utils'
 import { Endpoint } from '@princesitas/core'
 import { CreateEndpointResponse } from './response'
 import type { CreateEndpointCommand } from './command'

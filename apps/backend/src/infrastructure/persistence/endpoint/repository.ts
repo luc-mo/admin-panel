@@ -1,6 +1,6 @@
 import { Filter } from 'firebase-admin/firestore'
 import { Logger } from '@snowdrive/logger'
-import { InjectableDependency } from '@/shared/injectable-dependency'
+import { InjectableDependency } from '@snowdrive/utils'
 import type { Endpoint } from '@princesitas/core'
 import type { IEndpointDocument } from './types'
 

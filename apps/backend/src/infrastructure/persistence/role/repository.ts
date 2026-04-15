@@ -1,7 +1,7 @@
 import { Filter } from 'firebase-admin/firestore'
 import { Logger } from '@snowdrive/logger'
 import { ArrayUtils } from '@/shared/array-utils'
-import { InjectableDependency } from '@/shared/injectable-dependency'
+import { InjectableDependency } from '@snowdrive/utils'
 import type { Role } from '@princesitas/core'
 import type { IRoleDocument } from './types'
 
