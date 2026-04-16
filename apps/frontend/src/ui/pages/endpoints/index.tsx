@@ -3,14 +3,20 @@ import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons'
 import type { ColumnsType } from 'antd/es/table'
 
 import { useEndpoints } from './use-endpoints'
+import { useProviders } from '@/ui/providers/utils/use-providers'
+import { sharedDataProvider } from '@/ui/providers/shared-data-provider'
 import type { IEndpointWithRoles } from '@princesitas/core'
 
 import { roleTagColors } from '@/ui/constants/tags'
 
 import { PageHeader } from '@/ui/components/page-header'
+import { ViewEndpointModal } from '@/ui/components/endpoint/view-endpoint-modal'
+import { CreateEndpointModal } from '@/ui/components/endpoint/create-endpoint-modal'
+import { UpdateEndpointModal } from '@/ui/components/endpoint/update-endpoint-modal'
 import styles from './styles.module.css'
 
 export const Endpoints: React.FC = () => {
+	const { sharedData } = useProviders([sharedDataProvider])
 	const endpoints = useEndpoints()
 
 	const actionsRender = {
@@ -23,13 +29,13 @@ export const Endpoints: React.FC = () => {
 				<Button
 					type="text"
 					icon={<EyeOutlined />}
-					onClick={() => console.log(endpoint.id)}
+					onClick={() => endpoints.viewEndpointPopUp.open(endpoint.id)}
 					title="Ver"
 				/>
 				<Button
 					type="text"
 					icon={<EditOutlined />}
-					onClick={() => console.log(endpoint.id)}
+					onClick={() => endpoints.updateEndpointToggle.open(endpoint.id)}
 					title="Editar"
 				/>
 				<Popconfirm
@@ -62,7 +68,7 @@ export const Endpoints: React.FC = () => {
 			<PageHeader
 				title="Administración de Endpoints"
 				newItemText="Nuevo Endpoint"
-				onNewItemClick={() => {}}
+				onNewItemClick={endpoints.createEndpointToggle.open}
 			/>
 
 			<Table
@@ -79,6 +85,30 @@ export const Endpoints: React.FC = () => {
 					showTotal: (total, range) => `${range[0]}-${range[1]} de ${total} endpoints`,
 				}}
 				onChange={(args) => endpoints.onPaginationChange(args)}
+			/>
+
+			<ViewEndpointModal
+				openId={endpoints.viewEndpointPopUp.openId}
+				endpoints={endpoints.data}
+				onCancel={endpoints.viewEndpointPopUp.close}
+			/>
+
+			<CreateEndpointModal
+				isOpen={endpoints.createEndpointToggle.isOpen}
+				isLoading={endpoints.loadings.createEndpoint}
+				title="Crear Nuevo Endpoint"
+				roles={sharedData.allRoles.data}
+				onCancel={endpoints.createEndpointToggle.close}
+				onSubmit={endpoints.onCreateEndpoint}
+			/>
+
+			<UpdateEndpointModal
+				openId={endpoints.updateEndpointToggle.openId}
+				isLoading={endpoints.loadings.updateEndpoint}
+				endpoints={endpoints.data}
+				roles={sharedData.allRoles.data}
+				onCancel={endpoints.updateEndpointToggle.close}
+				onSubmit={endpoints.onUpdateEndpoint}
 			/>
 		</>
 	)
