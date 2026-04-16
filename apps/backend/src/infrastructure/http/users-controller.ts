@@ -1,4 +1,5 @@
 import { container } from '@/container'
+import { jsonMiddleware } from './middlewares/json-middleware'
 import { contextMiddleware } from './middlewares/context-middleware'
 import { loggerMiddleware } from './middlewares/logger-middleware'
 import { accessTokenMiddleware } from './middlewares/access-token-middleware'
@@ -14,7 +15,13 @@ export const usersController = container.resolve('controllerFactory').createCont
 	type: 'app',
 	path: '/api/users',
 	corsOptions: true,
-	middlewares: [contextMiddleware, loggerMiddleware, accessTokenMiddleware, userRolesMiddleware],
+	middlewares: [
+		jsonMiddleware,
+		contextMiddleware,
+		loggerMiddleware,
+		accessTokenMiddleware,
+		userRolesMiddleware,
+	],
 	endpoints: [
 		{
 			method: 'get',
