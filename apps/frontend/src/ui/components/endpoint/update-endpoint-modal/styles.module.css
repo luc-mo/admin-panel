@@ -1,0 +1,9 @@
+@layer components {
+	.cancel_button {
+		cursor: pointer;
+	}
+
+	.cancel_button:disabled {
+		cursor: default;
+	}
+}
