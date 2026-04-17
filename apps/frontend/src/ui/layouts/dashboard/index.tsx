@@ -22,7 +22,7 @@ import styles from './styles.module.css'
 
 export const Dashboard: React.FC = withProviders([coreServicesProvider, sharedDataProvider], () => {
 	const { router, sharedData } = useProviders([routerProvider, sharedDataProvider])
-	const { onMenuClick } = useDashboard()
+	const { menuAccess, onMenuClick } = useDashboard()
 
 	return (
 		<Layout className={styles.layout}>
@@ -33,7 +33,7 @@ export const Dashboard: React.FC = withProviders([coreServicesProvider, sharedDa
 					theme="dark"
 					selectedKeys={[router.location.pathname]}
 					mode="inline"
-					items={menuItems}
+					items={menuItems.filter((item) => menuAccess[item.key] ?? true)}
 					onClick={onMenuClick}
 				/>
 			</Layout.Sider>

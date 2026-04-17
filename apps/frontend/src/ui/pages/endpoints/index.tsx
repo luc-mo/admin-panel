@@ -9,110 +9,118 @@ import type { IEndpointWithRoles } from '@princesitas/core'
 
 import { roleTagColors, permissionMethodTagColors } from '@/ui/constants/tags'
 
+import { AccessGuard } from '@/ui/guards/access-guard'
+import { NotFound } from '@/ui/layouts/not-found'
 import { PageHeader } from '@/ui/components/page-header'
 import { ViewEndpointModal } from '@/ui/components/endpoint/view-endpoint-modal'
 import { CreateEndpointModal } from '@/ui/components/endpoint/create-endpoint-modal'
 import { UpdateEndpointModal } from '@/ui/components/endpoint/update-endpoint-modal'
+
+import { endpointsPagePermissions } from '@/ui/constants/page-permissions'
 import styles from './styles.module.css'
 
-export const Endpoints: React.FC = () => {
-	const { sharedData } = useProviders([sharedDataProvider])
-	const endpoints = useEndpoints()
+export const Endpoints: React.FC = AccessGuard.withAccess({
+	permissions: endpointsPagePermissions,
+	Fallback: NotFound,
+	Component: () => {
+		const { sharedData } = useProviders([sharedDataProvider])
+		const endpoints = useEndpoints()
 
-	const actionsRender = {
-		title: 'Acciones',
-		key: 'actions',
-		dataIndex: 'id',
-		width: 150,
-		render: (_: any, endpoint: IEndpointWithRoles) => (
-			<Space size="small">
-				<Button
-					type="text"
-					icon={<EyeOutlined />}
-					onClick={() => endpoints.viewEndpointPopUp.open(endpoint.id)}
-					title="Ver"
+		const actionsRender = {
+			title: 'Acciones',
+			key: 'actions',
+			dataIndex: 'id',
+			width: 150,
+			render: (_: any, endpoint: IEndpointWithRoles) => (
+				<Space size="small">
+					<Button
+						type="text"
+						icon={<EyeOutlined />}
+						onClick={() => endpoints.viewEndpointPopUp.open(endpoint.id)}
+						title="Ver"
+					/>
+					<Button
+						type="text"
+						icon={<EditOutlined />}
+						onClick={() => endpoints.updateEndpointToggle.open(endpoint.id)}
+						title="Editar"
+					/>
+					<Popconfirm
+						open={endpoints.removeEndpointPopUp.isOpen(endpoint.id)}
+						placement="leftTop"
+						title="Eliminar endpoint"
+						description="¿Estás seguro de eliminar este endpoint?"
+						okText="Sí"
+						cancelText="No"
+						classNames={{ root: styles.pup_up_buttons }}
+						okButtonProps={{ loading: endpoints.loadings.removeEndpoint }}
+						cancelButtonProps={{
+							className: styles.popup_cancell_button,
+							disabled: endpoints.loadings.removeEndpoint,
+						}}
+						onConfirm={() => endpoints.onRemoveEndpoint(endpoint.id)}
+						onOpenChange={(isOpen) => {
+							if (!isOpen && endpoints.loadings.removeEndpoint) return
+							endpoints.removeEndpointPopUp.toggle(endpoint.id)(isOpen)
+						}}
+					>
+						<Button type="text" title="Eliminar" icon={<DeleteOutlined />} danger />
+					</Popconfirm>
+				</Space>
+			),
+		}
+
+		return (
+			<>
+				<PageHeader
+					title="Administración de Endpoints"
+					newItemText="Nuevo Endpoint"
+					onNewItemClick={endpoints.createEndpointToggle.open}
 				/>
-				<Button
-					type="text"
-					icon={<EditOutlined />}
-					onClick={() => endpoints.updateEndpointToggle.open(endpoint.id)}
-					title="Editar"
+
+				<Table
+					className={styles.table}
+					rowKey="id"
+					columns={[...tableColumns, actionsRender]}
+					dataSource={endpoints.data}
+					loading={endpoints.loadings.findEndpoints}
+					pagination={{
+						total: endpoints.pagination.total,
+						current: endpoints.pagination.page,
+						pageSize: endpoints.pagination.limit,
+						showSizeChanger: true,
+						showTotal: (total, range) => `${range[0]}-${range[1]} de ${total} endpoints`,
+					}}
+					onChange={(args) => endpoints.onPaginationChange(args)}
 				/>
-				<Popconfirm
-					open={endpoints.removeEndpointPopUp.isOpen(endpoint.id)}
-					placement="leftTop"
-					title="Eliminar endpoint"
-					description="¿Estás seguro de eliminar este endpoint?"
-					okText="Sí"
-					cancelText="No"
-					classNames={{ root: styles.pup_up_buttons }}
-					okButtonProps={{ loading: endpoints.loadings.removeEndpoint }}
-					cancelButtonProps={{
-						className: styles.popup_cancell_button,
-						disabled: endpoints.loadings.removeEndpoint,
-					}}
-					onConfirm={() => endpoints.onRemoveEndpoint(endpoint.id)}
-					onOpenChange={(isOpen) => {
-						if (!isOpen && endpoints.loadings.removeEndpoint) return
-						endpoints.removeEndpointPopUp.toggle(endpoint.id)(isOpen)
-					}}
-				>
-					<Button type="text" title="Eliminar" icon={<DeleteOutlined />} danger />
-				</Popconfirm>
-			</Space>
-		),
-	}
 
-	return (
-		<>
-			<PageHeader
-				title="Administración de Endpoints"
-				newItemText="Nuevo Endpoint"
-				onNewItemClick={endpoints.createEndpointToggle.open}
-			/>
+				<ViewEndpointModal
+					openId={endpoints.viewEndpointPopUp.openId}
+					endpoints={endpoints.data}
+					onCancel={endpoints.viewEndpointPopUp.close}
+				/>
 
-			<Table
-				className={styles.table}
-				rowKey="id"
-				columns={[...tableColumns, actionsRender]}
-				dataSource={endpoints.data}
-				loading={endpoints.loadings.findEndpoints}
-				pagination={{
-					total: endpoints.pagination.total,
-					current: endpoints.pagination.page,
-					pageSize: endpoints.pagination.limit,
-					showSizeChanger: true,
-					showTotal: (total, range) => `${range[0]}-${range[1]} de ${total} endpoints`,
-				}}
-				onChange={(args) => endpoints.onPaginationChange(args)}
-			/>
+				<CreateEndpointModal
+					isOpen={endpoints.createEndpointToggle.isOpen}
+					isLoading={endpoints.loadings.createEndpoint}
+					title="Crear Nuevo Endpoint"
+					roles={sharedData.allRoles.data}
+					onCancel={endpoints.createEndpointToggle.close}
+					onSubmit={endpoints.onCreateEndpoint}
+				/>
 
-			<ViewEndpointModal
-				openId={endpoints.viewEndpointPopUp.openId}
-				endpoints={endpoints.data}
-				onCancel={endpoints.viewEndpointPopUp.close}
-			/>
-
-			<CreateEndpointModal
-				isOpen={endpoints.createEndpointToggle.isOpen}
-				isLoading={endpoints.loadings.createEndpoint}
-				title="Crear Nuevo Endpoint"
-				roles={sharedData.allRoles.data}
-				onCancel={endpoints.createEndpointToggle.close}
-				onSubmit={endpoints.onCreateEndpoint}
-			/>
-
-			<UpdateEndpointModal
-				openId={endpoints.updateEndpointToggle.openId}
-				isLoading={endpoints.loadings.updateEndpoint}
-				endpoints={endpoints.data}
-				roles={sharedData.allRoles.data}
-				onCancel={endpoints.updateEndpointToggle.close}
-				onSubmit={endpoints.onUpdateEndpoint}
-			/>
-		</>
-	)
-}
+				<UpdateEndpointModal
+					openId={endpoints.updateEndpointToggle.openId}
+					isLoading={endpoints.loadings.updateEndpoint}
+					endpoints={endpoints.data}
+					roles={sharedData.allRoles.data}
+					onCancel={endpoints.updateEndpointToggle.close}
+					onSubmit={endpoints.onUpdateEndpoint}
+				/>
+			</>
+		)
+	},
+})
 
 const tableColumns: ColumnsType<IEndpointWithRoles> = [
 	{
