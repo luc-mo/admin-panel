@@ -116,18 +116,18 @@ export const Endpoints: React.FC = () => {
 
 const tableColumns: ColumnsType<IEndpointWithRoles> = [
 	{
-		title: 'Ruta',
-		dataIndex: 'path',
-		key: 'path',
-		minWidth: 150,
-	},
-	{
 		title: 'Método',
 		dataIndex: 'method',
 		key: 'method',
 		render: (method: IEndpointWithRoles['method']) => (
 			<Tag color={permissionMethodTagColors[method]}>{method}</Tag>
 		),
+	},
+	{
+		title: 'Ruta',
+		dataIndex: 'path',
+		key: 'path',
+		minWidth: 150,
 	},
 	{
 		title: 'Roles',
