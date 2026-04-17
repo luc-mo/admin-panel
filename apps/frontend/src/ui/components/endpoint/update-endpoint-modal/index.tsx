@@ -1,7 +1,8 @@
 import { useEffect } from 'react'
 import { Modal, Form, Input, Select, Tag } from 'antd'
-import { roleTagColors } from '@/ui/constants/tags'
-import type { IRole, IEndpointWithRoles, StrictOmit } from '@princesitas/core'
+import { methodOptions } from '@/ui/constants/options'
+import { roleTagColors, permissionMethodTagColors } from '@/ui/constants/tags'
+import type { IRole, IEndpointWithRoles, IEndpointMethod, StrictOmit } from '@princesitas/core'
 import type { IUpdateEndpointParams } from '@/application/endpoint/use-update-endpoint'
 import styles from './styles.module.css'
 
@@ -43,6 +44,7 @@ export const UpdateEndpointModal: React.FC<IUpdateEndpointModalProps> = ({
 		}
 		form.setFieldsValue({
 			path: endpoint.path,
+			method: endpoint.method,
 			roles: endpoint.roles.map((role) => role.id),
 		})
 	}, [endpoint])
@@ -63,6 +65,20 @@ export const UpdateEndpointModal: React.FC<IUpdateEndpointModalProps> = ({
 			onCancel={handleCancel}
 		>
 			<Form form={form} layout="vertical" onFinish={handleSubmit}>
+				<Form.Item
+					name="method"
+					label="Método"
+					rules={[{ required: true, message: 'Por favor selecciona el método HTTP' }]}
+				>
+					<Select
+						placeholder="Selecciona el método"
+						options={methodOptions}
+						labelRender={({ value }) => (
+							<Tag color={permissionMethodTagColors[value as IEndpointMethod]}>{value}</Tag>
+						)}
+					/>
+				</Form.Item>
+
 				<Form.Item
 					name="path"
 					label="Ruta"

@@ -1,5 +1,5 @@
 import { Modal, Tag, Descriptions } from 'antd'
-import { roleTagColors } from '@/ui/constants/tags'
+import { roleTagColors, permissionMethodTagColors } from '@/ui/constants/tags'
 import type { IEndpointWithRoles } from '@princesitas/core'
 
 interface IViewEndpointModalProps {
@@ -17,6 +17,11 @@ export const ViewEndpointModal: React.FC<IViewEndpointModalProps> = ({
 	return (
 		<Modal open={Boolean(openId)} title="Ver endpoint" footer={null} onCancel={onCancel}>
 			<Descriptions column={1} bordered size="small">
+				<Descriptions.Item label="Método">
+					<Tag color={endpoint?.method ? permissionMethodTagColors[endpoint.method] : undefined}>
+						{endpoint?.method}
+					</Tag>
+				</Descriptions.Item>
 				<Descriptions.Item label="Ruta">{endpoint?.path}</Descriptions.Item>
 				<Descriptions.Item label="Roles">
 					<div

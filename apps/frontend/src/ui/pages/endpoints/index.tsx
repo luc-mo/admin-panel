@@ -7,7 +7,7 @@ import { useProviders } from '@/ui/providers/utils/use-providers'
 import { sharedDataProvider } from '@/ui/providers/shared-data-provider'
 import type { IEndpointWithRoles } from '@princesitas/core'
 
-import { roleTagColors } from '@/ui/constants/tags'
+import { roleTagColors, permissionMethodTagColors } from '@/ui/constants/tags'
 
 import { PageHeader } from '@/ui/components/page-header'
 import { ViewEndpointModal } from '@/ui/components/endpoint/view-endpoint-modal'
@@ -119,7 +119,15 @@ const tableColumns: ColumnsType<IEndpointWithRoles> = [
 		title: 'Ruta',
 		dataIndex: 'path',
 		key: 'path',
-		minWidth: 200,
+		minWidth: 150,
+	},
+	{
+		title: 'Método',
+		dataIndex: 'method',
+		key: 'method',
+		render: (method: IEndpointWithRoles['method']) => (
+			<Tag color={permissionMethodTagColors[method]}>{method}</Tag>
+		),
 	},
 	{
 		title: 'Roles',

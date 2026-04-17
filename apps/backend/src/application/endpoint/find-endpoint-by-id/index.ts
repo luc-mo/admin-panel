@@ -13,6 +13,7 @@ export class FindEndpointById extends InjectableDependency('endpointRepository')
 		return new FindEndpointByIdResponse({
 			data: {
 				id: endpoint.id,
+				method: endpoint.method,
 				path: endpoint.path,
 				roles: endpoint.roles,
 				createdAt: endpoint.createdAt.toISOString(),

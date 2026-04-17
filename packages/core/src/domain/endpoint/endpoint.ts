@@ -1,7 +1,8 @@
-import type { IEndpoint, IJsonEndpoint } from './types'
+import type { IEndpoint, IJsonEndpoint, IEndpointMethod } from './types'
 
 export class Endpoint {
 	private readonly _id: string
+	private readonly _method: IEndpointMethod
 	private readonly _path: string
 	private readonly _roles: string[]
 	private readonly _createdAt: Date
@@ -9,6 +10,7 @@ export class Endpoint {
 
 	constructor(data: IEndpoint) {
 		this._id = data.id
+		this._method = data.method
 		this._path = data.path
 		this._roles = data.roles
 		this._createdAt = data.createdAt
@@ -18,6 +20,7 @@ export class Endpoint {
 	public toJSON(): IJsonEndpoint {
 		return {
 			id: this._id,
+			method: this._method,
 			path: this._path,
 			roles: this._roles,
 			createdAt: this._createdAt.toISOString(),
@@ -27,6 +30,10 @@ export class Endpoint {
 
 	public get id() {
 		return this._id
+	}
+
+	public get method() {
+		return this._method
 	}
 
 	public get path() {

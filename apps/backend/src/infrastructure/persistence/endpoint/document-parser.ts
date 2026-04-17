@@ -8,6 +8,7 @@ export class EndpointDocumentParser {
 	public toDomain(document: IEndpointDocument): Endpoint {
 		return new Endpoint({
 			id: document.id,
+			method: document.method as any,
 			path: document.path,
 			roles: document.roles,
 			createdAt: document.createdAt.toDate(),
@@ -18,6 +19,7 @@ export class EndpointDocumentParser {
 	public toDocument(endpoint: Endpoint): IEndpointDocument {
 		return {
 			id: endpoint.id,
+			method: endpoint.method,
 			path: endpoint.path,
 			roles: endpoint.roles,
 			createdAt: Timestamp.fromDate(endpoint.createdAt),

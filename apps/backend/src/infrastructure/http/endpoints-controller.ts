@@ -55,6 +55,7 @@ export const endpointsController = container.resolve('controllerFactory').create
 			middlewares: [],
 			handler: async (req, res) => {
 				const command = new CreateEndpointCommand({
+					method: req.body.method,
 					path: req.body.path,
 					roles: req.body.roles,
 				})
@@ -70,6 +71,7 @@ export const endpointsController = container.resolve('controllerFactory').create
 			handler: async (req, res) => {
 				const command = new UpdateEndpointCommand({
 					id: req.params.id as string,
+					method: req.body.method,
 					path: req.body.path,
 					roles: req.body.roles,
 				})

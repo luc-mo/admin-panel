@@ -13,6 +13,7 @@ export class FindEndpoints extends InjectableDependency('endpointRepository') {
 
 		const jsonEndpoints = endpoints.map((endpoint) => ({
 			id: endpoint.id,
+			method: endpoint.method,
 			path: endpoint.path,
 			roles: endpoint.roles,
 			createdAt: endpoint.createdAt.toISOString(),

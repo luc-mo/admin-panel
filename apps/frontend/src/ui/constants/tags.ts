@@ -1,4 +1,4 @@
-import type { IRoleCategory } from '@princesitas/core'
+import type { IRoleCategory, IEndpointMethod } from '@princesitas/core'
 
 export const roleTagColors: Record<IRoleCategory, string> = {
 	ADMIN: 'blue',
@@ -20,4 +20,12 @@ export const permissionTagColors: Record<string, string> = {
 	view: 'purple',
 	update: 'orange',
 	delete: 'red',
+}
+
+export const permissionMethodTagColors: Record<IEndpointMethod, string> = {
+	GET: 'blue',
+	POST: 'green',
+	PUT: 'orange',
+	PATCH: 'purple',
+	DELETE: 'red',
 }

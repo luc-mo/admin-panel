@@ -67,6 +67,7 @@ export class EndpointService {
 	private _parseEndpoint(endpoint: IJsonEndpoint): IEndpoint {
 		return {
 			id: endpoint.id,
+			method: endpoint.method,
 			path: endpoint.path,
 			roles: endpoint.roles,
 			createdAt: new Date(endpoint.createdAt),

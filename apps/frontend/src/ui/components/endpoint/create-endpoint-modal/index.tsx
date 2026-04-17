@@ -1,6 +1,7 @@
 import { Modal, Form, Input, Select, Tag } from 'antd'
-import { roleTagColors } from '@/ui/constants/tags'
-import type { IRole } from '@princesitas/core'
+import { methodOptions } from '@/ui/constants/options'
+import { roleTagColors, permissionMethodTagColors } from '@/ui/constants/tags'
+import type { IRole, IEndpointMethod } from '@princesitas/core'
 import type { ICreateEndpointParams } from '@/application/endpoint/use-create-endpoint'
 import styles from './styles.module.css'
 
@@ -49,6 +50,20 @@ export const CreateEndpointModal: React.FC<ICreateEndpointModalProps> = ({
 			onCancel={handleCancel}
 		>
 			<Form form={form} layout="vertical" onFinish={handleSubmit}>
+				<Form.Item
+					name="method"
+					label="Método"
+					rules={[{ required: true, message: 'Por favor selecciona el método HTTP' }]}
+				>
+					<Select
+						placeholder="Selecciona el método"
+						options={methodOptions}
+						labelRender={({ value }) => (
+							<Tag color={permissionMethodTagColors[value as IEndpointMethod]}>{value}</Tag>
+						)}
+					/>
+				</Form.Item>
+
 				<Form.Item
 					name="path"
 					label="Ruta"

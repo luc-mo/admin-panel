@@ -12,6 +12,7 @@ export class UpdateEndpoint extends InjectableDependency('endpointRepository') {
 
 		const updatedEndpoint = new Endpoint({
 			id: exists.id,
+			method: command.method ?? exists.method,
 			path: command.path ?? exists.path,
 			roles: command.roles ?? exists.roles,
 			createdAt: exists.createdAt,
@@ -23,6 +24,7 @@ export class UpdateEndpoint extends InjectableDependency('endpointRepository') {
 		return new UpdateEndpointResponse({
 			data: {
 				id: updatedEndpoint.id,
+				method: updatedEndpoint.method,
 				path: updatedEndpoint.path,
 				roles: updatedEndpoint.roles,
 				createdAt: updatedEndpoint.createdAt.toISOString(),

@@ -1,4 +1,4 @@
-import type { IJsonEndpoint } from '@princesitas/core'
+import type { IJsonEndpoint, IEndpointMethod } from '@princesitas/core'
 
 export interface IFindEndpoints {
 	request: {
@@ -24,6 +24,7 @@ export interface IFindEndpointById {
 
 export interface ICreateEndpoint {
 	request: {
+		method: IEndpointMethod
 		path: string
 		roles: string[]
 	}
@@ -36,6 +37,7 @@ export interface ICreateEndpoint {
 export interface IUpdateEndpoint {
 	request: {
 		id: string
+		method?: IEndpointMethod
 		path?: string
 		roles?: string[]
 	}

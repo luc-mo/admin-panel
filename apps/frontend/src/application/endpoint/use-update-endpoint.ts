@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { ICoreServicesContext } from '@/ui/providers/core-services-provider'
 import type { IToastContext } from '@/ui/providers/toast-provider'
+import type { IEndpointMethod } from '@princesitas/core'
 
 interface IUseUpdateEndpointProps {
 	coreServices: ICoreServicesContext
@@ -9,6 +10,7 @@ interface IUseUpdateEndpointProps {
 
 export interface IUpdateEndpointParams {
 	id: string
+	method?: IEndpointMethod
 	path?: string
 	roles?: string[]
 }

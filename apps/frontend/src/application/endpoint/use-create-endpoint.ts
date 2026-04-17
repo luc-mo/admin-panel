@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { ICoreServicesContext } from '@/ui/providers/core-services-provider'
 import type { IToastContext } from '@/ui/providers/toast-provider'
+import type { IEndpointMethod } from '@princesitas/core'
 
 interface IUseCreateEndpointProps {
 	coreServices: ICoreServicesContext
@@ -8,6 +9,7 @@ interface IUseCreateEndpointProps {
 }
 
 export interface ICreateEndpointParams {
+	method: IEndpointMethod
 	path: string
 	roles: string[]
 }
