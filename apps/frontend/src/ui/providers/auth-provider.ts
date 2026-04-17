@@ -19,6 +19,7 @@ export interface IAuthContext {
 	logOut: () => Promise<void>
 	forceLogOut: () => Promise<void>
 	getAccessToken: (forceRefresh: boolean) => Promise<string | null>
+	getStoredAccessToken: () => string | null
 }
 
 export const authProvider = createProvider({

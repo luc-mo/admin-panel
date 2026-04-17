@@ -31,13 +31,13 @@ export const coreServicesProvider = createProvider({
 		const http = useMemo(() => {
 			const baseURL = config.app.apiBaseUrl
 			const httpClient = services.http.create({ baseURL })
-			httpClient.addAuthentication(auth.session.accessToken)
+			httpClient.addAuthentication(auth.getStoredAccessToken)
 			httpClient.addRetryOnExpiration(
 				() => auth.getAccessToken(true),
 				() => auth.forceLogOut()
 			)
 			return httpClient
-		}, [auth.session.accessToken])
+		}, [])
 
 		const userService = useMemo(() => new UserService({ http }), [http])
 		const roleService = useMemo(() => new RoleService({ http }), [http])

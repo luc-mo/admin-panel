@@ -71,6 +71,10 @@ export const useAuth = ({ services, router, toast }: IUseAuthProps) => {
 		}
 	}
 
+	const getStoredAccessToken = () => {
+		return services.localStorage.getItem('accessToken')
+	}
+
 	useEffect(() => {
 		const unsubscribe = services.auth.onSessionChange((accessToken) => {
 			if (accessToken) {
@@ -100,6 +104,7 @@ export const useAuth = ({ services, router, toast }: IUseAuthProps) => {
 		logOut,
 		forceLogOut,
 		getAccessToken,
+		getStoredAccessToken,
 	}
 }
 
