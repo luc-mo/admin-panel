@@ -1,5 +1,5 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom'
-import { AuthGuard } from '@/ui/layouts/auth-guard'
+import { AuthGuard } from '@/ui/guards/auth-guard'
 import { Dashboard } from '@/ui/layouts/dashboard'
 
 export const router = createBrowserRouter([
