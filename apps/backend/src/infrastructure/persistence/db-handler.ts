@@ -6,19 +6,19 @@ import { InjectableDependency } from '@snowdrive/utils'
 export class FirebaseDbHandler extends InjectableDependency('admin', 'config', 'cloudSdkService') {
 	private _db: admin.firestore.Firestore | null = null
 
-	public getDatabase() {
+	public getCollection<T>(path: string) {
+		const instance = this.getInstance()
+		return instance.collection(path) as admin.firestore.CollectionReference<T>
+	}
+
+	public getInstance() {
 		if (!this._db) {
-			this._db = this._createDatabase()
+			this._db = this._createInstance()
 		}
 		return this._db
 	}
 
-	public getCollection<T>(path: string) {
-		const instance = this.getDatabase()
-		return instance.collection(path) as admin.firestore.CollectionReference<T>
-	}
-
-	private _createDatabase() {
+	private _createInstance() {
 		try {
 			Logger.info('Initializing Firestore instance')
 			const app = this._cloudSdkService.getApp()
