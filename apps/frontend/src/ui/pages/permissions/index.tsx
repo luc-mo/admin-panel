@@ -25,36 +25,43 @@ export const Permissions: React.FC = AccessGuard.withAccess({
 			title: 'Acciones',
 			key: 'actions',
 			dataIndex: 'id',
+			align: 'center' as const,
 			width: 150,
 			render: (_: any, permission: IPermission) => (
 				<Space size="small">
-					<Button
-						type="text"
-						icon={<EyeOutlined />}
-						onClick={() => permissions.viewPermissionPopUp.open(permission.id)}
-						title="Ver"
-					/>
-					<Button
-						type="text"
-						icon={<EditOutlined />}
-						onClick={() => permissions.updatePermissionPopUp.open(permission.id)}
-						title="Editar"
-					/>
-					<Popconfirm
-						open={permissions.removePermissionPopUp.isOpen(permission.id)}
-						title="Eliminar permiso"
-						description="¿Estás seguro de eliminar este permiso?"
-						okText="Sí"
-						cancelText="No"
-						placement="leftTop"
-						onConfirm={() => permissions.onRemovePermission(permission.id)}
-						onOpenChange={permissions.removePermissionPopUp.toggle(permission.id)}
-						okButtonProps={{ loading: permissions.loadings.removePermission }}
-						classNames={{ root: styles.pup_up_buttons }}
-						cancelButtonProps={{ className: styles.popup_cancell_button }}
-					>
-						<Button type="text" title="Eliminar" icon={<DeleteOutlined />} danger />
-					</Popconfirm>
+					<AccessGuard permissions={['permission:view']}>
+						<Button
+							type="text"
+							icon={<EyeOutlined />}
+							onClick={() => permissions.viewPermissionPopUp.open(permission.id)}
+							title="Ver"
+						/>
+					</AccessGuard>
+					<AccessGuard permissions={['permission:update']}>
+						<Button
+							type="text"
+							icon={<EditOutlined />}
+							onClick={() => permissions.updatePermissionPopUp.open(permission.id)}
+							title="Editar"
+						/>
+					</AccessGuard>
+					<AccessGuard permissions={['permission:delete']}>
+						<Popconfirm
+							open={permissions.removePermissionPopUp.isOpen(permission.id)}
+							title="Eliminar permiso"
+							description="¿Estás seguro de eliminar este permiso?"
+							okText="Sí"
+							cancelText="No"
+							placement="leftTop"
+							onConfirm={() => permissions.onRemovePermission(permission.id)}
+							onOpenChange={permissions.removePermissionPopUp.toggle(permission.id)}
+							okButtonProps={{ loading: permissions.loadings.removePermission }}
+							classNames={{ root: styles.pup_up_buttons }}
+							cancelButtonProps={{ className: styles.popup_cancell_button }}
+						>
+							<Button type="text" title="Eliminar" icon={<DeleteOutlined />} danger />
+						</Popconfirm>
+					</AccessGuard>
 				</Space>
 			),
 		}

@@ -30,36 +30,43 @@ export const Roles: React.FC = AccessGuard.withAccess({
 			title: 'Acciones',
 			key: 'actions',
 			dataIndex: 'id',
+			align: 'center' as const,
 			width: 150,
 			render: (_: any, role: IRoleWithPermissions) => (
 				<Space size="small">
-					<Button
-						type="text"
-						icon={<EyeOutlined />}
-						onClick={() => roles.viewRolePopUp.open(role.id)}
-						title="Ver"
-					/>
-					<Button
-						type="text"
-						icon={<EditOutlined />}
-						onClick={() => roles.updateRolePopUp.open(role.id)}
-						title="Editar"
-					/>
-					<Popconfirm
-						open={roles.removeRolePopUp.isOpen(role.id)}
-						title="Eliminar rol"
-						description="¿Estás seguro de eliminar este rol?"
-						okText="Sí"
-						cancelText="No"
-						placement="leftTop"
-						onConfirm={() => roles.onRemoveRole(role.id)}
-						onOpenChange={roles.removeRolePopUp.toggle(role.id)}
-						okButtonProps={{ loading: roles.loadings.removeRole }}
-						classNames={{ root: styles.pup_up_buttons }}
-						cancelButtonProps={{ className: styles.popup_cancell_button }}
-					>
-						<Button type="text" title="Eliminar" icon={<DeleteOutlined />} danger />
-					</Popconfirm>
+					<AccessGuard permissions={['role:view']}>
+						<Button
+							type="text"
+							icon={<EyeOutlined />}
+							onClick={() => roles.viewRolePopUp.open(role.id)}
+							title="Ver"
+						/>
+					</AccessGuard>
+					<AccessGuard permissions={['role:update']}>
+						<Button
+							type="text"
+							icon={<EditOutlined />}
+							onClick={() => roles.updateRolePopUp.open(role.id)}
+							title="Editar"
+						/>
+					</AccessGuard>
+					<AccessGuard permissions={['role:delete']}>
+						<Popconfirm
+							open={roles.removeRolePopUp.isOpen(role.id)}
+							title="Eliminar rol"
+							description="¿Estás seguro de eliminar este rol?"
+							okText="Sí"
+							cancelText="No"
+							placement="leftTop"
+							onConfirm={() => roles.onRemoveRole(role.id)}
+							onOpenChange={roles.removeRolePopUp.toggle(role.id)}
+							okButtonProps={{ loading: roles.loadings.removeRole }}
+							classNames={{ root: styles.pup_up_buttons }}
+							cancelButtonProps={{ className: styles.popup_cancell_button }}
+						>
+							<Button type="text" title="Eliminar" icon={<DeleteOutlined />} danger />
+						</Popconfirm>
+					</AccessGuard>
 				</Space>
 			),
 		}

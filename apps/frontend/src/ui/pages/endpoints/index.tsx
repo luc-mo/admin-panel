@@ -30,42 +30,49 @@ export const Endpoints: React.FC = AccessGuard.withAccess({
 			title: 'Acciones',
 			key: 'actions',
 			dataIndex: 'id',
+			align: 'center' as const,
 			width: 150,
 			render: (_: any, endpoint: IEndpointWithRoles) => (
 				<Space size="small">
-					<Button
-						type="text"
-						icon={<EyeOutlined />}
-						onClick={() => endpoints.viewEndpointPopUp.open(endpoint.id)}
-						title="Ver"
-					/>
-					<Button
-						type="text"
-						icon={<EditOutlined />}
-						onClick={() => endpoints.updateEndpointToggle.open(endpoint.id)}
-						title="Editar"
-					/>
-					<Popconfirm
-						open={endpoints.removeEndpointPopUp.isOpen(endpoint.id)}
-						placement="leftTop"
-						title="Eliminar endpoint"
-						description="¿Estás seguro de eliminar este endpoint?"
-						okText="Sí"
-						cancelText="No"
-						classNames={{ root: styles.pup_up_buttons }}
-						okButtonProps={{ loading: endpoints.loadings.removeEndpoint }}
-						cancelButtonProps={{
-							className: styles.popup_cancell_button,
-							disabled: endpoints.loadings.removeEndpoint,
-						}}
-						onConfirm={() => endpoints.onRemoveEndpoint(endpoint.id)}
-						onOpenChange={(isOpen) => {
-							if (!isOpen && endpoints.loadings.removeEndpoint) return
-							endpoints.removeEndpointPopUp.toggle(endpoint.id)(isOpen)
-						}}
-					>
-						<Button type="text" title="Eliminar" icon={<DeleteOutlined />} danger />
-					</Popconfirm>
+					<AccessGuard permissions={['endpoint:view']}>
+						<Button
+							type="text"
+							icon={<EyeOutlined />}
+							onClick={() => endpoints.viewEndpointPopUp.open(endpoint.id)}
+							title="Ver"
+						/>
+					</AccessGuard>
+					<AccessGuard permissions={['endpoint:update']}>
+						<Button
+							type="text"
+							icon={<EditOutlined />}
+							onClick={() => endpoints.updateEndpointToggle.open(endpoint.id)}
+							title="Editar"
+						/>
+					</AccessGuard>
+					<AccessGuard permissions={['endpoint:delete']}>
+						<Popconfirm
+							open={endpoints.removeEndpointPopUp.isOpen(endpoint.id)}
+							placement="leftTop"
+							title="Eliminar endpoint"
+							description="¿Estás seguro de eliminar este endpoint?"
+							okText="Sí"
+							cancelText="No"
+							classNames={{ root: styles.pup_up_buttons }}
+							okButtonProps={{ loading: endpoints.loadings.removeEndpoint }}
+							cancelButtonProps={{
+								className: styles.popup_cancell_button,
+								disabled: endpoints.loadings.removeEndpoint,
+							}}
+							onConfirm={() => endpoints.onRemoveEndpoint(endpoint.id)}
+							onOpenChange={(isOpen) => {
+								if (!isOpen && endpoints.loadings.removeEndpoint) return
+								endpoints.removeEndpointPopUp.toggle(endpoint.id)(isOpen)
+							}}
+						>
+							<Button type="text" title="Eliminar" icon={<DeleteOutlined />} danger />
+						</Popconfirm>
+					</AccessGuard>
 				</Space>
 			),
 		}
