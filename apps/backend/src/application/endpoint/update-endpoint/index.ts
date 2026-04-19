@@ -9,6 +9,11 @@ export class UpdateEndpoint extends InjectableDependency('endpointRepository') {
 	public async execute(command: UpdateEndpointCommand) {
 		const exists = await this._endpointRepository.findById(command.id)
 		this._assertEndpointExists(exists)
+		await this._assertMethodAndPathDoNotExist(
+			command.id,
+			command.method ?? exists.method,
+			command.path ?? exists.path
+		)
 
 		const updatedEndpoint = new Endpoint({
 			id: exists.id,
@@ -37,6 +42,13 @@ export class UpdateEndpoint extends InjectableDependency('endpointRepository') {
 	private _assertEndpointExists(endpoint: Endpoint | null): asserts endpoint is Endpoint {
 		if (!endpoint) {
 			throw new Error('Endpoint no encontrado')
+		}
+	}
+
+	private async _assertMethodAndPathDoNotExist(id: string, method: string, path: string) {
+		const exists = await this._endpointRepository.findByMethodAndPath(method, path)
+		if (exists && exists.id !== id) {
+			throw new Error('El método y la ruta ya están en uso por otro endpoint')
 		}
 	}
 }

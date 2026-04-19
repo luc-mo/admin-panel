@@ -8,7 +8,7 @@ import type { CreateEndpointCommand } from './command'
 export class CreateEndpoint extends InjectableDependency('idGenerator', 'endpointRepository') {
 	public async execute(command: CreateEndpointCommand) {
 		const endpointId = this._idGenerator.generate()
-		await this._assertEndpointDoesNotExist(endpointId, command.path)
+		await this._assertEndpointDoesNotExist(endpointId, command.method, command.path)
 
 		const date = new Date()
 		const endpoint = new Endpoint({
@@ -35,8 +35,8 @@ export class CreateEndpoint extends InjectableDependency('idGenerator', 'endpoin
 		})
 	}
 
-	private async _assertEndpointDoesNotExist(id: string, path: string) {
-		const exists = await this._endpointRepository.findByIdOrPath(id, path)
+	private async _assertEndpointDoesNotExist(id: string, method: string, path: string) {
+		const exists = await this._endpointRepository.findByIdMethodAndPath(id, method, path)
 		if (exists) {
 			throw new Error('El endpoint ya existe')
 		}
