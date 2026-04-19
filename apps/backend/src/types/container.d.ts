@@ -8,6 +8,10 @@ export interface IContainer {
 	cloudSdkService: import('@/infrastructure/services/cloud-sdk-service').FirebaseCloudSdkService
 	authService: import('@/infrastructure/services/auth-service').FirebaseAuthService
 
+	cacheHandler: import('@/infrastructure/cache/cache-handler').FirebaseCacheHandler
+	cachedEndpointRepository: import('@/infrastructure/cache/endpoint/repository').CachedEndpointRepository
+	cachedEndpointDocumentParser: import('@/infrastructure/cache/endpoint/document-parser').CachedEndpointDocumentParser
+
 	dbHandler: import('@/infrastructure/persistence/db-handler').FirebaseDbHandler
 	userRepository: import('@/infrastructure/persistence/user/repository').UserRepository
 	roleRepository: import('@/infrastructure/persistence/role/repository').RoleRepository

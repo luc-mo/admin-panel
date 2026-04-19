@@ -8,6 +8,10 @@ import { config } from '@/infrastructure/config'
 import { FirebaseCloudSdkService } from '@/infrastructure/services/cloud-sdk-service'
 import { FirebaseAuthService } from '@/infrastructure/services/auth-service'
 
+import { FirebaseCacheHandler } from './infrastructure/cache/cache-handler'
+import { CachedEndpointRepository } from './infrastructure/cache/endpoint/repository'
+import { CachedEndpointDocumentParser } from './infrastructure/cache/endpoint/document-parser'
+
 import { FirebaseDbHandler } from '@/infrastructure/persistence/db-handler'
 import { UserRepository } from '@/infrastructure/persistence/user/repository'
 import { RoleRepository } from '@/infrastructure/persistence/role/repository'
@@ -64,6 +68,10 @@ container.register({
 	config: asValue(config),
 	cloudSdkService: asClass(FirebaseCloudSdkService).singleton(),
 	authService: asClass(FirebaseAuthService).singleton(),
+
+	cacheHandler: asClass(FirebaseCacheHandler).singleton(),
+	cachedEndpointRepository: asClass(CachedEndpointRepository),
+	cachedEndpointDocumentParser: asClass(CachedEndpointDocumentParser),
 
 	dbHandler: asClass(FirebaseDbHandler).singleton(),
 	userRepository: asClass(UserRepository),
