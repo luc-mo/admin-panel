@@ -8,7 +8,7 @@ export const loggerMiddleware: RequestHandler = async (
 	next: NextFunction
 ) => {
 	const idGenerator = new IdGenerator()
-	const traceId = (req.headers['x-trace-id'] as string) ?? (await idGenerator.generate())
+	const traceId = (req.headers['x-trace-id'] as string) ?? (await idGenerator.uuid())
 
 	Logger.context.run(traceId, () => {
 		res.setHeader('x-trace-id', traceId)

@@ -7,7 +7,7 @@ import type { CreatePermissionCommand } from './command'
 @Logger({ severity: 'INFO' })
 export class CreatePermission extends InjectableDependency('idGenerator', 'permissionRepository') {
 	public async execute(command: CreatePermissionCommand) {
-		const permissionId = this._idGenerator.generate()
+		const permissionId = this._idGenerator.uuid()
 		await this._assertPermissionDoesNotExist(permissionId, command.key)
 
 		const date = new Date()

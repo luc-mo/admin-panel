@@ -7,7 +7,7 @@ import type { CreateRoleCommand } from './command'
 @Logger({ severity: 'INFO' })
 export class CreateRole extends InjectableDependency('idGenerator', 'roleRepository') {
 	public async execute(command: CreateRoleCommand) {
-		const roleId = this._idGenerator.generate()
+		const roleId = this._idGenerator.uuid()
 		const exists = await this._roleRepository.findByIdOrName(roleId, command.name)
 
 		this._assertRoleDoesNotExist(exists)

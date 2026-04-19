@@ -11,7 +11,7 @@ export class CreateUser extends InjectableDependency(
 	'userRepository'
 ) {
 	public async execute(command: CreateUserCommand) {
-		const userId = this._idGenerator.generate()
+		const userId = this._idGenerator.uuid()
 		await this._assertUserDoesNotExist(userId, command.email)
 
 		const date = new Date()

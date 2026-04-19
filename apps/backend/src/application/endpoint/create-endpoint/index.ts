@@ -7,7 +7,7 @@ import type { CreateEndpointCommand } from './command'
 @Logger({ severity: 'INFO' })
 export class CreateEndpoint extends InjectableDependency('idGenerator', 'endpointRepository') {
 	public async execute(command: CreateEndpointCommand) {
-		const endpointId = this._idGenerator.generate()
+		const endpointId = this._idGenerator.uuid()
 		await this._assertEndpointDoesNotExist(endpointId, command.method, command.path)
 
 		const date = new Date()
