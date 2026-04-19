@@ -1,11 +1,16 @@
 import { Logger } from '@snowdrive/logger'
 import { InjectableDependency } from '@snowdrive/utils'
 import { Endpoint } from '@princesitas/core'
+import { CachedEndpoint } from '@/domain/cached-endpoint'
 import { CreateEndpointResponse } from './response'
 import type { CreateEndpointCommand } from './command'
 
 @Logger({ severity: 'INFO' })
-export class CreateEndpoint extends InjectableDependency('idGenerator', 'endpointRepository') {
+export class CreateEndpoint extends InjectableDependency(
+	'idGenerator',
+	'endpointRepository',
+	'cachedEndpointRepository'
+) {
 	public async execute(command: CreateEndpointCommand) {
 		const endpointId = this._idGenerator.uuid()
 		await this._assertEndpointDoesNotExist(endpointId, command.method, command.path)
@@ -19,8 +24,16 @@ export class CreateEndpoint extends InjectableDependency('idGenerator', 'endpoin
 			createdAt: date,
 			updatedAt: date,
 		})
+		const cachedEndpoint = new CachedEndpoint({
+			id: this._idGenerator.md5(`${endpoint.method}-${endpoint.path}`),
+			method: endpoint.method,
+			path: endpoint.path,
+			roles: endpoint.roles,
+			cachedAt: date,
+		})
 
 		await this._endpointRepository.save(endpoint)
+		await this._cachedEndpointRepository.save(cachedEndpoint)
 
 		return new CreateEndpointResponse({
 			data: {
