@@ -29,6 +29,7 @@ export class FirebaseCloudSdkService extends InjectableDependency('admin', 'conf
 					clientEmail: this._config.firebase.clientEmail,
 					privateKey: this._config.firebase.privateKey,
 				}),
+				databaseURL: this._config.firebase.realtimeDatabaseUrl,
 			})
 		} catch (error) {
 			Logger.error(`Error initializing Firebase app: ${error}`)

@@ -10,6 +10,7 @@ export const config = {
 		projectId: process.env.APP_FIREBASE_PROJECT_ID!,
 		clientEmail: process.env.APP_FIREBASE_CLIENT_EMAIL!,
 		privateKey: process.env.APP_FIREBASE_PRIVATE_KEY!.replace(/\\n/g, '\n'),
-		databaseId: process.env.APP_FIREBASE_FIRESTORE_DATABASE_ID!,
+		firestoreDatabaseId: process.env.APP_FIREBASE_FIRESTORE_DATABASE_ID!,
+		realtimeDatabaseUrl: process.env.APP_FIREBASE_REALTIME_DATABASE_URL!,
 	},
 }

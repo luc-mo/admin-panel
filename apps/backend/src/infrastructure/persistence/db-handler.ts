@@ -24,7 +24,7 @@ export class FirebaseDbHandler extends InjectableDependency('admin', 'config', '
 			const app = this._cloudSdkService.getApp()
 			const db = this._admin.firestore(app)
 			db.settings({
-				databaseId: this._config.firebase.databaseId,
+				databaseId: this._config.firebase.firestoreDatabaseId,
 				ignoreUndefinedProperties: true,
 			})
 			return db
