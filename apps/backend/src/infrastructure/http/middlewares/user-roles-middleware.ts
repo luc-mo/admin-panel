@@ -2,6 +2,8 @@ import { container } from '@/container'
 import { CheckUserRolesCommand } from '@/application/auth/check-user-roles/command'
 import type { RequestHandler, Request, Response, NextFunction } from 'express'
 
+const lastSlashReplacer = /\/$/
+
 const userRolesMiddleware: RequestHandler & { bypass: RequestHandler } = async (
 	req: Request,
 	res: Response,
@@ -14,7 +16,8 @@ const userRolesMiddleware: RequestHandler & { bypass: RequestHandler } = async (
 
 		const command = new CheckUserRolesCommand({
 			userId: req.authUser.uid,
-			path: req.path,
+			method: req.method.toUpperCase(),
+			path: `${req.baseUrl}${req.path}`.replace(lastSlashReplacer, ''),
 		})
 		const checkUserRoles = container.resolve('checkUserRoles')
 		const response = await checkUserRoles.execute(command)

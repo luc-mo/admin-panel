@@ -13,7 +13,7 @@ import { RemoveEndpointCommand } from '@/application/endpoint/remove-endpoint/co
 
 export const endpointsController = container.resolve('controllerFactory').createController({
 	type: 'app',
-	path: '/api/endpoints',
+	path: '/endpoints',
 	corsOptions: true,
 	middlewares: [
 		jsonMiddleware,

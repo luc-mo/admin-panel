@@ -13,7 +13,7 @@ import { RemoveUserCommand } from '@/application/user/remove-user/command'
 
 export const usersController = container.resolve('controllerFactory').createController({
 	type: 'app',
-	path: '/api/users',
+	path: '/users',
 	corsOptions: true,
 	middlewares: [
 		jsonMiddleware,

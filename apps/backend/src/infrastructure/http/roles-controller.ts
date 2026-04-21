@@ -13,7 +13,7 @@ import { RemoveRoleCommand } from '@/application/role/remove-role/command'
 
 export const rolesController = container.resolve('controllerFactory').createController({
 	type: 'app',
-	path: '/api/roles',
+	path: '/roles',
 	corsOptions: true,
 	middlewares: [
 		jsonMiddleware,

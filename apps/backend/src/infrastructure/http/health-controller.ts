@@ -5,7 +5,7 @@ import { loggerMiddleware } from './middlewares/logger-middleware'
 
 export const healthController = container.resolve('controllerFactory').createController({
 	type: 'app',
-	path: '/api/health',
+	path: '/health',
 	corsOptions: true,
 	middlewares: [jsonMiddleware, contextMiddleware, loggerMiddleware],
 	endpoints: [

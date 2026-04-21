@@ -13,7 +13,7 @@ import { RemovePermissionCommand } from '@/application/permission/remove-permiss
 
 export const permissionsController = container.resolve('controllerFactory').createController({
 	type: 'app',
-	path: '/api/permissions',
+	path: '/permissions',
 	corsOptions: true,
 	middlewares: [
 		jsonMiddleware,
