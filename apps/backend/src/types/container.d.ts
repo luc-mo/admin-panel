@@ -28,6 +28,7 @@ export interface IContainer {
 
 	// Miscellaneous
 	healthCheck: import('@/application/health-check').HealthCheck
+	cacheEndpoints: import('@/application/cache-endpoints').CacheEndpoints
 	checkUserRoles: import('@/application/auth/check-user-roles').CheckUserRoles
 
 	// User

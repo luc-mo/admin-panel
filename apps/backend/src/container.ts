@@ -27,6 +27,7 @@ import { IdGenerator } from '@/domain/services/id-generator'
 import { EndpointParser } from '@/infrastructure/http/utils/endpoint-parser'
 
 import { HealthCheck } from '@/application/health-check'
+import { CacheEndpoints } from '@/application/cache-endpoints'
 import { CheckUserRoles } from '@/application/auth/check-user-roles'
 
 import { FindUsers } from '@/application/user/find-users'
@@ -89,6 +90,7 @@ container.register({
 	endpointParser: asClass(EndpointParser),
 
 	healthCheck: asClass(HealthCheck),
+	cacheEndpoints: asClass(CacheEndpoints),
 	checkUserRoles: asClass(CheckUserRoles),
 
 	findUsers: asClass(FindUsers),

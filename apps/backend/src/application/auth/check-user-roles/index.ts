@@ -6,24 +6,46 @@ import type { CheckUserRolesCommand } from './command'
 
 @Logger({ severity: 'INFO' })
 export class CheckUserRoles extends InjectableDependency(
+	'idGenerator',
+	'endpointParser',
 	'userRepository',
-	'roleRepository',
-	'permissionRepository',
-	'endpointRepository'
+	'cachedEndpointRepository'
 ) {
 	public async execute(command: CheckUserRolesCommand) {
-		const [user, endpoint] = await Promise.all([
-			this._userRepository.findById(command.userId),
-			this._endpointRepository.findByPath(command.path),
+		const registeredPath = this._endpointParser.parse(command.path, [
+			'/users',
+			'/users/me',
+			'/users/:id',
+			'/roles',
+			'/roles/all',
+			'/roles/:id',
+			'/permissions',
+			'/permissions/all',
+			'/permissions/:id',
+			'/endpoints',
+			'/endpoints/:id',
 		])
+
+		if (!registeredPath) {
+			return new CheckUserRolesResponse({ isAuthorized: true })
+		}
+
+		const cachedEndpointId = this._idGenerator.md5(`${command.method}-${registeredPath}`)
+		const cachedEndpoint = await this._cachedEndpointRepository.findById(cachedEndpointId)
+
+		if (!cachedEndpoint) {
+			return new CheckUserRolesResponse({ isAuthorized: true })
+		}
+
+		const user = await this._userRepository.findById(command.userId)
 		this._assertUserExists(user)
 
-		if (user.isSuperAdmin || !endpoint || !endpoint.roles.length) {
+		if (user.isSuperAdmin) {
 			return new CheckUserRolesResponse({ isAuthorized: true })
 		}
 
 		const userRoles = new Set(user.roles)
-		const isAuthorized = endpoint.roles.some((roleId) => userRoles.has(roleId))
+		const isAuthorized = cachedEndpoint.roles.some((roleId) => userRoles.has(roleId))
 		return new CheckUserRolesResponse({ isAuthorized })
 	}
 
