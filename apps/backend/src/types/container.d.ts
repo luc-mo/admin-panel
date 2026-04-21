@@ -24,6 +24,7 @@ export interface IContainer {
 	endpointDocumentParser: import('@/infrastructure/persistence/endpoint/document-parser').EndpointDocumentParser
 
 	idGenerator: import('@/domain/services/id-generator').IdGenerator
+	endpointParser: import('@/infrastructure/http/utils/endpoint-parser').EndpointParser
 
 	// Miscellaneous
 	healthCheck: import('@/application/health-check').HealthCheck

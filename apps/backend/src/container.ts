@@ -8,9 +8,9 @@ import { config } from '@/infrastructure/config'
 import { FirebaseCloudSdkService } from '@/infrastructure/services/cloud-sdk-service'
 import { FirebaseAuthService } from '@/infrastructure/services/auth-service'
 
-import { FirebaseCacheHandler } from './infrastructure/cache/cache-handler'
-import { CachedEndpointRepository } from './infrastructure/cache/endpoint/repository'
-import { CachedEndpointDocumentParser } from './infrastructure/cache/endpoint/document-parser'
+import { FirebaseCacheHandler } from '@/infrastructure/cache/cache-handler'
+import { CachedEndpointRepository } from '@/infrastructure/cache/endpoint/repository'
+import { CachedEndpointDocumentParser } from '@/infrastructure/cache/endpoint/document-parser'
 
 import { FirebaseDbHandler } from '@/infrastructure/persistence/db-handler'
 import { UserRepository } from '@/infrastructure/persistence/user/repository'
@@ -23,7 +23,8 @@ import { RoleDocumentParser } from '@/infrastructure/persistence/role/document-p
 import { PermissionDocumentParser } from '@/infrastructure/persistence/permission/document-parser'
 import { EndpointDocumentParser } from '@/infrastructure/persistence/endpoint/document-parser'
 
-import { IdGenerator } from './domain/services/id-generator'
+import { IdGenerator } from '@/domain/services/id-generator'
+import { EndpointParser } from '@/infrastructure/http/utils/endpoint-parser'
 
 import { HealthCheck } from '@/application/health-check'
 import { CheckUserRoles } from '@/application/auth/check-user-roles'
@@ -85,6 +86,7 @@ container.register({
 	endpointDocumentParser: asClass(EndpointDocumentParser),
 
 	idGenerator: asClass(IdGenerator),
+	endpointParser: asClass(EndpointParser),
 
 	healthCheck: asClass(HealthCheck),
 	checkUserRoles: asClass(CheckUserRoles),
