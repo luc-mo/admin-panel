@@ -4,6 +4,7 @@ dotenv.config({ quiet: true })
 export const config = {
 	server: {
 		port: process.env.APP_PORT!,
+		basePath: process.env.APP_BASE_PATH!,
 		logLevel: process.env.APP_LOG_LEVEL! as any,
 	},
 	firebase: {
