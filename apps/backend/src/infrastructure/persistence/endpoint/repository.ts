@@ -15,6 +15,12 @@ export class EndpointRepository extends InjectableDependency(
 		return snapshot.data().count
 	}
 
+	public async findAll() {
+		const collection = this._getCollection()
+		const documents = await collection.get()
+		return documents.docs.map((document) => this._endpointDocumentParser.toDomain(document.data()))
+	}
+
 	public async find(limit: number, offset: number) {
 		const collection = this._getCollection()
 		const documents = await collection.limit(limit).offset(offset).get()
@@ -25,12 +31,6 @@ export class EndpointRepository extends InjectableDependency(
 		const collection = this._getCollection()
 		const document = await collection.doc(id).get()
 		return document.exists ? this._endpointDocumentParser.toDomain(document.data()!) : null
-	}
-
-	public async findByPath(path: string) {
-		const collection = this._getCollection()
-		const document = await collection.where('path', '==', path).get()
-		return document.docs[0] ? this._endpointDocumentParser.toDomain(document.docs[0].data()) : null
 	}
 
 	public async findByIdMethodAndPath(id: string, method: string, path: string) {

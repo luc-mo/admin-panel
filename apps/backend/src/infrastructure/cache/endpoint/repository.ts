@@ -36,4 +36,9 @@ export class CachedEndpointRepository extends InjectableDependency(
 		const instance = this._cacheHandler.getInstance()
 		await instance.ref(`${this._COLLECTION}/${id}`).remove()
 	}
+
+	public async removeAll() {
+		const instance = this._cacheHandler.getInstance()
+		await instance.ref(this._COLLECTION).remove()
+	}
 }
