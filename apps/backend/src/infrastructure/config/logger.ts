@@ -24,4 +24,5 @@ Logger.config({
 			})
 		),
 	}),
+	logEvents: { start: false },
 })
