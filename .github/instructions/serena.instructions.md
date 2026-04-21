@@ -1,3 +1,7 @@
+---
+applyTo: '**'
+---
+
 # Serena — Reglas de búsqueda de código
 SIEMPRE sigue estas reglas sin excepción al consultar código.
 
