@@ -1,0 +1,19 @@
+{
+	"$schema": "https://raw.githubusercontent.com/firebase/firebase-tools/master/schema/firebase-config.json",
+	"functions": {
+		"source": ".",
+		"codebase": "default",
+		"runtime": "nodejs24",
+		"predeploy": "node ./scripts/predeploy.js",
+		"postdeploy": "node ./scripts/postdeploy.js",
+		"ignore": [
+			".git",
+			"node_modules",
+			"src",
+			"scripts",
+			"firebase-debug.log",
+			"firebase-debug.*.log",
+			"pnpm-lock.yaml"
+		]
+	}
+}
