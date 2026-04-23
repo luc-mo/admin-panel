@@ -9,7 +9,6 @@
 		"build": "tsup"
 	},
 	"dependencies": {
-		"@princesitas/core": "workspace:*",
 		"@snowdrive/logger": "1.2.0",
 		"@snowdrive/utils": "1.2.1",
 		"awilix": "13.0.0",
@@ -23,6 +22,7 @@
 		"winston": "3.19.0"
 	},
 	"devDependencies": {
+		"@princesitas/core": "workspace:*",
 		"@types/cors": "2.8.19",
 		"@types/express": "5.0.6"
 	}

@@ -8,4 +8,5 @@ export default defineConfig({
 	minify: false,
 	clean: true,
 	treeshake: true,
+	noExternal: ['@princesitas/core'],
 })
