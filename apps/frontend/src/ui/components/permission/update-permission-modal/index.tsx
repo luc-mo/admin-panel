@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Modal, Form, Input } from 'antd'
-import type { IPermission, StrictOmit } from '@princesitas/core'
+import type { IPermission, StrictOmit } from '@admin-panel/core'
 import type { IUpdatePermissionParams } from '@/application/permission/use-update-permission'
 import styles from './styles.module.css'
 

@@ -6,7 +6,7 @@ import type {
 	IRoleCategory,
 	IRoleWithPermissions,
 	StrictOmit,
-} from '@princesitas/core'
+} from '@admin-panel/core'
 import type { IUpdateRoleParams } from '@/application/role/use-update-role'
 import styles from './styles.module.css'
 

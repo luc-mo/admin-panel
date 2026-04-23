@@ -3,7 +3,7 @@ import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons'
 import type { ColumnsType } from 'antd/es/table'
 
 import { usePermissions } from './use-permissions'
-import type { IPermission } from '@princesitas/core'
+import type { IPermission } from '@admin-panel/core'
 
 import { AccessGuard } from '@/ui/guards/access-guard'
 import { NotFound } from '@/ui/layouts/not-found'

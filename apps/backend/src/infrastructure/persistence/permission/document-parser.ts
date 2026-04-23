@@ -1,6 +1,6 @@
 import { Timestamp } from 'firebase-admin/firestore'
 import { Logger } from '@snowdrive/logger'
-import { Permission } from '@princesitas/core'
+import { Permission } from '@admin-panel/core'
 import type { IPermissionDocument } from './types'
 
 @Logger({ severity: 'TRACE' })

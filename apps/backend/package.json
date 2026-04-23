@@ -1,5 +1,5 @@
 {
-	"name": "@princesitas/backend",
+	"name": "@admin-panel/backend",
 	"version": "1.0.0",
 	"main": "dist/index.js",
 	"type": "module",
@@ -22,7 +22,7 @@
 		"winston": "3.19.0"
 	},
 	"devDependencies": {
-		"@princesitas/core": "workspace:*",
+		"@admin-panel/core": "workspace:*",
 		"@types/cors": "2.8.19",
 		"@types/express": "5.0.6"
 	}

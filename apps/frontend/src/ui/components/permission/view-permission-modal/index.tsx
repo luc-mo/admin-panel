@@ -1,6 +1,6 @@
 import { Modal, Tag, Descriptions } from 'antd'
 import { permissionTagColors } from '@/ui/constants/tags'
-import type { IPermission } from '@princesitas/core'
+import type { IPermission } from '@admin-panel/core'
 
 interface IViewPermissionModalProps {
 	openId: string | null

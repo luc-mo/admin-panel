@@ -3,7 +3,7 @@ import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons'
 import type { ColumnsType } from 'antd/es/table'
 
 import { useRoles } from './use-roles'
-import type { IRoleWithPermissions, IRoleCategory } from '@princesitas/core'
+import type { IRoleWithPermissions, IRoleCategory } from '@admin-panel/core'
 
 import { useProviders } from '@/ui/providers/utils/use-providers'
 import { sharedDataProvider } from '@/ui/providers/shared-data-provider'

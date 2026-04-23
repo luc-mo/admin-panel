@@ -1,6 +1,6 @@
 import { Avatar, Skeleton } from 'antd'
 import styles from './styles.module.css'
-import type { IUser } from '@princesitas/core'
+import type { IUser } from '@admin-panel/core'
 
 interface IUserCardProps {
 	user: IUser | null

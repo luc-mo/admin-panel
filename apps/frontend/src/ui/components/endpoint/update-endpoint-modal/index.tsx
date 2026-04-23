@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { Modal, Form, Input, Select, Tag } from 'antd'
 import { methodOptions } from '@/ui/constants/options'
 import { roleTagColors, permissionMethodTagColors } from '@/ui/constants/tags'
-import type { IRole, IEndpointWithRoles, IEndpointMethod, StrictOmit } from '@princesitas/core'
+import type { IRole, IEndpointWithRoles, IEndpointMethod, StrictOmit } from '@admin-panel/core'
 import type { IUpdateEndpointParams } from '@/application/endpoint/use-update-endpoint'
 import styles from './styles.module.css'
 

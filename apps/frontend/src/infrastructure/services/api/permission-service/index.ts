@@ -1,4 +1,4 @@
-import type { IPermission, IJsonPermission } from '@princesitas/core'
+import type { IPermission, IJsonPermission } from '@admin-panel/core'
 import type { IHttpService } from '@/infrastructure/services/http-service'
 import type {
 	IFindPermissions,

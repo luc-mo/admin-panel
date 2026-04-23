@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import type { IPermission, StrictOmit } from '@princesitas/core'
+import type { IPermission, StrictOmit } from '@admin-panel/core'
 import type { IPagination } from '@/domain/pagination'
 import type { ICoreServicesContext } from '@/ui/providers/core-services-provider'
 import type { IToastContext } from '@/ui/providers/toast-provider'

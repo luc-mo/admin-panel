@@ -1,6 +1,6 @@
 import { Logger } from '@snowdrive/logger'
 import { InjectableDependency } from '@snowdrive/utils'
-import { Permission } from '@princesitas/core'
+import { Permission } from '@admin-panel/core'
 import { UpdatePermissionResponse } from './response'
 import type { UpdatePermissionCommand } from './command'
 

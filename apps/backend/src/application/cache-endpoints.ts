@@ -1,7 +1,7 @@
 import { Logger } from '@snowdrive/logger'
 import { InjectableDependency } from '@snowdrive/utils'
 import { CachedEndpoint } from '@/domain/cached-endpoint'
-import type { Endpoint } from '@princesitas/core'
+import type { Endpoint } from '@admin-panel/core'
 
 @Logger({ severity: 'INFO' })
 export class CacheEndpoints extends InjectableDependency(

@@ -1,7 +1,7 @@
 import { Logger } from '@snowdrive/logger'
 import { InjectableDependency } from '@snowdrive/utils'
 import { FindAllPermissionsResponse } from './response'
-import type { IJsonPermission } from '@princesitas/core'
+import type { IJsonPermission } from '@admin-panel/core'
 
 @Logger({ severity: 'INFO' })
 export class FindAllPermissions extends InjectableDependency('permissionRepository') {

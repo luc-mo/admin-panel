@@ -1,4 +1,4 @@
-import type { IEndpointMethod } from '@princesitas/core'
+import type { IEndpointMethod } from '@admin-panel/core'
 
 export const methodOptions: { label: string; value: IEndpointMethod }[] = [
 	{ label: 'GET', value: 'GET' },

@@ -2,7 +2,7 @@ import { Logger } from '@snowdrive/logger'
 import { InjectableDependency } from '@snowdrive/utils'
 import { FindPermissionByIdResponse } from './response'
 import type { FindPermissionByIdCommand } from './command'
-import type { Permission } from '@princesitas/core'
+import type { Permission } from '@admin-panel/core'
 
 @Logger({ severity: 'INFO' })
 export class FindPermissionById extends InjectableDependency('permissionRepository') {

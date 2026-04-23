@@ -1,4 +1,4 @@
-import type { IJsonUser } from '@princesitas/core'
+import type { IJsonUser } from '@admin-panel/core'
 
 export class FindUserByIdResponse {
 	public readonly data: IJsonUser

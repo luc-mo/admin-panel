@@ -1,5 +1,5 @@
-# Princesitas
-Princesitas es un sistema de gestión de usuarios, roles y permisos estructurado arquitecturalmente como un monorepositorio aplicando `Onion Architecture`.
+# Admin panel
+Admin panel es un sistema de gestión de usuarios, roles y permisos estructurado arquitecturalmente como un monorepositorio aplicando `Onion Architecture`.
 
 ## Monorepo
 ```

@@ -2,7 +2,7 @@ import { Logger } from '@snowdrive/logger'
 import { InjectableDependency } from '@snowdrive/utils'
 import { RemovePermissionResponse } from './response'
 import type { RemovePermissionCommand } from './command'
-import type { Permission } from '@princesitas/core'
+import type { Permission } from '@admin-panel/core'
 
 @Logger({ severity: 'INFO' })
 export class RemovePermission extends InjectableDependency('permissionRepository') {

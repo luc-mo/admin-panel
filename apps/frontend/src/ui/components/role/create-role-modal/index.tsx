@@ -1,5 +1,5 @@
 import { Modal, Form, Input, Select, Tag } from 'antd'
-import type { IPermission, IRoleCategory } from '@princesitas/core'
+import type { IPermission, IRoleCategory } from '@admin-panel/core'
 import type { ICreateRoleParams } from '@/application/role/use-create-role'
 import { permissionTagColors } from '@/ui/constants/tags'
 import styles from './styles.module.css'

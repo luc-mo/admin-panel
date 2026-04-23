@@ -1,4 +1,4 @@
-import type { IJsonRole, IRoleCategory } from '@princesitas/core'
+import type { IJsonRole, IRoleCategory } from '@admin-panel/core'
 
 export interface IFindRoles {
 	request: {

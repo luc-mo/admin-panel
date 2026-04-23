@@ -1,7 +1,7 @@
 import { Modal, Form, Input, Select, Tag } from 'antd'
 import { methodOptions } from '@/ui/constants/options'
 import { roleTagColors, permissionMethodTagColors } from '@/ui/constants/tags'
-import type { IRole, IEndpointMethod } from '@princesitas/core'
+import type { IRole, IEndpointMethod } from '@admin-panel/core'
 import type { ICreateEndpointParams } from '@/application/endpoint/use-create-endpoint'
 import styles from './styles.module.css'
 

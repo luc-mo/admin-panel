@@ -2,7 +2,7 @@ import { Logger } from '@snowdrive/logger'
 import { InjectableDependency } from '@snowdrive/utils'
 import { RemoveEndpointResponse } from './response'
 import type { RemoveEndpointCommand } from './command'
-import type { Endpoint } from '@princesitas/core'
+import type { Endpoint } from '@admin-panel/core'
 
 @Logger({ severity: 'INFO' })
 export class RemoveEndpoint extends InjectableDependency(

@@ -11,7 +11,7 @@ import { sharedDataProvider } from '@/ui/providers/shared-data-provider'
 import { useCreatePermission } from '@/application/permission/use-create-permission'
 import { useUpdatePermission } from '@/application/permission/use-update-permission'
 import { useRemovePermission } from '@/application/permission/use-remove-permission'
-import type { ParameterCommand } from '@princesitas/core'
+import type { ParameterCommand } from '@admin-panel/core'
 
 export const usePermissions = () => {
 	const { sharedData, ...providers } = useProviders([

@@ -1,6 +1,6 @@
 import { Modal, Tag, Descriptions } from 'antd'
 import { roleTagColors, roleCategoryLabels, permissionTagColors } from '@/ui/constants/tags'
-import type { IRoleWithPermissions } from '@princesitas/core'
+import type { IRoleWithPermissions } from '@admin-panel/core'
 
 interface IViewRoleModalProps {
 	openId: string | null

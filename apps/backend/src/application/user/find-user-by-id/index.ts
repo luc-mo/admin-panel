@@ -2,7 +2,7 @@ import { Logger } from '@snowdrive/logger'
 import { InjectableDependency } from '@snowdrive/utils'
 import { FindUserByIdResponse } from './response'
 import type { FindUserByIdCommand } from './command'
-import type { User } from '@princesitas/core'
+import type { User } from '@admin-panel/core'
 
 @Logger({ severity: 'INFO' })
 export class FindUserById extends InjectableDependency('userRepository') {

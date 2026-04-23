@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Modal, Form, Input, Select, Tag } from 'antd'
 import { roleTagColors } from '@/ui/constants/tags'
-import type { IRole, IUserWithRoles, StrictOmit } from '@princesitas/core'
+import type { IRole, IUserWithRoles, StrictOmit } from '@admin-panel/core'
 import type { IUpdateUserParams } from '@/application/user/use-update-user'
 import styles from './styles.module.css'
 

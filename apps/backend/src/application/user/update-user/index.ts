@@ -1,6 +1,6 @@
 import { Logger } from '@snowdrive/logger'
 import { InjectableDependency } from '@snowdrive/utils'
-import { User } from '@princesitas/core'
+import { User } from '@admin-panel/core'
 import { UpdateUserResponse } from './response'
 import type { UpdateUserCommand } from './command'
 

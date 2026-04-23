@@ -1,6 +1,6 @@
 import { Modal, Tag, Descriptions } from 'antd'
 import { roleTagColors } from '@/ui/constants/tags'
-import type { IUserWithRoles } from '@princesitas/core'
+import type { IUserWithRoles } from '@admin-panel/core'
 
 interface IViewUserModalProps {
 	openId: string | null

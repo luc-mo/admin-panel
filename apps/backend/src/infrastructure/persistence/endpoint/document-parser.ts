@@ -1,6 +1,6 @@
 import { Timestamp } from 'firebase-admin/firestore'
 import { Logger } from '@snowdrive/logger'
-import { Endpoint } from '@princesitas/core'
+import { Endpoint } from '@admin-panel/core'
 import type { IEndpointDocument } from './types'
 
 @Logger({ severity: 'TRACE' })

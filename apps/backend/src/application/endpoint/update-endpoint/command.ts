@@ -1,4 +1,4 @@
-import type { IEndpointMethod } from '@princesitas/core'
+import type { IEndpointMethod } from '@admin-panel/core'
 
 export class UpdateEndpointCommand {
 	public readonly id: string

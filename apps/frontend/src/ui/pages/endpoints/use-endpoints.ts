@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react'
 import type { TablePaginationConfig } from 'antd'
-import type { IEndpointWithRoles, ParameterCommand } from '@princesitas/core'
+import type { IEndpointWithRoles, ParameterCommand } from '@admin-panel/core'
 
 import { useToggle } from '@/shared/hooks/use-toggle'
 import { usePopUp } from '@/shared/hooks/use-pop-up'

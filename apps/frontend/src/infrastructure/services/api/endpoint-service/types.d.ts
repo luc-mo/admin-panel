@@ -1,4 +1,4 @@
-import type { IJsonEndpoint, IEndpointMethod } from '@princesitas/core'
+import type { IJsonEndpoint, IEndpointMethod } from '@admin-panel/core'
 
 export interface IFindEndpoints {
 	request: {

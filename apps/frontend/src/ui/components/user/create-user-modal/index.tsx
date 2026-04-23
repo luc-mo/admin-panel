@@ -1,6 +1,6 @@
 import { Modal, Form, Input, Select, Tag } from 'antd'
 import { roleTagColors } from '@/ui/constants/tags'
-import type { IRole } from '@princesitas/core'
+import type { IRole } from '@admin-panel/core'
 import type { ICreateUserParams } from '@/application/user/use-create-user'
 import styles from './styles.module.css'
 

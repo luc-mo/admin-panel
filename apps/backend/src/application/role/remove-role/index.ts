@@ -2,7 +2,7 @@ import { Logger } from '@snowdrive/logger'
 import { InjectableDependency } from '@snowdrive/utils'
 import { RemoveRoleResponse } from './response'
 import type { RemoveRoleCommand } from './command'
-import type { Role } from '@princesitas/core'
+import type { Role } from '@admin-panel/core'
 
 @Logger({ severity: 'INFO' })
 export class RemoveRole extends InjectableDependency('roleRepository') {

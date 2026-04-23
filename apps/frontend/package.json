@@ -1,5 +1,5 @@
 {
-	"name": "@princesitas/frontend",
+	"name": "@admin-panel/frontend",
 	"version": "0.0.0",
 	"type": "module",
 	"private": true,
@@ -11,7 +11,7 @@
 	"dependencies": {
 		"@ant-design/cssinjs": "2.1.2",
 		"@ant-design/icons": "6.1.1",
-		"@princesitas/core": "workspace:*",
+		"@admin-panel/core": "workspace:*",
 		"antd": "6.3.4",
 		"axios": "1.14.0",
 		"clsx": "2.1.1",

@@ -2,7 +2,7 @@ import { Logger } from '@snowdrive/logger'
 import { InjectableDependency } from '@snowdrive/utils'
 import { FindRoleByIdResponse } from './response'
 import type { FindRoleByIdCommand } from './command'
-import type { Role } from '@princesitas/core'
+import type { Role } from '@admin-panel/core'
 
 @Logger({ severity: 'INFO' })
 export class FindRoleById extends InjectableDependency('roleRepository') {

@@ -1,4 +1,4 @@
-import type { IRoleCategory, IEndpointMethod } from '@princesitas/core'
+import type { IRoleCategory, IEndpointMethod } from '@admin-panel/core'
 
 export const roleTagColors: Record<IRoleCategory, string> = {
 	ADMIN: 'blue',

@@ -1,6 +1,6 @@
 import { Logger } from '@snowdrive/logger'
 import { InjectableDependency } from '@snowdrive/utils'
-import { Role, type IRoleCategory } from '@princesitas/core'
+import { Role, type IRoleCategory } from '@admin-panel/core'
 import { UpdateRoleResponse } from './response'
 import type { UpdateRoleCommand } from './command'
 

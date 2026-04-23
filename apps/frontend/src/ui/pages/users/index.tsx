@@ -5,7 +5,7 @@ import type { ColumnsType } from 'antd/es/table'
 import { useUsers } from './use-users'
 import { useProviders } from '@/ui/providers/utils/use-providers'
 import { sharedDataProvider } from '@/ui/providers/shared-data-provider'
-import type { IUserWithRoles, IRoleCategory } from '@princesitas/core'
+import type { IUserWithRoles, IRoleCategory } from '@admin-panel/core'
 
 import { AccessGuard } from '@/ui/guards/access-guard'
 import { NotFound } from '@/ui/layouts/not-found'

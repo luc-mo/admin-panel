@@ -1,4 +1,4 @@
-import type { IUser, IJsonUser } from '@princesitas/core'
+import type { IUser, IJsonUser } from '@admin-panel/core'
 import type { IHttpService } from '@/infrastructure/services/http-service'
 import type { IFindUsers, IFindUserById, ICreateUser, IUpdateUser, IRemoveUser } from './types'
 

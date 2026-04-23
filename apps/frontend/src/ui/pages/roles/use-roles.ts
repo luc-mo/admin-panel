@@ -11,7 +11,7 @@ import { sharedDataProvider } from '@/ui/providers/shared-data-provider'
 import { useRemoveRole } from '@/application/role/use-remove-role'
 import { useCreateRole } from '@/application/role/use-create-role'
 import { useUpdateRole } from '@/application/role/use-update-role'
-import type { IRoleWithPermissions, ParameterCommand } from '@princesitas/core'
+import type { IRoleWithPermissions, ParameterCommand } from '@admin-panel/core'
 
 export const useRoles = () => {
 	const { sharedData, ...providers } = useProviders([

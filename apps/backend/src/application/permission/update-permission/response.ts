@@ -1,4 +1,4 @@
-import type { IJsonPermission } from '@princesitas/core'
+import type { IJsonPermission } from '@admin-panel/core'
 
 export class UpdatePermissionResponse {
 	public readonly data: IJsonPermission

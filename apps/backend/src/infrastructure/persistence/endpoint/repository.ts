@@ -1,7 +1,7 @@
 import { Filter } from 'firebase-admin/firestore'
 import { Logger } from '@snowdrive/logger'
 import { InjectableDependency } from '@snowdrive/utils'
-import type { Endpoint } from '@princesitas/core'
+import type { Endpoint } from '@admin-panel/core'
 import type { IEndpointDocument } from './types'
 
 @Logger({ severity: 'DEBUG' })

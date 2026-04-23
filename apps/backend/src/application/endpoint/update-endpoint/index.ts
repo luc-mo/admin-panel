@@ -1,6 +1,6 @@
 import { Logger } from '@snowdrive/logger'
 import { InjectableDependency } from '@snowdrive/utils'
-import { Endpoint } from '@princesitas/core'
+import { Endpoint } from '@admin-panel/core'
 import { CachedEndpoint } from '@/domain/cached-endpoint'
 import { UpdateEndpointResponse } from './response'
 import type { UpdateEndpointCommand } from './command'

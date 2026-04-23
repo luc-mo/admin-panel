@@ -2,7 +2,7 @@ import { Logger } from '@snowdrive/logger'
 import { InjectableDependency } from '@snowdrive/utils'
 import { RemoveUserResponse } from './response'
 import type { RemoveUserCommand } from './command'
-import type { User } from '@princesitas/core'
+import type { User } from '@admin-panel/core'
 
 @Logger({ severity: 'INFO' })
 export class RemoveUser extends InjectableDependency('userRepository', 'authService') {

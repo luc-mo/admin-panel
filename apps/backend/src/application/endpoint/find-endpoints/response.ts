@@ -1,4 +1,4 @@
-import type { IJsonEndpoint } from '@princesitas/core'
+import type { IJsonEndpoint } from '@admin-panel/core'
 
 export class FindEndpointsResponse {
 	public readonly data: IJsonEndpoint[]

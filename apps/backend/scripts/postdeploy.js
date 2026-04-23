@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync } from 'node:fs'
 
 const packageJson = JSON.parse(readFileSync('./package.json', 'utf8'))
 packageJson.devDependencies = {
-	'@princesitas/core': 'workspace:*',
+	'@admin-panel/core': 'workspace:*',
 	...packageJson.devDependencies,
 }
 

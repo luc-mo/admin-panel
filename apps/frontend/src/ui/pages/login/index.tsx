@@ -12,7 +12,7 @@ export const Login: React.FC = () => {
 				<Card className={styles.card}>
 					<header className={styles.header}>
 						<Typography.Title className={styles.title} level={3}>
-							Administración Princesitas
+							Administración
 						</Typography.Title>
 						<Typography.Text type="secondary">
 							Ingresa tus credenciales para continuar

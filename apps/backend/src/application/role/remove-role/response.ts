@@ -1,4 +1,4 @@
-import type { IJsonRole } from '@princesitas/core'
+import type { IJsonRole } from '@admin-panel/core'
 
 export class RemoveRoleResponse {
 	public readonly data: IJsonRole

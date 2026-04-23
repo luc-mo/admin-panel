@@ -5,7 +5,7 @@ import type { ColumnsType } from 'antd/es/table'
 import { useEndpoints } from './use-endpoints'
 import { useProviders } from '@/ui/providers/utils/use-providers'
 import { sharedDataProvider } from '@/ui/providers/shared-data-provider'
-import type { IEndpointWithRoles } from '@princesitas/core'
+import type { IEndpointWithRoles } from '@admin-panel/core'
 
 import { roleTagColors, permissionMethodTagColors } from '@/ui/constants/tags'
 

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { ICoreServicesContext } from '@/ui/providers/core-services-provider'
 import type { IToastContext } from '@/ui/providers/toast-provider'
-import type { IRoleCategory } from '@princesitas/core'
+import type { IRoleCategory } from '@admin-panel/core'
 
 interface IUseCreateRoleProps {
 	coreServices: ICoreServicesContext

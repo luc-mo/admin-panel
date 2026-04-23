@@ -1,5 +1,5 @@
 import type { Timestamp } from 'firebase-admin/firestore'
-import type { IRoleCategory } from '@princesitas/core'
+import type { IRoleCategory } from '@admin-panel/core'
 
 export interface IRoleDocument {
 	id: string

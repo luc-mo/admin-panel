@@ -1,5 +1,5 @@
 {
-	"name": "@princesitas/core",
+	"name": "@admin-panel/core",
 	"version": "1.0.0",
 	"main": "./dist/index.js",
 	"module": "./dist/index.mjs",

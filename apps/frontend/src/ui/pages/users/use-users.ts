@@ -12,7 +12,7 @@ import { useFindUsers } from '@/application/user/use-find-users'
 import { useCreateUser } from '@/application/user/use-create-user'
 import { useUpdateUser } from '@/application/user/use-update-user'
 import { useRemoveUser } from '@/application/user/use-remove-user'
-import type { IUserWithRoles, IRoleCategory, ParameterCommand } from '@princesitas/core'
+import type { IUserWithRoles, IRoleCategory, ParameterCommand } from '@admin-panel/core'
 
 export const useUsers = () => {
 	const { sharedData, ...providers } = useProviders([

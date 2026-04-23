@@ -1,6 +1,6 @@
 import { Timestamp } from 'firebase-admin/firestore'
 import { Logger } from '@snowdrive/logger'
-import { User } from '@princesitas/core'
+import { User } from '@admin-panel/core'
 import type { IUserDocument } from './types'
 
 @Logger({ severity: 'TRACE' })

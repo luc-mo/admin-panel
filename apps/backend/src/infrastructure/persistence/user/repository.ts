@@ -1,7 +1,7 @@
 import { Filter } from 'firebase-admin/firestore'
 import { Logger } from '@snowdrive/logger'
 import { InjectableDependency } from '@snowdrive/utils'
-import type { User } from '@princesitas/core'
+import type { User } from '@admin-panel/core'
 import type { IUserDocument } from './types'
 
 @Logger({ severity: 'DEBUG' })

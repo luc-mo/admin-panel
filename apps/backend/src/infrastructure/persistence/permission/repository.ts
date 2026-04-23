@@ -1,7 +1,7 @@
 import { Filter } from 'firebase-admin/firestore'
 import { Logger } from '@snowdrive/logger'
 import { InjectableDependency } from '@snowdrive/utils'
-import type { Permission } from '@princesitas/core'
+import type { Permission } from '@admin-panel/core'
 import type { IPermissionDocument } from './types'
 
 @Logger({ severity: 'DEBUG' })

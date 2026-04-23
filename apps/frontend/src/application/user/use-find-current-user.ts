@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { IUser } from '@princesitas/core'
+import type { IUser } from '@admin-panel/core'
 import type { ICoreServicesContext } from '@/ui/providers/core-services-provider'
 import type { IToastContext } from '@/ui/providers/toast-provider'
 

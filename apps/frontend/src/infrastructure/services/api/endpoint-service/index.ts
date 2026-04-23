@@ -1,4 +1,4 @@
-import type { IEndpoint, IJsonEndpoint } from '@princesitas/core'
+import type { IEndpoint, IJsonEndpoint } from '@admin-panel/core'
 import type { IHttpService } from '@/infrastructure/services/http-service'
 import type {
 	IFindEndpoints,
